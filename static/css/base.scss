@@ -1,0 +1,59 @@
+body{
+	font-family: Fira Code;
+}
+
+.me{ 
+	.izq{
+		text-align: center;
+		// border: 1px solid blue;
+		width: 50%;
+		float: left;
+		.photo{
+			// border: 1px solid gray;
+			img{
+				width:30%;
+				height: 40%;	
+			}
+			
+			margin: 0 auto;
+		}
+		p{
+			margin: 5px 0;
+			border: 1px solid gray;
+		}
+	}
+	.der{
+		float: left;
+		width: 50%;
+		margin: 3em 0;
+		// border: 1px solid blue;
+		ul{
+			margin: 0 auto;
+			text-align: left;
+		}
+	}
+
+}
+.footer{
+		clear:both;
+		font-size:0.8em;
+		text-align: center;
+		}
+@media (max-width: 600px) {
+		.me{
+			.izq, .der{
+				clear: both;
+				width: 100%;
+				margin: 2em 0;
+				text-align: center;
+			}
+		}
+	}
+
+.carlos{
+	font-family: Poppins;
+	font-size: 180px;
+}
+
+// import home file
+@import 'home.scss';
