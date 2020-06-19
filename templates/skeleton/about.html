@@ -3,5 +3,44 @@
 {% block title %}Home{% endblock title %}
 
 {% block content %}
-	<p>{% autoescape off %}Esto es el About me{% endautoescape %}</p>
+{% load static %}
+	<!-- <p>{% autoescape off %}Esto es el About me{% endautoescape %}</p> -->
+	<div class=" container" >
+		<div class="me">
+			<div class="izq" style="">
+				<h1 ><a href="">Edfab Suchett</a></h1>
+				<div class="photo">
+					<img src="{% static 'images/edfabs.jpeg' %}">
+				</div>
+			    <p> Ing. en Comunicaciones y Electrónica - <a href="https://www.esimez.ipn.mx/oferta-educativa-2/carreras.html" target="_blank"> Esp. Computación</a> <br> <a href="https://www.esimez.ipn.mx/" target="_blank"> Instituto Politecnico Nacional [ESIME- Zacatenco]</a></p>
+			</div>
+			<div class="der" style="">
+				<ul>
+					<li><a href="">Informacion de Contacto</a>
+					  <ul>
+					    <li>e-mail: <a href="mailto:suchettr@gmail.com">suchettr@gmail.com</a></li>
+					  </ul>
+					</li>
+					<li><a href="">Investigacion</a>
+					  <ul>
+					  	{% load static %}
+					    <li><a href="{% static 'files/CVFabianSuchett.pdf' %}">CV[PDF]</a></li>
+					    <li><a href="">Publlicaciones</a></li>
+					  </ul>
+					</li>
+					<li><a href="https://github.com/EdFabS" target="_blank">Proyectos[GitHub]</a>
+					  <ul>
+					  	<li><a href="">e-mailing</a></li>
+					    <li><a href="">Agenda clínica</a></li>
+					    <li><a href="">Bonos</a></li>
+					    <li><a href="">Control de radios</a></li>
+					    <li><a href="">Conexión SAP</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="footer">
+				<br>
+				<p>Me gusta poner en practica lo que sé, bien lo decía el Capitán Archibaldo Witwicky (Transformers: El lado oscuro de la luna) "No hay <b>victoria</b> sin <b>sacrificio</b>."<br>Conociendo, aprendiendo y aplicando, con orden y diciplina, para poder construir proyectos solidos sobre cono<b>cimientos</b>  fuertes.</p>
+			</div>
+	</div>
 {% endblock content %}

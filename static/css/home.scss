@@ -12,6 +12,8 @@
 .container{
 }
 
+#logo{font-family: 'Bungee Shade', cursive;}
+
 /* clearfix */
 // .grid:after {
 //   content: '';
@@ -36,6 +38,10 @@ img{
   border-color: hsla(0, 0%, 0%, 0.5);
   border-radius: 5px;
   margin-bottom: 10px;
+  a {
+    text-decoration: none;
+    color: #212529;
+  }
 }
 
 .grid-item--width2 { width:  74%;  background: #28A745;}

@@ -23,7 +23,7 @@
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-	  <a class="navbar-brand" href="/">edfab</a>
+	  <a class="navbar-brand" id="logo" href="/">edfabs</a>
 	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 	    <span class="navbar-toggler-icon"></span>
 	  </button>
@@ -41,11 +41,12 @@
 	          Menú
 	        </a>
 	        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-	        	<a class="dropdown-item" href="/projects">Proyectos</a>
+	        	<a class="dropdown-item" href="/articles">Articles</a>
+	        	<a class="dropdown-item" href="/projects">Projects</a>
 				<a class="dropdown-item" href="http://edfabs.blogspot.com/" target="_blank">Blog</a>
-				<a class="dropdown-item" href="#">Snippets</a>
 				<div class="dropdown-divider"></div>
-				<a class="dropdown-item" href="#">Acerca de</a>
+				<a class="dropdown-item" href="/about">About me</a>
+				<a class="dropdown-item" href="/contact"> Contact</a>
 	        </div>
 	      </li>
 	      <!-- <li class="nav-item">
@@ -58,14 +59,7 @@
 	    </form>
 	  </div>
 	</nav>
-	<h1>{{title}}</h1>
-	<ul>
-		<li><a href="/">Home</a></li>
-		<li><a href="/articles">Articles</a></li>
-		<li> <a href="/projects ">Projects</a></li>
-		<li><a href="/about">About me</a></li>
-		<li><a href="/contact">Contact</a></li>
-	</ul>
+	<!-- <h1>{{title}}</h1> -->
 	{% block content %}
 	<p>Placeholder text in base template. Replace ith page content.</p>
 	{% endblock content %}
