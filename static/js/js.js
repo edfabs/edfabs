@@ -12,9 +12,9 @@ $(document).ready(function(){
 		 	itemSelector: '.grid-item',
 		 	columnWidth: '.grid-sizer',
 		 	percentPosition: true,
-		  // resize: true,
-		  // stagger: 30,
-		 	// fitWidth: true,
+		  	resize: true,
+		    stagger: 30,
+		 	fitWidth: true,
 		 	gutter: 10
 		});
 	  })
