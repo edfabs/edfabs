@@ -31,7 +31,7 @@ img{
 }
 
 .grid-item {
-  height: 120px;
+  
   float: left;
   background: #28A745;
   border: 2px solid #333;
@@ -47,9 +47,12 @@ img{
 .grid-item--width2 { width:  74%;  background: #28A745;}
 
 .grid-item--height2 { height: auto; }
-.grid-item--height3 { height: auto; }
+.grid-item--height3 { 
+  height: auto; 
+  color: gray;
+}
 .grid-item--height4 { height: 360px; }
-
+.grid-item--width3 { height: 120px; }
 .title, .intro{
   text-align: justify;
   padding: 25px;
@@ -65,22 +68,26 @@ img{
 .intro{
   background:#5377A6;
 }
+.grid{
+  opacity:1;
 #Plaster{font-family: 'Plaster', cursive;background: #5377A6;}
 #Chango{font-family: 'Plaster', cursive;background: #024873;}
 #Della{font-family: 'Della Respira', serif;background: #024873;}
 #Mrs{font-family: 'Mrs Sheppards', cursive;background: #027368;}
-#Dr{font-family: 'Plaster', cursive;background: #0D0D0D; color:white;}
+#Dr{font-family: 'Plaster', cursive;background: #0D0D0D; color:gray;}
 #Molle{font-family: 'Plaster', cursive;background: #5377A6;}
 #Bungee{font-family: 'Bungee Outline', cursive;background: #024873;}
 #Emblma{font-family: 'Emblema One', cursive;background: #025959;}
 #Bangers{font-family: 'Bangers', cursive;background: #027368;}
-#Shrikhand{font-family: 'Plaster', cursive;background: #0D0D0D; color:white;}
+#Shrikhand{font-family: 'Plaster', cursive;background: #0D0D0D; color:gray;}
 #Faster{font-family: 'Faster One', cursive;background: #5377A6;}
 #BungeeS{font-family: 'Bungee Shade', cursive;background: #027368;}
 #Codystar{font-family: 'Codystar', cursive;background: #025959;}
 #Fontdiner{font-family: 'Plaster', cursive;background: #027368;}
 #Slackey{font-family: 'Slackey', cursive;background: #0D0D0D;}
 #Fascinate{font-family: 'Fascinate Inline', cursive;background: #5377A6;}
+}
+
 
 @media (max-width: 700px) {
   .grid-sizer,

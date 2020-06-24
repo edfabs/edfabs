@@ -74,7 +74,6 @@ img {
 }
 
 .grid-item {
-  height: 120px;
   float: left;
   background: #28A745;
   border: 2px solid #333;
@@ -98,10 +97,15 @@ img {
 
 .grid-item--height3 {
   height: auto;
+  color: gray;
 }
 
 .grid-item--height4 {
   height: 360px;
+}
+
+.grid-item--width3 {
+  height: 120px;
 }
 
 .title, .intro {
@@ -122,84 +126,72 @@ img {
   background: #5377A6;
 }
 
-#Plaster {
+.grid {
+  opacity: 1;
+}
+.grid #Plaster {
   font-family: "Plaster", cursive;
   background: #5377A6;
 }
-
-#Chango {
+.grid #Chango {
   font-family: "Plaster", cursive;
   background: #024873;
 }
-
-#Della {
+.grid #Della {
   font-family: "Della Respira", serif;
   background: #024873;
 }
-
-#Mrs {
+.grid #Mrs {
   font-family: "Mrs Sheppards", cursive;
   background: #027368;
 }
-
-#Dr {
+.grid #Dr {
   font-family: "Plaster", cursive;
   background: #0D0D0D;
-  color: white;
+  color: gray;
 }
-
-#Molle {
+.grid #Molle {
   font-family: "Plaster", cursive;
   background: #5377A6;
 }
-
-#Bungee {
+.grid #Bungee {
   font-family: "Bungee Outline", cursive;
   background: #024873;
 }
-
-#Emblma {
+.grid #Emblma {
   font-family: "Emblema One", cursive;
   background: #025959;
 }
-
-#Bangers {
+.grid #Bangers {
   font-family: "Bangers", cursive;
   background: #027368;
 }
-
-#Shrikhand {
+.grid #Shrikhand {
   font-family: "Plaster", cursive;
   background: #0D0D0D;
-  color: white;
+  color: gray;
 }
-
-#Faster {
+.grid #Faster {
   font-family: "Faster One", cursive;
   background: #5377A6;
 }
-
-#BungeeS {
+.grid #BungeeS {
   font-family: "Bungee Shade", cursive;
   background: #027368;
 }
-
-#Codystar {
+.grid #Codystar {
   font-family: "Codystar", cursive;
   background: #025959;
 }
-
-#Fontdiner {
+.grid #Fontdiner {
   font-family: "Plaster", cursive;
   background: #027368;
 }
-
-#Slackey {
+.grid #Slackey {
   font-family: "Slackey", cursive;
   background: #0D0D0D;
 }
-
-#Fascinate {
+.grid #Fascinate {
   font-family: "Fascinate Inline", cursive;
   background: #5377A6;
 }
