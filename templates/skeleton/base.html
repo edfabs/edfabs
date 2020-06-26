@@ -63,6 +63,15 @@
 	{% block content %}
 	<p>Placeholder text in base template. Replace ith page content.</p>
 	{% endblock content %}
-	<script type="text/javascript" src="{%static 'js/js.js' %}"></script>	
+	<script type="text/javascript" src="{%static 'js/js.js' %}"></script>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-170952228-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-170952228-1');
+	</script>
 </body>
 </html>
