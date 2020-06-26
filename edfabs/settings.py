@@ -81,6 +81,17 @@ WSGI_APPLICATION = 'edfabs.wsgi.application'
 #         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': os.getenv("db_name"),
+#         'USER': os.getenv("db_user"),
+#         'PASSWORD': os.getenv("password"),
+#         'HOST': 'localhost',
+#         'PORT': '',
+#     }
+# }
+
 DATABASES = {}
 DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 
@@ -142,6 +153,3 @@ STATICFILES_DIRS = [
 ]
 STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
-if config('DJANGO_PRODUCTION_ENV', default=False, cast=bool):
-    from .settings_production import *
