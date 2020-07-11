@@ -3,10 +3,31 @@ body {
   font-family: Fira Code;
 }
 
-.nav ul {
+.menu ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
+  width: 100%;
+  background-color: #f1f1f1;
+  height: 100%;
+  /* Full height */
+}
+.menu ul li {
+  display: inline;
+  float: left;
+}
+.menu ul li a {
+  display: block;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+.menu ul li a:hover {
+  background-color: #111;
+}
+
+.floatless {
+  clear: both;
 }
 
 .me .izq {
