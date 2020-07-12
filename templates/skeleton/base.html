@@ -24,7 +24,7 @@
 	<script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
 </head>
 <body>
-	<div class="container">
+	<div class="container_nav">
 		<nav class="menu">
 			<ul>
 				<li><a href="#">Home</a></li>
@@ -34,12 +34,13 @@
 				<li><a href="#">Contact</a></li>
 			</ul>
 		</nav>
-		<div class="floatless"></div>
-		{% block content %}
-		<p>Placeholder text in base template. Replace ith page content.</p>
-		{% endblock content %}
-		<script type="text/javascript" src="{%static 'js/js.js' %}"></script>
 	</div>
+	<div class="floatless"></div>
+	{% block content %}
+	<p>Placeholder text in base template. Replace ith page content.</p>
+	{% endblock content %}
+	<script type="text/javascript" src="{%static 'js/js.js' %}"></script>
+	
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-170952228-1"></script>
 	<script>
