@@ -22,7 +22,6 @@ body{
 					font-weight: bold;
 					text-align: left;
 					display: block;
-					padding: 0 20px;
 					text-decoration: none;
 					color:white;
 				}
@@ -32,23 +31,33 @@ body{
 			}
 		}	
 	}
-
 }
-
+.container{
+	.description{
+		font-size: 1.5em;
+		font-weight: bold;
+		padding-top: 10%;
+		padding-bottom: 22%;
+	}
+	.footer{
+		text-align: left;
+	}
+}
 .floatless{
 	clear: both;
 }
-@media only screen and (min-width: 600px){
+
+@media only all and (min-width: 720px){
 	.container_nav{
 		background: url("/static/images/back_images_desktop.png");
 		background-size:cover;
 		.menu{
-			padding: 1% 0 4% 0;
+			padding: 2% 0 5% 0;
 			ul{
-			padding: 0 0 0 10%;
 			li {
 				display: inline;
 				float: left;
+				padding-right: 15px;
 			}
 			}
 		}
@@ -56,8 +65,16 @@ body{
 			clear: both;
 		}
 	}
-	
-	
+	.container{
+		.description {
+			font-size: 2.5em;
+			padding-top: 7%;
+			padding-bottom: 23%;
+		}
+		.footer{
+			text-align: center;
+		}
+	} 	
 }
 
 
