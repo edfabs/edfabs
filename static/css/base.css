@@ -9,7 +9,7 @@ body {
   background-size: cover;
 }
 .container_nav .menu {
-  padding: 35px 0 85px 0;
+  padding: 10% 0 20% 0;
   background-color: none;
 }
 .container_nav .menu ul {
@@ -38,15 +38,21 @@ body {
 }
 
 @media only screen and (min-width: 600px) {
-  .menu ul {
-    border: 1px solid red;
+  .container_nav {
+    background: url("/static/images/back_images_desktop.png");
+    background-size: cover;
   }
-  .menu ul li {
+  .container_nav .menu {
+    padding: 1% 0 4% 0;
+  }
+  .container_nav .menu ul {
+    padding: 0 0 0 10%;
+  }
+  .container_nav .menu ul li {
     display: inline;
     float: left;
   }
-
-  .floatless {
+  .container_nav .floatless {
     clear: both;
   }
 }
