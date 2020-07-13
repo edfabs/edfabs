@@ -3,8 +3,17 @@
 {% block title %}Home{% endblock title %}
 
 {% block content %}
-	<p>{% autoescape off %}Esto es el Proects{% endautoescape %}</p>
-	<a href="tesseract">Tesseract test</a>
+<div class="container">
+	<!-- <p>{% autoescape off %}Esto es el Proects{% endautoescape %}</p> -->
+	<div class="row">
+		<div class="col description">
+			<p>
+				Repositorio, archivero de proyectos de temas importantes relacionados con lo más relevante de la tecnología y la sociedad. Esto con el objetivo de mantenernos vigentes.
+				<a href="tesseract">Tesseract test</a>
+			</p>
+		</div>
+	</div>
+</div>
 {% endblock content %}
 
 {% block result %}Home{% endblock result %}

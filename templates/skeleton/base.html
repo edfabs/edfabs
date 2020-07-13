@@ -36,9 +36,18 @@
 		</nav>
 	</div>
 	<div class="floatless"></div>
-	{% block content %}
-	<p>Placeholder text in base template. Replace ith page content.</p>
-	{% endblock content %}
+	<div class="container">
+		{% block content %}
+			<p>Placeholder text in base template. Replace ith page content.</p>
+		{% endblock content %}
+	</div>
+	<footer class="container footer" style="border:1px solid rec">
+		<div class="row">
+			<div class="col-sm-12 col-md-6">Fabian Suchett - Developer</div>
+			<div class="col-sm-12 col-md-6">fabian.suchett@edfabs.com</div>
+		</div>
+	</footer>
+	
 	<script type="text/javascript" src="{%static 'js/js.js' %}"></script>
 	
 	<!-- Global site tag (gtag.js) - Google Analytics -->
