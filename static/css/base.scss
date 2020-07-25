@@ -1,49 +1,7 @@
-body{
-	font-size: 16px;
-	line-height: 1.2;
-}
-.container_nav{
-	background: url("/static/images/back_images_mobile.png");
-	background-size:cover;
-	.menu{
-		padding: 10% 0 20% 0;
-		background-color: none;
-		ul{
-			list-style-type: none;
-			margin: 0;
-			padding: 0;
-			width: 100%;
-			height: 100%; /* Full height */
-			//position: fixed; /* Make it stick, even on scroll */
-			//overflow: auto; /* Enable scrolling if the sidenav has too much content */
-			li {	
-				a {
-					font-size: 1.8em;
-					font-weight: bold;
-					text-align: left;
-					display: block;
-					text-decoration: none;
-					color:white;
-				}
-				a:hover {
-					background-color: #737373;
-				}
-			}
-		}	
-	}
-}
-.container{
-	.description{
-		font-size: 1.5em;
-		font-weight: bold;
-		padding-top: 10%;
-		padding-bottom: 22%;
-	}
-	
-}
+
 .footer{
 	text-align: left;
-	background-color: black;
+	background-color:#343a40;
 	position: fixed;
 	bottom: 0;
 	left: 0;
@@ -51,99 +9,18 @@ body{
 	margin:0 auto;
 	width: 100%;
 	height: 40px;
-	color: white;
+	color: #6c757d;
 	padding: 5px 0 0 0;
 }
-.floatless{
-	clear: both;
-}
+
 
 @media only all and (min-width: 720px){
-	.container_nav{
-		background: url("/static/images/back_images_desktop.png");
-		background-size:cover;
-		.menu{
-			padding: 2% 0 5% 0;
-			ul{
-			li {
-				display: inline;
-				float: left;
-				padding-right: 15px;
-			}
-			}
-		}
-		.floatless{
-			clear: both;
-		}
-	}
-	.container{
-		.description {
-			font-size: 2.5em;
-			padding-top: 7%;
-			padding-bottom: 23%;
-		}
-	} 
+	 
 	.footer{
 		text-align: center;
 		padding: 13px 0 0 0;
 	}
 }
-
-
-
-.me{ 
-	.izq{
-		text-align: center;
-		// border: 1px solid blue;
-		width: 50%;
-		float: left;
-		.photo{
-			// border: 1px solid gray;
-			img{
-				width:30%;
-				height: 40%;	
-			}
-			
-			margin: 0 auto;
-		}
-		p{
-			margin: 5px 0;
-			border: 1px solid gray;
-		}
-	}
-	.der{
-		float: left;
-		width: 50%;
-		margin: 3em 0;
-		// border: 1px solid blue;
-		ul{
-			margin: 0 auto;
-			text-align: left;
-		}
-	}
-
-}
-.footer{
-		clear:both;
-		font-size:0.8em;
-		text-align: center;
-		}
-@media (max-width: 600px) {
-		.me{
-			.izq, .der{
-				clear: both;
-				width: 100%;
-				margin: 2em 0;
-				text-align: center;
-			}
-		}
-	}
-
-.carlos{
-	font-family: Poppins;
-	font-size: 180px;
-}
-
 // import home file
 @import 'home.scss';
 @import 'about.scss';

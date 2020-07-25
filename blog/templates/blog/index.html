@@ -1,0 +1,20 @@
+{% extends 'skeleton/base.html' %}
+
+{% block title %}Blog - detail{% endblock title %}
+
+{% block content %}
+{% load static %}
+<h1>Post</h1>
+
+{% if latest_post_list %}
+    <ul>
+        {% for post in latest_post_list %}
+            <li> <a href=" {% url 'blog:detail' post.id %} ">{{ post.title }}</a> - {{ post.author.first_name }} {{ post.author.last_name }}<br>
+            {{ post.content}}</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+        <p> No pols are available. </p>
+    {% endif %}
+
+{% endblock content %}
