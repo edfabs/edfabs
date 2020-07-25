@@ -1,3 +1,10 @@
+{% extends 'skeleton/base.html' %}
+
+{% block title %}Polls - detail{% endblock title %}
+
+{% block content %}
+{% load static %}
+
 <h1>{{ question.question_text }}</h1>
 {% if error_message %}<p><strong>{{ error_message }}</strong></p> {% endif %}
 <form action="{% url 'polls:vote' question.id %}" method="post">
@@ -8,3 +15,5 @@
     {% endfor %}
     <input type="submit" value="Vote">
 </form>
+
+{% endblock content %}
