@@ -1,0 +1,15 @@
+{% extends 'skeleton/base.html' %}
+
+{% block title %}Create A New Blog Post!{% endblock title %}
+
+{% block content %}
+{% load static %}
+<h1>Add Blog Post...</h1>
+<br><br>
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-secondary">Post</button>
+</form>
+
+{% endblock content %}
