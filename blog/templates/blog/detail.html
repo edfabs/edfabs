@@ -5,7 +5,7 @@
 {% block content %}
 {% load static %}
 <h2>{{post.title}}</h2>
-<small>by: {{ post.author.first_name}} {{post.author.last_name}} </small>
+<small>by: {{ post.author.first_name}} {{post.author.last_name}} - <a href="{% url 'blog:update_post' post.id %}">(Edit)</a> </small>
 <hr>
 <br>
 {{post.content}}

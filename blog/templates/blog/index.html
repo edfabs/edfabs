@@ -9,7 +9,9 @@
 {% if latest_post_list %}
     <ul>
         {% for post in latest_post_list %}
-            <li> <a href=" {% url 'blog:detail' post.id %} ">{{ post.title }}</a> - {{ post.author.first_name }} {{ post.author.last_name }}<br>
+            <li> <a href=" {% url 'blog:detail' post.id %} ">{{ post.title }}</a> 
+                - {{ post.author.first_name }} {{ post.author.last_name }} - 
+                <small><a href="{% url 'blog:update_post' post.id %}">(Edit)</a></small><br>
             {{ post.content}}</li>
         {% endfor %}
     </ul>
