@@ -8,15 +8,15 @@ STATUS = (
     (0, "Draft"),
     (1, "Publish")
 )
-class Category(models.Model):
-    name = models.CharField(max_length=255)
+# class Category(models.Model):
+#     name = models.CharField(max_length=255)
 
-    def __str__(self):
-        return self.name
+#     def __str__(self):
+#         return self.name
 
-    def get_absolute_url(self):
-        #return reverse('blog:detail', args=(str(self.id)))
-        return reverse('blog:index')
+    # def get_absolute_url(self):
+    #     #return reverse('blog:detail', args=(str(self.id)))
+    #     return reverse('blog:index')
 
 class Post(models.Model):
     title = models.CharField(max_length=200, unique=True)
