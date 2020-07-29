@@ -4,6 +4,7 @@
 
 {% block content %}
 {% load static %}
+{% if user.is_authenticated %}
 <h1>Add Blog Post...</h1>
 <br><br>
 <div class="form-group">
@@ -12,5 +13,10 @@
         {{ form.as_p }}
         <button class="btn btn-secondary">Post</button>
 </div>
+{% else %}
+
+You're not allowed here !! (and you know it...)
+
+{% endif %}
 
 {% endblock content %}
