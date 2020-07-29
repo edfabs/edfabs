@@ -1,0 +1,22 @@
+{% extends 'skeleton/base.html' %}
+
+{% block title %}Create A New Blog Category!{% endblock title %}
+
+{% block content %}
+{% load static %}
+{% if user.is_authenticated %}
+<h1>Add Category Post...</h1>
+<br><br>
+<div class="form-group">
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-secondary">Category</button>
+</div>
+{% else %}
+
+You're not allowed here !! (and you know it...)
+
+{% endif %}
+
+{% endblock content %}
