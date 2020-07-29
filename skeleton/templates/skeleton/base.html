@@ -59,11 +59,12 @@
 			  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 				<a class="dropdown-item" href="/blog">Blog</a>
 				{% if user.is_authenticated %}
+				<div class="dropdown-divider"></div>
 				<a class="dropdown-item" href="/blog/add_post">Add a post</a>
 				<a class="dropdown-item" href="{% url 'blog:add_category' %}">Add a category</a>
 				{% endif %}
-				<div class="dropdown-divider"></div>
-				<a class="dropdown-item" href="http://edfabs.blogspot.com/" target="_blank">Blogspot</a>
+				
+				<!-- <a class="dropdown-item" href="http://edfabs.blogspot.com/" target="_blank">Blogspot</a> -->
 				
 				<!-- <a class="dropdown-item" href="#">Something else here</a> -->
 			  </div>
