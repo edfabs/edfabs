@@ -1,0 +1,18 @@
+{% extends 'skeleton/base.html' %}
+
+{% block title %}Delete Blog Post{% endblock title %}
+
+{% block content %}
+{% load static %}
+<h1>Delete Blog Post...</h1>
+<br><br>
+<h3>Delete: {{ post.title }}</h3>
+<div class="form-group">
+    <form action="" method="post">
+        {% csrf_token %}
+        <br>
+        <strong>Are you sure?!</strong><br><br>
+        <button class="btn btn-secondary">Delete Post!</button>
+</div>
+
+{% endblock content %}
