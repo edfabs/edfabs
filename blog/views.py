@@ -13,9 +13,8 @@ class IndexView(ListView):
     #ordering = ['-id']
 
 def CategoryView(request, cats):
-    cat = Category.objects.filter(name=cats)
-    cat = Category.objects.filter(name=cats)
-    return render(request, 'blog/categories.html', {'cats': cats, 'category_post': category_posts})
+    category_posts = Post.objects.filter(category__name=cats)
+    return render(request, 'blog/categories.html', {'cats': cats.title(), 'category_posts': category_posts})
 
 class DetailView(DetailView):
     model = Post

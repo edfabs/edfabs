@@ -10,7 +10,7 @@
     <ul>
         {% for post in latest_post_list %}
             <li> <a href=" {% url 'blog:detail' post.id %} ">{{ post.title }}</a>
-                - {{ post.category }} 
+                - <a href="{% url 'blog:category' post.category %}">{{ post.category }}</a>
                 - {{ post.author.first_name }} {{ post.author.last_name }} 
                 <small>
                     {% if user.is_authenticated %}
