@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .views import CategoryView
 
 app_name = 'blog'
 urlpatterns = [
@@ -9,4 +10,5 @@ urlpatterns = [
     path('add_category/', views.AddCategoryView.as_view(), name='add_category'),    
     path('article/edit/<int:pk>',views.UpdatePostView.as_view(), name='update_post'),
     path('article/<int:pk>/remove',views.DeletePostView.as_view(), name='delete_post'),
+    path('category/<str:cats>/', CategoryView, name='category'),
 ]
