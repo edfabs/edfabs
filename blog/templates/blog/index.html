@@ -12,7 +12,7 @@
             <li> <a href=" {% url 'blog:detail' post.id %} ">{{ post.title }}</a>
                 - <a href="{% url 'blog:category' post.category|slugify %}">{{ post.category }}</a>
                 - {{ post.author.first_name }} {{ post.author.last_name }}
-                - {{ post.updated_on }}
+                - {{ post.created_on|date:"F d, Y" }}
                 <small>
                     {% if user.is_authenticated %}
                         {% if user.id == post.author.id %}
