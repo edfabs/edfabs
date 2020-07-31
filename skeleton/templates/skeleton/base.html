@@ -48,9 +48,9 @@
 			  <li class="nav-item">
 				  <a class="nav-link" href="/about">About</a>
 				</li>
-			  <li class="nav-item">
+			  <!-- <li class="nav-item">
 				  <a class="nav-link" href="/projects">Projects</a>
-				</li>			
+				</li>			 -->
 			
 			<li class="nav-item dropdown">
 			  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -64,7 +64,19 @@
 				<a class="dropdown-item" href="{% url 'blog:add_category' %}">Add a category</a>
 				{% endif %}
 			  </div>
+			  {% if cat_menu %}
+			  <li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				  Categorys
+				</a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+				  	{% for item in cat_menu %}
+					  <a class="dropdown-item" href="{% url 'blog:category' item|slugify %}">{{item}}</a>
+					{% endfor%}
+				</div>
+			  </li>
 			</li>
+			{% endif %}
 			{% if user.is_authenticated %}
 			<li class="nav-item">
 				<a class="nav-link" href="{% url 'logout' %}">Logout</a>

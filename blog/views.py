@@ -11,10 +11,17 @@ class IndexView(ListView):
     template_name = 'blog/index.html'
     context_object_name = 'latest_post_list'
     #ordering = ['-id']
+    cats = Category.objects.all()
+
+    def get_context_data(self, *args, **kwargs):
+        cat_menu = Category.objects.all()
+        context = super(IndexView, self).get_context_data(*args, **kwargs)
+        context["cat_menu"] = cat_menu
+        return context
 
 def CategoryView(request, cats):
-    category_posts = Post.objects.filter(category__name=cats)
-    return render(request, 'blog/categories.html', {'cats': cats.title(), 'category_posts': category_posts})
+    category_posts = Post.objects.filter(category__name=cats.replace('-',' '))
+    return render(request, 'blog/categories.html', {'cats': cats.title().replace('-',' '), 'category_posts': category_posts})
 
 class DetailView(DetailView):
     model = Post
