@@ -23,11 +23,11 @@
 
             
                 </small><br>
-            {{ post.content|slice:":200"|safe}}</li>
+            {{ post.snippet|slice:":200"|safe}}</li>
         {% endfor %}
     </ul>
     {% else %}
-        <p> No pols are available. </p>
+        <p> No post are available. </p>
     {% endif %}
 
     
