@@ -20,4 +20,22 @@
 {{post.content|safe}}
 <br><br>
 <a class="btn btn-secondary" href="{% url 'blog:index' %}">Back</a>
+
+<br><br>
+<hr>
+<br>
+<form action="{% url 'blog:like_post' post.pk %}" method="POST">
+    {% csrf_token %}
+    {% if user.is_authenticated %}
+    {% if liked %}
+    <button type="submit" name="post_id" value="{{post.id}}" class="btn btn-danger btn-sm">Unlike</button> 
+    {% else %}
+    <button type="submit" name="post_id" value="{{post.id}}" class="btn btn-primary btn-sm">Like</button>
+    {% endif %}
+    {% else %}
+    <small><a href="{% url 'login' %}"> Login</a> to likes</small>
+    {% endif %}
+    - {{total_likes}} likes
+</form>
+
 {% endblock content %}

@@ -27,9 +27,13 @@ class Post(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    likes = models.ManyToManyField(User, related_name='blog_posts')
 
     class Meta:
         ordering = ['-created_on']
+
+    def total_likes(self):
+        return self.likes.count()
 
     def __str__(self):
         return self.title + '  |  ' + str(self.author)
