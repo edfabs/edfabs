@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'polls.apps.PollsConfig',
     'blog',
     'members',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [

@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
+from ckeditor.fields import RichTextField
 
 # Create your models here.
 
@@ -23,7 +24,8 @@ class Post(models.Model):
     slug = models.CharField(max_length=200)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_post')
     updated_on = models.DateTimeField(auto_now=True)
-    content = models.TextField()
+    content = RichTextField(blank=True, null=True)
+    # content = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
