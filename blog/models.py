@@ -9,6 +9,7 @@ STATUS = (
     (0, "Draft"),
     (1, "Publish")
 )
+
 class Category(models.Model):
     name = models.CharField(max_length=255)
 
@@ -19,13 +20,27 @@ class Category(models.Model):
         #return reverse('blog:detail', args=(str(self.id)))
         return reverse('blog:index')
 
+class Profile(models.Model):
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE) 
+    bio = models.TextField()
+    website_url = models.CharField(max_length=200, null=True, blank=True)
+    facebook_url = models.CharField(max_length=200, null=True, blank=True)
+    twitter_url = models.CharField(max_length=200, null=True, blank=True)
+    instagram_url = models.CharField(max_length=200, null=True, blank=True)
+    pinterest_url = models.CharField(max_length=200, null=True, blank=True)
+    
+    def __str__(self):
+        return str(self.user)
+
+
 class Post(models.Model):
     title = models.CharField(max_length=200, unique=True)
+    header_image = models.ImageField(null=True,blank=True, upload_to="images/header_post/")
     slug = models.CharField(max_length=200)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_post')
     updated_on = models.DateTimeField(auto_now=True)
     content = RichTextField(blank=True, null=True)
-    # content = models.TextField()
+    # content =
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
