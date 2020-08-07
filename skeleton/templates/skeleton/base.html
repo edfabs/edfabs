@@ -82,8 +82,13 @@
 				<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Profile</a>
 				<div class="dropdown-menu">
 				  <a class="dropdown-item" href="{% url 'members:edit_profile' %}">Edith Settings</a>
-				  <a class="dropdown-item" href="{% url 'members:edit_profile_page' user.profile.id %}">Edith Profile Page</a>
-				  <a class="dropdown-item" href="{% url 'members:show_profile_page' user.profile.id %}">Sow Profile Page</a>
+				{% if user.profile.id %}
+					<a class="dropdown-item" href="{% url 'members:edit_profile_page' user.profile.id %}">Edith Profile Page</a>
+					<a class="dropdown-item" href="{% url 'members:show_profile_page' user.profile.id %}">Sow Profile Page</a>
+				{%  else %}
+					<a class="dropdown-item" href="{% url 'members:create_profile_page'%}">Create Profile Page</a>	
+				{% endif %}
+				  
 				</div>
 			  </li>
 			<li class="nav-item">
