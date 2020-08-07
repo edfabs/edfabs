@@ -1,11 +1,13 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Post, Category
-from .forms import PostForm, EditForm, CategoryForm
+from .models import Post, Category, Comment
+from .forms import PostForm, EditForm, CategoryForm, CommentForm
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
 
 # Create your views here.
+
+
 
 def LikeView(request, pk):
     post = get_object_or_404(Post, id=request.POST.get('post_id'))
@@ -60,6 +62,18 @@ class AddPostView(CreateView):
     form_class = PostForm
     template_name = 'blog/add_post.html'
     # fields = '__all__'
+
+class AddCommentView(CreateView):
+    model = Comment
+    form_class = CommentForm
+    template_name = 'blog/add_comment.html'
+    # fields = '__all__'
+    def form_valid(self, form):
+        form.instance.post_id = self.kwargs['pk']
+        return super().form_valid(form)
+
+    success_url = reverse_lazy('blog:index')
+
 
 class AddCategoryView(CreateView):
     model = Category

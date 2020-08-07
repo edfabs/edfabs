@@ -4,7 +4,7 @@
 
 {% block content %}
 {% load static %}
-
+<br>
 <h2>{{post.title}} </h2>
 <small>
     by: {{ post.author.first_name}} {{post.author.last_name}} - {{post.post_date}}
@@ -21,10 +21,7 @@
 <img src="{{post.header_image.url}}" alt="">
 {% endif %}
 {{post.content|safe}}
-<br><br>
-<a class="btn btn-secondary" href="{% url 'blog:index' %}">Back</a>
-
-<br><br>
+<br>
 <hr>
 <br>
 <form action="{% url 'blog:like_post' post.pk %}" method="POST">
@@ -40,7 +37,8 @@
     {% endif %}
     - {{total_likes}} likes
 </form>
-<br><br>
+<br>
+
 
 <div class="card mb-3">
     <div class="row no-gutters">
@@ -77,5 +75,26 @@
       </div>
     </div>
   </div>
+<br><br>
+  <h2>Comments...</h2>
+<br>
+{% if not post.comments.all %}
+  No comments yet... <a href="{% url 'blog:add_comment' post.pk %}">Add Comment</a><br><br>
+{% else %}
+<a href="{% url 'blog:add_comment' post.pk %}">Add Comment</a><br><br>
+  {%for comment in post.comments.all %}
+  <strong>
+    {{ comment.name }} - 
+    {{ comment.date_added}}
+  </strong>
+  <br>
+  {{ comment.body }}
+  <br><br>  
+  {% endfor %}
+  <br>
+<a href="{% url 'blog:add_comment' post.pk %}">Add Comment</a><br><br>
+<br><br>  
+{% endif %}
+
 
 {% endblock content %}
