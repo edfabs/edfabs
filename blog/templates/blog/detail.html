@@ -78,10 +78,15 @@
 <br><br>
   <h2>Comments...</h2>
 <br>
-{% if not post.comments.all %}
-  No comments yet... <a href="{% url 'blog:add_comment' post.pk %}">Add Comment</a><br><br>
-{% else %}
-<a href="{% url 'blog:add_comment' post.pk %}">Add Comment</a><br><br>
+{% if user.is_authenticated %}
+  {% if not post.comments.all %}
+    No comments yet... <a href="{% url 'blog:add_comment' post.pk %}">Add Comment</a><br><br>
+  {% else %}
+    <a href="{% url 'blog:add_comment' post.pk %}">Add Comment</a><br><br>
+  {% endif %}
+  {% else %}
+  <a href="{% url 'members:register' %}">Registrate </a>para comentar...<br><br>
+{% endif %}
   {%for comment in post.comments.all %}
   <strong>
     {{ comment.name }} - 
@@ -91,10 +96,16 @@
   {{ comment.body }}
   <br><br>  
   {% endfor %}
-  <br>
-<a href="{% url 'blog:add_comment' post.pk %}">Add Comment</a><br><br>
-<br><br>  
+  {% if user.is_authenticated %}
+  {% if not post.comments.all %}
+    No comments yet... <a href="{% url 'blog:add_comment' post.pk %}">Add Comment</a><br><br>
+  {% else %}
+    <a href="{% url 'blog:add_comment' post.pk %}">Add Comment</a><br><br>
+  {% endif %}
+  {% else %}
+  <a href="{% url 'members:register' %}">Registrate </a>para comentar...<br><br>
 {% endif %}
+
 
 
 {% endblock content %}
