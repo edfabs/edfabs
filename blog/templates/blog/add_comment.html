@@ -7,10 +7,15 @@
 
 <h1>Add Blog Post...</h1>
 <br><br>
-<div class="form-group">
-    <form action="" method="post" ">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button class="btn btn-secondary">Add comment</button>
-</div>
+{% if user.is_authenticated %}
+    <div class="form-group">
+        <form action="" method="post" ">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-secondary">Add comment</button>
+    </div>
+{% else %}
+<p> Para agregar un commentario debes <a href="{% url 'members:register' %}"> Registrarte</a></p>
+
+{% endif %}
 {% endblock content %}
