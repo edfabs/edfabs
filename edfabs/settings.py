@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'blog',
     'members',
     'ckeditor',
+    'emailing',
 ]
 
 MIDDLEWARE = [
@@ -172,3 +173,17 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 LOGIN_REDIRECT_URL = 'blog:index'
 LOGOUT_REDIRECT_URL = 'blog:index'
+
+# EMAIL_HOST: 'localhost'
+# EMAIL_PORT: 25
+# EMAIL_HOST_USER:
+# EMAIL_HOST_PASSWORD:
+# EMAIL_USE_TLS: False
+# EMAL_USE_SSL: False
+EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_PORT= 587
+EMAIL_HOST_USER='suchettr@gmail.com'
+EMAIL_HOST_PASSWORD='hHPv55QX'
+EMAIL_USE_TLS: True
+EMAL_USE_SSL: False
