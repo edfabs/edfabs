@@ -1,3 +1,10 @@
+.post-content {
+  background: none repeat scroll 0 0 #FFFFFF;
+  opacity: 0.5;
+  margin: -54px 20px 12px;
+  position: relative;
+}
+
 .about {
   padding: 30px 0 30px 0;
   text-align: center;
@@ -8,10 +15,6 @@
 }
 .about ul {
   padding-top: 30px;
-}
-
-.projects {
-  font-size: 1.5em;
 }
 
 /*# sourceMappingURL=base.css.map */
