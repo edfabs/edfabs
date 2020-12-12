@@ -135,8 +135,8 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.0/howto/static-files/
+# # Static files (CSS, JavaScript, Images) In localhost
+# # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 # STATIC_URL = '/static/'
 
@@ -144,6 +144,10 @@ USE_TZ = True
 #     os.path.join(BASE_DIR, "static"),
 #     '/var/www/static/',
 # ]
+
+# MEDIA_URL = '/media/'
+
+#Static files in AWS
 
 AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
