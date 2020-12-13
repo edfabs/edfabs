@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
 .post-content {
   background: none repeat scroll 0 0 #FFFFFF;
   opacity: 0.5;
@@ -12,19 +13,56 @@ body {
   font-size: 1em;
 }
 
+.header-margin {
+  background-color: #bbb;
+  margin: 1em 0;
+}
+
 .header-home {
-  background-color: white;
-  border-radius: 0.3em;
-  font-size: 1.2em;
-  text-align: justify;
+  background-color: #bbb;
+  font-size: 0.9em;
   color: black;
-  font-family: "Source Code Pro", monospace;
+  font-family: "Press Start 2P";
   margin: 1em 0 1em 0;
+  padding: 1em 0;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+}
+.header-home .bio .title {
+  background-color: black;
+  color: #bbb;
 }
 .header-home .image {
   text-align: center;
 }
+.header-home .image img {
+  width: 80%;
+  box-shadow: 5px 5px;
+}
+.header-home .links a.botton {
+  border-color: #04a1a1;
+  background: #04a1a1;
+  color: #fff;
+  border-radius: 0;
+  padding: 0.25rem 0.75rem;
+  -webkit-filter: drop-shadow(7px 8px 0 #000);
+  filter: drop-shadow(7px 8px 0 black);
+  margin-top: 0.25rem;
+  text-decoration: none;
+}
+.header-home .links a.botton:hover {
+  background-color: white;
+  color: black;
+  text-decoration: none;
+}
 
+@media (max-width: 600px) {
+  .header-home .image img {
+    display: none;
+  }
+}
 .about {
   padding: 30px 0 30px 0;
   text-align: center;
