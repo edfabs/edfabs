@@ -6,20 +6,64 @@
 {% load static %}
 	<!-- <p>{% autoescape off %}Esto es el About me{% endautoescape %}</p> -->
 	<div class="row no-gutters bg-light position-relative">
-		<div class="col-md-3 mb-md-0 p-md-4 ">
-		  <img src="{% static 'images/edfabs.jpeg' %}" class="mw-100" alt="...">
-		</div>
-		<div class="col-md-9 position-static p-4 pl-md-0">
-			<br>
-		  <div style="text-align:center;"><h2 class="mt-0">E. Fabian Suchett A.</h2></div>
-		  <div style="text-align:center;"><h4>Ing. en Comunicaciones y Electrónica</h4></div><br>
-		  <p class="font-weight-light" style="text-align: center; font-style: italic;" >"Me gustan las matemáticas y varias de sus aplicaciones como la computación y la electrónica, estoy totalmente convencido que solo compartiendo y enseñando es la mejor forma para  seguir creciendo y no caer en el estancamiento."</p>
+		
+		<div class="col-md-9 position-static p-4 pl-md about">
+		  <h2 class="mt-2">Acerca de mi.</h2>
+		  <h4 class="mt-4">Soy Fabian Suchett, clavado del open source, y experto googleador.</h4>
+		  <p class="mt-3">Hola, soy ingeniero en comunicaciones y electrónica de la Ciudad de México. Este es una lugar para compartir conocimento, tutoriales, projectos, musica y muchas cosas que se sean de valor para quien lo necesit aparte de mi.</p>
 		  
-		  <p class="font-weight-light" style="text-align: justify;" style="text-align: justify;"><b>Objetivo profesional:</b> Contribuir con mis conocimientos para la resolución de problemas, propuestas, puesta en marcha de proyectos y aplicaciones de la industria.</p>
+		  <h5 class="mt-2"><b>Objetivo profesional:</b> Intento hacer un cambio para democratizar el conocimiento.</h5>
 		</div>
+		<div class="col-md-3 mb-md-0 p-md-4 ">
+			<img src="{% static 'images/edfabs.jpeg' %}" class="mw-100" alt="...">
+		  </div>
 	  </div>
-	  <div class="row no-gutters bg-light position-relative">
+	  <div class="row no-gutters bg-light position-relative about">
 		<div class="col-md-12 p-md-4">
+			<p>Empece casi por casualidad a aprender sobre la web en el año 2008 desde ese momento he tratado de mejorar. </p>
+			<p> Me especialice en computación aun que siempre hay algo nuevo que aprender, como lo dice el nombre de mi licenciado también sé electrónica y comunicaciones.
+			Quien se dedica a la tecnología sabe que hay que actualizarce constantemente, la mayoría de libros que leo son técnicos y me encanta.</p>
+
+
+			<div class="accordion" id="accordionExample">
+				<div class="accordion-item">
+				  <h2 class="accordion-header" id="headingOne">
+					<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+					  Accordion Item #1
+					</button>
+				  </h2>
+				  <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+					<div class="accordion-body">
+					  <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+					</div>
+				  </div>
+				</div>
+				<div class="accordion-item">
+				  <h2 class="accordion-header" id="headingTwo">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+					  Accordion Item #2
+					</button>
+				  </h2>
+				  <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+					<div class="accordion-body">
+					  <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+					</div>
+				  </div>
+				</div>
+				<div class="accordion-item">
+				  <h2 class="accordion-header" id="headingThree">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+					  Accordion Item #3
+					</button>
+				  </h2>
+				  <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+					<div class="accordion-body">
+					  <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+					</div>
+				  </div>
+				</div>
+			  </div>
+
 		  <div style="text-align: center;"><h4>Experiencia</h4><br></div>
 		  <h5 class="font-weight-bold">Agosto 2020 a la fecha</h5>
 		  <p style="margin-left:1em;">Actualmente me encuentro desarrollando diversas aplicaciones web con <b>CMS Wordpress</b> y <b>Framework Django</b>.</p>
@@ -35,9 +79,4 @@
 		<p style="margin-left:1em;">Cursé la carrera de <b>Ingeniería en Comunicaciones y Electrónica</b> en el <b>Instituto Politécnico Nacional (IPN)</b> en la <b>Escuela Superior de Ingeniería Mecánica y Eléctrica unidad Zacatenco (ESIME Zacatenco)</b> con la especialidad en <b>Computación</b>, especialidad donde desarrollé el gusto por todo lo que tenía que ver con la web.</p>
 		</div>
 	  </div>
-	<div class="row">
-		<div class="col">
-			<P></P>
-		</div>
-	</div>
 {% endblock content %}
