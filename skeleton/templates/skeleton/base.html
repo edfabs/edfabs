@@ -32,7 +32,7 @@
 		</nav>
 	</div> -->
 	<div class="floatless"></div>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container-fluid">
 		  <a class="navbar-brand" href="/">EdFabS</a>
 		  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -72,9 +72,33 @@
 				</ul>
 			  </li>
 			  {% endif %}
-			  <li class="nav-item">
-				<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+			  
+			  {% if user.is_authenticated %}
+			  <li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+					{{ user.first_name }}
+					{{ user.last_name }}
+				</a>
+				<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+					<li><a class="dropdown-item" href="{% url 'members:edit_profile' %}">Edith Settings</a></li>
+					{% if user.profile.id %}
+					
+					<li><a class="dropdown-item" href="{% url 'members:edit_profile_page' user.profile.id %}">Edith Profile Page</a></li>
+					<li><a class="dropdown-item" href="{% url 'members:show_profile_page' user.profile.id %}">Sow Profile Page</a></li>
+					{%  else %}
+					<li><a class="dropdown-item" href="{% url 'members:create_profile_page'%}">Create Profile Page</a></li>
+					{% endif %}
+					<li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+				</ul>
 			  </li>
+			  {% else %}
+			  <li class="nav-item">
+				<a class="nav-link" href="{% url 'login' %}" >Login</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link" href="{% url 'members:register' %}" tabindex="-1" aria-disabled="true">Register</a>
+			  </li>
+			  {% endif %}
 			</ul>
 			
 			<form class="d-flex">
@@ -82,94 +106,6 @@
 			  <button class="btn btn-outline-success" type="submit">Search</button>
 			</form>
 		  </div>
-		</div>
-	  </nav>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<a class="navbar-brand" href="/">EdFabS</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-		  <span class="navbar-toggler-icon"></span>
-		</button>
-	  
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-		  <ul class="navbar-nav mr-auto">
-			  <li class="nav-item">
-				  <a class="nav-link" href="/about">About</a>
-				</li>
-			  <!-- <li class="nav-item">
-				  <a class="nav-link" href="/projects">Projects</a>
-				</li>			 -->
-			
-			<li class="nav-item dropdown">
-			  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				Blogs
-			  </a>
-			  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-				<a class="dropdown-item" href="/blog">Blog</a>
-				{% if user.is_authenticated %}
-				<div class="dropdown-divider"></div>
-				<a class="dropdown-item" href="/blog/add_post">Add a post</a>
-				<a class="dropdown-item" href="{% url 'blog:add_category' %}">Add a category</a>
-				{% endif %}
-			  </div>
-			  {% if cat_menu %}
-			  <li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				  Categorys
-				</a>
-				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-				  	{% for item in cat_menu %}
-					  <a class="dropdown-item" href="{% url 'blog:category' item|slugify %}">{{item}}</a>
-					{% endfor%}
-				</div>
-			  </li>
-			</li>
-			{% endif %}
-			{% if user.is_authenticated %}
-			
-			<li class="nav-item">
-				
-			  </li>
-			{% else %}
-			
-			  
-			{% endif %}
-			
-			  
-			<!-- <li class="nav-item">
-			  <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-			</li> -->
-			<li class="nav-item">
-				<a class="nav-link" href="/contact">Contact</a>
-			  </li>
-		  </ul>
-		  {% if user.is_authenticated %}
-		  <ul class="navbar-nav ml-auto">
-			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ user.first_name }}
-					{{ user.last_name }}</a>
-				<div class="dropdown-menu">
-				  <a class="dropdown-item" href="{% url 'members:edit_profile' %}">Edith Settings</a>
-				{% if user.profile.id %}
-					<a class="dropdown-item" href="{% url 'members:edit_profile_page' user.profile.id %}">Edith Profile Page</a>
-					<a class="dropdown-item" href="{% url 'members:show_profile_page' user.profile.id %}">Sow Profile Page</a>
-				{%  else %}
-					<a class="dropdown-item" href="{% url 'members:create_profile_page'%}">Create Profile Page</a>	
-				{% endif %}
-					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
-				</div>
-			  </li>
-		  </ul>
-		  {% else %}
-		  <ul class="navbar-nav ml-auto">
-			<li class="nav-item">
-				<a class="nav-link" href="{% url 'login' %}">Login</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" href="{% url 'members:register' %}">Register</a>
-			  </li>
-		  </ul>		  
-		  {% endif %}
 		</div>
 	  </nav>
 	<div class="container">
