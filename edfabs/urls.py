@@ -19,13 +19,14 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('blog/', include('blog.urls')),
-    path('polls/', include('polls.urls')),
-    path('projects/', include('projects.urls')),
-	path('', include('skeleton.urls')),
-    path('admin/', admin.site.urls),
-    path('members/', include('django.contrib.auth.urls')),
-    path('members/', include('members.urls')),
-    path('emailing/', include('emailing.urls')),
-# ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    path("blog/", include("blog.urls")),
+    path("polls/", include("polls.urls")),
+    path("projects/", include("projects.urls")),
+    path("", include("skeleton.urls")),
+    path("admin/", admin.site.urls),
+    path("members/", include("django.contrib.auth.urls")),
+    path("members/", include("members.urls")),
+    path("emailing/", include("emailing.urls")),
+    path("lacabanaRestaurante/", include("lacabanaRestaurante.urls")),
+    # ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

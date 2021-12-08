@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        {% load static %}
+        <link rel="icon" href="{% static 'images/favicon.ico' %}">
+	    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    </head>
+    
+    <body>
+        <div class="container">
+            <!-- <div class="box"> <img src="{% static 'images/lacabanaft/menu1.jpg' %}" alt=""> menu 1</div> -->
+            <div class="box"><a href="{% url 'lacabanaRestaurante:pizza' %}">Pizzas</a> </div>
+            <div class="box"> <a href="{% url 'lacabanaRestaurante:antojo' %}">Antojitos mexicanos</a> </div>
+            <div class="box"> <a href="{% url 'lacabanaRestaurante:cafe' %}">de la Cafetería</a> </div>
+            <div class="box"> <a href="{% url 'lacabanaRestaurante:crepas' %}">Crepas</a> </div>
+            <div class="box"> <a href="{% url 'lacabanaRestaurante:alitas' %}">Alitas</a> </div>
+        </div>
+    </body>
+</html>
