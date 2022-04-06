@@ -6,7 +6,6 @@
 }
 
 body {
-  font-family: Roboto;
   font-size: 1em;
 }
 
@@ -19,7 +18,6 @@ body {
   background-color: #bbb;
   font-size: 0.9em;
   color: black;
-  font-family: "Press Start 2P";
   margin: 1em 0 1em 0;
   padding: 1em 0;
   border-top: 1px solid black;
@@ -35,7 +33,7 @@ body {
   .image {
     text-align: center;
     img {
-      width: 80%;
+      width: 55%;
       box-shadow: 5px 5px;
     }
   }
@@ -111,9 +109,13 @@ footer ul {
 }
 @media (max-width: 600px) {
   .header-home {
+    .bio {
+      .title {
+        text-align: center;
+      }
+    }
     .image {
       img {
-        display: none;
       }
     }
   }
