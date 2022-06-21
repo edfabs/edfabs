@@ -4,9 +4,33 @@
 
 {% block content %}
 	<!-- <p>{% autoescape off %}Esto es el Contact{% endautoescape %}</p> -->
-	<div class="card-body" >
-		<h5 class="card-title">Contacto</h5>
-		<p class="card-text"> <a href="https://www.linkedin.com/in/edfabs/">linkedIn</a> </p>
-		<p><a href="mailto:fabian.suchett@edfabs.com">fabian.suchett@edfabs.com</a></p>
+	<div class="contacto m-5">
+		<p class="h2 mb-5">¿Quieres  compartirme algo?</p>
+		<form action="" method="post">
+			{% csrf_token %}
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-sm-12 mb-5"><input type="text" class="form-control" placeholder="Nombre" id=""></div>
+				<div class="col-md-6 col-sm-12 mb-5"><input type="email" class="form-control" placeholder="E-mail" id=""></div>
+			</div>
+			<div class="form-floating mb-5">
+				<textarea class="form-control" name="" id="floatingTextarea2" style="height:100px;"></textarea>
+				<label for="floatingTextarea2">Comentarios</label>
+			</div>
+			<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+				<button class="btn btn-primary">Enviar</button>
+			</div>
+		</div>
+		</form>
+		<p class="h3 mt-5 mb-5">Encuentrame también en:</p>
+		<div class="social-icons m-5">
+		<a href="https://github.com/EdFabS" target="_blank"><i class="bi-github h2"></i></a>
+		<a href="https://twitter.com/edfabs" target="_blank"><i class="bi-twitter h2"></i></a>
+		<a href="https://www.linkedin.com/in/edfabs/" target="_blank"><i class="bi-linkedin h2"></i></a>
+		<a href="https://www.reddit.com/user/edfabs" target="_blank"><i class="bi-reddit h2"></i></a>
+		</div>
+		&nbsp;
+		&nbsp;
+		&nbsp;
 	  </div>
 {% endblock content %}

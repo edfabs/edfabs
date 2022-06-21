@@ -137,8 +137,8 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images) In localhost
-# https://docs.djangoproject.com/en/3.0/howto/static-files/
+# # Static files (CSS, JavaScript, Images) In localhost
+# # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 # STATIC_URL = "/static/"
 
@@ -175,5 +175,5 @@ MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, AWS_MEDIA_LOCATION)
 DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
 
-# LOGIN_REDIRECT_URL = "blog:index"
-# LOGOUT_REDIRECT_URL = "blog:index"
+LOGIN_REDIRECT_URL = "blog:index"
+LOGOUT_REDIRECT_URL = "blog:index"

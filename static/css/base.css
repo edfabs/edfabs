@@ -106,7 +106,7 @@ h2 {
   color: #343a40;
 }
 
-.container {
+.containerCabana {
   display: flex;
   align-items: flex-start;
   flex-flow: row wrap;
@@ -167,6 +167,11 @@ h2 {
 .image img {
   width: 100%;
   height: auto;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: space-evenly;
 }
 
 /*# sourceMappingURL=base.css.map */
