@@ -106,67 +106,137 @@ h2 {
   color: #343a40;
 }
 
-.containerCabana {
-  display: flex;
-  align-items: flex-start;
-  flex-flow: row wrap;
-  width: 100%;
-  color: black;
+body {
+  background-color: black;
+  font-size: 3em;
 }
 
-.box {
-  background-color: #202020;
-  flex-basis: calc(100% / 1);
-  height: 8rem;
-  margin: 0;
-  white-space: nowrap;
+.logo {
   display: flex;
-  align-items: center;
   justify-content: center;
-  font-size: 2.5rem;
 }
-.box a {
+
+.logo img {
+  width: 100%;
+}
+
+ul {
+  padding-left: 0px;
+  list-style: none;
+  text-align: center;
+}
+ul a {
   text-decoration: none;
   color: white;
 }
-.box img {
-  width: 100%;
-  height: 100%;
-}
-.box:first-child {
-  background: #ad341c;
-  background: linear-gradient(0deg, #ad341c 0%, #713629 33%, #2e160e 100%);
-}
-.box:first-child img {
-  width: 57%;
-}
-.box:nth-child(2) {
-  background: #fb5c3d;
-  background: linear-gradient(0deg, #fb5c3d 0%, #b02203 33%, #ad341c 100%);
-}
-.box:nth-child(3) {
-  background: #d23719;
-  background: linear-gradient(0deg, #d23719 0%, #f9451e 33%, #fb5c3d 100%);
-}
-.box:nth-child(4) {
-  background: #8a220d;
-  background: linear-gradient(0deg, #8a220d 0%, #dd3713 33%, #d23719 100%);
-}
-.box:nth-child(5) {
-  background: #370f07;
-  background: linear-gradient(0deg, #370f07 0%, #b82100 33%, #8a220d 100%);
-}
-.box:nth-child(6) {
-  background: black;
-  background: linear-gradient(0deg, black 0%, #651301 33%, #370f07 100%);
+
+.title {
+  margin-top: 5%;
+  text-align: center;
+  font-size: 1.2em;
+  line-height: 75%;
 }
 
-.image {
-  width: 100%;
+.elemento {
+  padding: 5px 10px;
 }
-.image img {
-  width: 100%;
-  height: auto;
+
+.elemento:hover, .elemento:active {
+  background-color: gray;
+}
+
+table {
+  font-size: 0.8em;
+  margin-top: 20px;
+  color: white;
+}
+
+table td {
+  border: 6px solid transparent;
+}
+
+.cafeteria {
+  font-size: 0.8em;
+}
+
+.cafeteria .title {
+  margin-top: 6%;
+  background-color: red;
+  font-size: 0.9em;
+}
+
+.cafeteria .ingredientes {
+  font-size: 0.6em;
+}
+
+.cafeteria .ingredientes span {
+  color: #bc0606;
+}
+
+.platillo {
+  color: white;
+}
+
+.platillo p {
+  text-align: center;
+}
+
+.alitometro {
+  font-size: 0.8em;
+  text-align: center;
+}
+
+.color .picor1q {
+  background-color: #8c0000;
+}
+
+.color .picor2q {
+  background-color: #cb0000;
+}
+
+.color .picor3q {
+  background-color: #e90202;
+}
+
+.color .picor4q {
+  background-color: red;
+}
+
+.color .picor5q {
+  background-color: #ff7700;
+}
+
+.color .picor6q {
+  background-color: darkorange;
+}
+
+.color .picor7q {
+  background-color: #ffb700;
+}
+
+.color .picor8q {
+  background-color: #ffea00;
+  color: gray;
+}
+
+.color .picor9q {
+  background-color: #e5ff00;
+  color: gray;
+}
+
+.color .picor10q {
+  background-color: #a2ff00;
+  color: gray;
+}
+
+.color .picor11q {
+  background-color: #48ff00;
+  color: gray;
+}
+
+.color .picor12q {
+  background-color: #00ff26;
+  color: gray;
 }
 
 .social-icons {
