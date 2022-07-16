@@ -1,4 +1,4 @@
-body{
+.bod{
   background-color:black;
   font-size: 3em;
   
@@ -6,10 +6,10 @@ body{
   display:flex;
   justify-content: center;
 }
-.logo img{
+.bod .logo img{
   width: 100%;
 }
-ul{
+.bod ul{
   padding-left: 0px;
   list-style: none;
   text-align: center;
@@ -19,7 +19,7 @@ ul{
   }
   
 }
-.title{
+.bod .title{
   margin-top: 5%;;
   text-align: center;
   font-size: 1.2em;
