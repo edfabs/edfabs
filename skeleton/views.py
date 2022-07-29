@@ -16,3 +16,6 @@ def about(request):
 
 def contact(request):
 	return render(request, 'skeleton/contact.html', {'title': 'Contact'})
+
+def servicios(request):
+	return render(request, 'skeleton/servicios.html', {'title': 'Servicios'})
