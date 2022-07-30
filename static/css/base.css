@@ -102,10 +102,6 @@ footer ul li img {
     text-align: center;
   }
 }
-h2 {
-  color: #343a40;
-}
-
 .bod {
   background-color: black;
   font-size: 3em;
@@ -244,6 +240,10 @@ table td {
 .social-icons {
   display: flex;
   justify-content: space-evenly;
+}
+
+.shadowing {
+  text-shadow: 2px 2px 2px gray;
 }
 
 /*# sourceMappingURL=base.css.map */
