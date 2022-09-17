@@ -177,3 +177,13 @@ DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
 LOGIN_REDIRECT_URL = "blog:index"
 LOGOUT_REDIRECT_URL = "blog:index"
+
+
+ # Parametros del servidor SMTP
+
+EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS")
+EMAIL_USE_SSL = os.getenv("EMAIL_USE_SSL")
+EMAIL_HOST = os.getenv("EMAIL_HOST")
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+EMAIL_PORT = os.getenv("EMAIL_PORT")

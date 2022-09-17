@@ -3,22 +3,33 @@
 {% block title %}Home{% endblock title %}
 
 {% block content %}
-	<!-- <p>{% autoescape off %}Esto es el Contact{% endautoescape %}</p> -->
-	<div class="contacto m-5">
-		<p class="h2 mb-5">¿Quieres  compartirme algo?</p>
-		<form action="" method="post">
+
+<!-- <form action="/contact/" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+</form> -->
+<p class="h2 mb-5">¿Quieres  compartirme algo?</p>
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+		<form action="/contact/" method="post">
 			{% csrf_token %}
 		<div class="container">
 			<div class="row">
-				<div class="col-md-6 col-sm-12 mb-5"><input type="text" class="form-control" placeholder="Nombre" id=""></div>
-				<div class="col-md-6 col-sm-12 mb-5"><input type="email" class="form-control" placeholder="E-mail" id=""></div>
+				<div class="col-md-6 col-sm-12 mb-5"><input type="text" class="form-control" placeholder="Nombre" id="id_name" name="name"></div>
+				<div class="col-md-6 col-sm-12 mb-5"><input type="email" class="form-control" placeholder="E-mail" id="id_sender" name="sender"></div>
 			</div>
 			<div class="form-floating mb-5">
-				<textarea class="form-control" name="" id="floatingTextarea2" style="height:100px;"></textarea>
-				<label for="floatingTextarea2">Comentarios</label>
+				<textarea class="form-control" id="id_mensaje" name="mensaje" style="height:100px;"></textarea>
+				<label for="floatingTextarea2">Mensaje</label>
 			</div>
 			<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-				<button class="btn btn-primary">Enviar</button>
+				<input type="submit" value="Enviar" class="btn btn-primary">
 			</div>
 		</div>
 		</form>
@@ -32,5 +43,4 @@
 		&nbsp;
 		&nbsp;
 		&nbsp;
-	  </div>
 {% endblock content %}
