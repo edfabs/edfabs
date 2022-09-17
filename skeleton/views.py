@@ -34,7 +34,7 @@ def contact(request):
 			message = request.POST.get('mensaje')
 			subject = 'Mensaje del formulario de contacto de edfabs.com'
 			try:
-				send_mail(subject, name+' envío el siguiente mensaje'+message+' de '+sender, os.getenv("EMAIL_HOST_USER"), os.getenv("EMAIL_HOST_USER"))
+				send_mail(subject, name+' envío el siguiente mensaje'+message+' de '+sender, 'fabian.suchett@edfabs.com', ['fabian.suchett@edfabs.com'])
 			except BadHeaderError:
 				return HttpResponse('Invalid header found.')
 			messages.success(request, 'mensaje enviado.')
