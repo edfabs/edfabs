@@ -9,13 +9,14 @@
     {{ form }}
     <input type="submit" value="Submit">
 </form> -->
-<p class="h2 mb-5">¿Quieres  compartirme algo?</p>
-{% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
-</ul>
+<div class="contacto m-5">
+	<p class="h2 mb-5">¿Quieres  compartirme algo?</p>
+	{% if messages %}
+	<ul class="messages">
+		{% for message in messages %}
+		<li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+		{% endfor %}
+	</ul>
 {% endif %}
 		<form action="/contact/" method="post">
 			{% csrf_token %}
@@ -43,4 +44,5 @@
 		&nbsp;
 		&nbsp;
 		&nbsp;
+	</div>
 {% endblock content %}
