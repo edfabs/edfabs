@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from .forms import Contacto
-import os
+
 from django.core.mail import BadHeaderError, send_mail
 from django.contrib import messages
 
 from django.conf import settings
+import os
 
 import json
 import urllib
@@ -43,7 +44,7 @@ def contact(request):
 			recaptcha_response = request.POST.get('g-recaptcha-response')
 			url = 'https://www.google.com/recaptcha/api/siteverify'
 			values = {
-                'secret': os.getenv("GOOGLE_RECAPTCHA_SECRET_KEY"),
+                'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
                 'response': recaptcha_response
             }
 			data = urllib.parse.urlencode(values).encode()
@@ -67,4 +68,6 @@ def contact(request):
 			return HttpResponseRedirect('/contact/')
 	else:
 		form = Contacto()
-	return render(request, 'skeleton/contact.html', {'form': form, 'recaptcha': os.getenv("GOOGLE_RECAPTCHA_WEB_SITE")})
+		recaptcha = os.getenv("GOOGLE_RECAPTCHA_WEB_SITE")
+		context = {'form': form, 'recaptcha': recaptcha}
+	return render(request, 'skeleton/contact.html', context)
