@@ -5,6 +5,11 @@ import os
 from django.core.mail import BadHeaderError, send_mail
 from django.contrib import messages
 
+from django.conf import settings
+
+import json
+import urllib
+
 # Create your views here.
 
 from django.http import HttpResponse
@@ -33,15 +38,33 @@ def contact(request):
 			sender = request.POST.get('sender')
 			message = request.POST.get('mensaje')
 			subject = 'Mensaje del formulario de contacto de edfabs.com'
-			try:
-				send_mail(subject, name+' envío el siguiente mensaje'+message+' de '+sender, 'fabian.suchett@edfabs.com', ['fabian.suchett@edfabs.com'])
-			except BadHeaderError:
-				return HttpResponse('Invalid header found.')
-			messages.success(request, 'mensaje enviado.')
-			return HttpResponseRedirect('/contact/')
+			
+			''' Begin reCAPTCHA validation '''
+			recaptcha_response = request.POST.get('g-recaptcha-response')
+			url = 'https://www.google.com/recaptcha/api/siteverify'
+			values = {
+                'secret': os.getenv("GOOGLE_RECAPTCHA_SECRET_KEY"),
+                'response': recaptcha_response
+            }
+			data = urllib.parse.urlencode(values).encode()
+			req =  urllib.request.Request(url, data=data)
+			response = urllib.request.urlopen(req)
+			result = json.loads(response.read().decode())
+			''' End reCAPTCHA validation '''
+
+			if result['success']:
+				try:
+					send_mail(subject, name+' envío el siguiente mensaje'+message+' de '+sender, 'fabian.suchett@edfabs.com', ['fabian.suchett@edfabs.com'])
+				except BadHeaderError:
+					return HttpResponse('Invalid header found.')
+				messages.success(request, 'mensaje enviado.')
+				return HttpResponseRedirect('/contact/')
+			else:
+				messages.error(request, 'Invalid reCAPTCHA. Please try again.')
+				return HttpResponseRedirect('/contact/')
 		else:
 			messages.error(request, 'hay un problema.')
 			return HttpResponseRedirect('/contact/')
 	else:
 		form = Contacto()
-	return render(request, 'skeleton/contact.html', {'form': form})
+	return render(request, 'skeleton/contact.html', {'form': form, 'recaptcha': os.getenv("GOOGLE_RECAPTCHA_WEB_SITE")})
