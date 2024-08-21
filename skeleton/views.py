@@ -55,7 +55,7 @@ def contact(request):
 
 			if result['success']:
 				try:
-					send_mail(subject, name+' envío el siguiente mensaje'+message+' de '+sender, 'fabian.suchett@edfabs.com', ['fabian.suchett@edfabs.com'])
+					send_mail(subject, name+' envío el siguiente mensaje: '+message+' de '+sender, 'fabian.suchett@edfabs.com', ['fabian.suchett@edfabs.com'])
 				except BadHeaderError:
 					return HttpResponse('Invalid header found.')
 				messages.success(request, 'mensaje enviado.')
