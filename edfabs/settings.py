@@ -92,9 +92,9 @@ WSGI_APPLICATION = "edfabs.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": os.getenv("db_name"),
-        "USER": os.getenv("db_user"),
-        "PASSWORD": os.getenv("password"),
+        "NAME": os.getenv("db_name_edfabs"),
+        "USER": os.getenv("db_user_edfabs"),
+        "PASSWORD": os.getenv("password_edfabs"),
         "HOST": os.getenv("host"),
         "PORT": os.getenv("port"),
     }
