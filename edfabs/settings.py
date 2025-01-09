@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "ckeditor",
     "emailing",
     "lacabanaRestaurante",
+    "asambleas",
 ]
 
 MIDDLEWARE = [
