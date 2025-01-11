@@ -1,0 +1,112 @@
+{% extends 'skeleton/base.html' %}
+
+{% block title %}Registro de Asistencia{% endblock title %}
+
+{% block content %}
+{% load static %}
+    <style>
+        #workerList {
+            display: none;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            max-height: 200px; /* Limitar la altura de la lista */
+            overflow-y: auto; /* Habilitar desplazamiento si hay muchos elementos */
+        }
+
+        .worker-item {
+            padding: 8px;
+            cursor: pointer;
+        }
+
+        .worker-item:hover {
+            background-color: #f0f0f0; /* Cambiar el color de fondo al pasar el mouse */
+        }
+    </style>
+    <h1>Registro de Asistencia a la Asamblea: {{ asamblea.nombre }}</h1>
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <form method="POST" id="form">
+        {% csrf_token %}
+        <label for="trabajador_id">Introduce tu ficha:</label>
+        <input type="text" id="searchInput" name="trabajador_id" placeholder="Buscar trabajador..." onkeyup="filterWorkers()">
+        <ul id="workerList">
+            <!-- Suponiendo que tienes una lista de trabajadores en el servidor -->
+            {% for trabajador in trabajadores %}
+                <li class="worker-item">{{trabajador.ficha}} - {{ trabajador.nombre }}</li>
+            {% endfor %}
+        </ul>
+
+        <input type="hidden" name="longitud" id="longitud">
+        <input type="hidden" name="latitud" id="latitud">
+        <button type="button" onclick="validateForm()">Registrar Asistencia</button>
+    </form>
+
+    <script>
+        function filterWorkers() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toLowerCase();
+            const ul = document.getElementById("workerList");
+            const li = ul.getElementsByTagName('li');
+            // Mostrar la lista si hay texto en el campo de entrada
+            if (input.value) {
+                ul.style.display = "block";
+            } else {
+                ul.style.display = "none"; // Ocultar la lista si el campo está vacío
+            }
+            for (let i = 0; i < li.length; i++) {
+                const txtValue = li[i].textContent || li[i].innerText;
+                if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+                }
+            }
+        }
+        function validateInput() {
+            const input = document.getElementById('searchInput');
+            // Reemplazar cualquier carácter que no sea un número
+            input.value = input.value.replace(/[^0-9]/g, '');
+        }
+
+        function validateForm() {
+            const input = document.getElementById('searchInput').value;
+            const workerItems = document.querySelectorAll('.worker-item');
+            let isValid = false;
+
+            // Validar que la ficha tenga exactamente 6 caracteres
+            if (input.length !== 6) {
+                alert("La ficha debe tener exactamente 6 caracteres.");
+                return;
+            }
+
+            // Verificar si el valor ingresado coincide con algún trabajador
+            workerItems.forEach(item => {
+                if (item.textContent.includes(input)) {
+                    isValid = true;
+                }
+            });
+
+            if (isValid) {
+                // Aquí puedes enviar el formulario o realizar otra acción
+                //alert("Formulario válido. Puedes enviar.");
+                // Si tienes un formulario, puedes usar:
+                 document.getElementById('form').submit();
+            } else {
+                alert("Por favor, selecciona un trabajador de la lista.");
+            }
+        }
+        // Obtener geolocalización
+        navigator.geolocation.getCurrentPosition(function(position) {
+            document.getElementById('longitud').value = position.coords.longitude;
+            document.getElementById('latitud').value = position.coords.latitude;
+        }, function() {
+            alert('No se pudo obtener la ubicación. Asegúrate de permitir el acceso a la ubicación.');
+        });
+    </script>
+{% endblock content %}

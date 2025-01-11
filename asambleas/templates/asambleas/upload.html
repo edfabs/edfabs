@@ -1,0 +1,13 @@
+{% extends 'skeleton/base.html' %}
+
+{% block title %}Asambleas - Detalle{% endblock title %}
+
+{% block content %}
+{% load static %}
+    <h1>Cargar archivo CSV</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Cargar</button>
+    </form>
+    {% endblock content %}

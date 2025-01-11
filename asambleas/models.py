@@ -4,23 +4,19 @@ from django.db import models
 
 class Trabajador(models.Model):
     ficha = models.CharField(max_length=20, unique=True)
-    nombre = models.CharField(max_length=50)
-    primer_apellido = models.CharField(max_length=50)
-    segundo_apellido = models.CharField(max_length=50)
+    nombre = models.CharField(max_length=200)
     regimen_contractual = models.CharField(max_length=50)
-    departamento = models.CharField(max_length=50)
-    clave_centro_trabajo = models.CharField(max_length=20)
+    departamento = models.CharField(max_length=100)
+    clave_centro_trabajo = models.CharField(max_length=50)
     centro_trabajo = models.CharField(max_length=100)
-    longitud = models.FloatField()
-    latitud = models.FloatField()
 
     def __str__(self):
-        return str(self.nombre, self.primer_apellido, self.segundo_apellido)
+        return str(self.nombre)
     
 class Asamblea(models.Model):
     nombre = models.CharField(max_length=100)
     descripcion = models.TextField()
-    link = models.URLField(max_length=200)
+    link = models.CharField(max_length=200)
     fecha = models.DateTimeField()
     longitud = models.FloatField()
     latitud = models.FloatField()

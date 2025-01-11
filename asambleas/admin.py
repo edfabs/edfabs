@@ -3,7 +3,7 @@ from .models import Trabajador, Asamblea, Asistencia
 
 @admin.register(Trabajador)
 class TrabajadorAdmin(admin.ModelAdmin):
-    list_display = ('ficha', 'nombre', 'primer_apellido', 'segundo_apellido', 'centro_trabajo')
+    list_display = ('ficha', 'nombre', 'centro_trabajo')
 
 @admin.register(Asamblea)
 class AsambleaAdmin(admin.ModelAdmin):
