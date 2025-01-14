@@ -20,28 +20,30 @@ def registrar_asistencia(request, asamblea_id):
         # Validar geolocalización
         longitud_actual = request.POST.get('longitud')
         latitud_actual = request.POST.get('latitud')
-
-        if (asamblea.longitud - 0.00225 <= float(longitud_actual) <= asamblea.longitud + 0.00225 and
-            asamblea.latitud - 0.00225<= float(latitud_actual) <= asamblea.latitud + 0.00225):
-            # Verificar si el trabajador ya se ha registrado
-            if (Asistencia.objects.filter(trabajador=trabajador, asamblea=asamblea).exists()):
-                messages.error(request, 'Ya has registrado tu asistencia a esta asamblea.')
-            else:
-                # Verificar si ya existe una cookie para este trabajador
-                cookie_name = f'assistencia_{asamblea.id}'
-                if request.COOKIES.get(cookie_name):
-                    messages.error(request, 'Ya has registrado tu asistencia a esta asamblea desde este dispositivo.')
-                else:                
-                    # Registrar asistencia
-                    Asistencia.objects.create(trabajador=trabajador, asamblea=asamblea, confirmacion=True)
-                    messages.success(request, 'Asistencia registrada con éxito.')
-                    # Establecer la cookie para indicar que el trabajador ha registrado asistencia
-                    response = redirect(f'/asambleas/asamblea/{asamblea_id}/registrar/')
-                    response.set_cookie(cookie_name, 'true', max_age=60*60*24*30)  # Cookie válida por 30 días
-                    
-                    return response
+        if longitud_actual == "" or latitud_actual == "":
+            messages.error(request, 'Error al registrar asistencia, debes de permitir la geolocalización')
         else:
-            messages.error(request, 'No se puede registrar la asistencia. Debe estar en el recinto.')
+            if (asamblea.longitud - 0.00225 <= float(longitud_actual) <= asamblea.longitud + 0.00225 and
+                asamblea.latitud - 0.00225<= float(latitud_actual) <= asamblea.latitud + 0.00225):
+                # Verificar si el trabajador ya se ha registrado
+                if (Asistencia.objects.filter(trabajador=trabajador, asamblea=asamblea).exists()):
+                    messages.error(request, 'Ya has registrado tu asistencia a esta asamblea.')
+                else:
+                    # Verificar si ya existe una cookie para este trabajador
+                    cookie_name = f'assistencia_{asamblea.id}'
+                    if request.COOKIES.get(cookie_name):
+                        messages.error(request, 'Ya has registrado tu asistencia a esta asamblea desde este dispositivo.')
+                    else:                
+                        # Registrar asistencia
+                        Asistencia.objects.create(trabajador=trabajador, asamblea=asamblea, confirmacion=True)
+                        messages.success(request, 'Asistencia registrada con éxito.')
+                        # Establecer la cookie para indicar que el trabajador ha registrado asistencia
+                        response = redirect(f'/asambleas/asamblea/{asamblea_id}/registrar/')
+                        response.set_cookie(cookie_name, 'true', max_age=60*60*24*30)  # Cookie válida por 30 días
+                        
+                        return response
+            else:
+                messages.error(request, 'No se puede registrar la asistencia. Debe estar en el recinto.')
 
     return render(request, 'asambleas/registrar_asistencia.html', {
         'asamblea': asamblea,
@@ -79,3 +81,15 @@ def upload_file(request):
     else:
         form = UploadFileForm()
     return render(request, 'asambleas/upload.html', {'form': form})
+
+def reporte_asistencia(request, asamblea_id):
+    asamblea = Asamblea.objects.get(id=asamblea_id)
+    asistencias = Asistencia.objects.filter(asamblea=asamblea).order_by('-fecha')[:500]
+    trabajadores_asistieron = [asistencia.trabajador for asistencia in asistencias if asistencia.confirmacion]
+    num_trabajadores = Asistencia.objects.filter(asamblea=asamblea)
+
+    return render(request, 'asambleas/reporte_asistencia.html', {
+        'asamblea': asamblea,
+        'trabajadores_asistieron': trabajadores_asistieron,
+        'num_trabajadores': num_trabajadores
+    })
