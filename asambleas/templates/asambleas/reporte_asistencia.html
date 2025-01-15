@@ -1,4 +1,4 @@
-{% extends 'skeleton/base.html' %}
+{% extends 'asambleas/base.html' %}
 
 {% block title %}Esistentes {{ asamblea.nombre }}{% endblock title %}
 
@@ -11,10 +11,10 @@
     <h2>Trabajadores Registrados al momento:</h2>
     <div class="circle">{{num_trabajadores|length}}</div>
 </div>
-<div class="sphere">    
-    <div class="sphere-content">
+<div class="names-body">    
+    <div class="name-grid">
         {% for trabajador in trabajadores_asistieron %}
-            <div class="word">
+            <div>
                 {{ trabajador.nombre }}
             </div>
         {% endfor %}
@@ -42,61 +42,43 @@
             font-size: 2em; /* Tamaño de la fuente */
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra */
         }
-.sphere {
-    position: relative;
-    width: 100%; /* Ajusta el tamaño según sea necesario */
-    height: 700px; /* Ajusta el tamaño según sea necesario */
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    perspective: 1000px; /* Para dar un efecto 3D */
-}
+        .names-body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            margin-top: 20px;
+            margin-bottom: 40px;
+            overflow-y: auto; /* Permitir desplazamiento vertical */
+        }
 
-.sphere-content {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    transform-style: preserve-3d;
-    animation: rotate 20s infinite linear; /* Rotación continua */
-}
+        h1 {
+            margin-bottom: 20px;
+        }
 
-.word {
-    position: absolute;
-    font-size: 0.2em; /* Tamaño base de la fuente */
-    transition: transform 0.3s ease, font-size 0.3s ease; /* Transiciones suaves */
-    color: #000000; /* Color de las palabras */
-}
+        .name-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* Crear columnas responsivas */
+            gap: 5px; /* Espacio entre los elementos */
+            max-width: 1200px; /* Ancho máximo de la cuadrícula */
+            width: 100%; /* Ancho completo */
+            padding: 5px; /* Espaciado interno */
+        }
 
-.word:hover {
-    font-size: .5rem;
-    color: #1b1c1c; /* Cambiar color al pasar el mouse */
-}
+        .name-grid div {
+            padding: 5px; /* Espaciado interno */
+            font-size: 0.6em; /* Tamaño de fuente */
+            color: #333; /* Color del texto */
+            transition: color 0.3s, background-color 0.3s; /* Transiciones suaves */
+            cursor: pointer; /* Cambiar cursor al pasar el mouse */
+            border-radius: 4px; /* Bordes redondeados */
+        }
+
+        .name-grid div:hover {
+            color: #0077ff; /* Cambiar color del texto al pasar el mouse */
+            background-color: #e0e0e0; /* Cambiar color de fondo al pasar el mouse */
+        }
 </style>
-
-<script>
-// Función para posicionar las palabras en la esfera
-function positionWords() {
-    const words = document.querySelectorAll('.word');
-    const radius = 400; // Radio de la esfera
-
-    words.forEach((word, index) => {
-        const phi = Math.acos(-1 + (2 * index) / words.length);
-        const theta = Math.sqrt(words.length * Math.PI) * phi;
-
-        const x = radius * Math.cos(theta) * Math.sin(phi);
-        const y = radius * Math.sin(theta) * Math.sin(phi);
-        const z = radius * Math.cos(phi);
-
-        word.style.transform = `translate3d(${x}px, ${y}px, ${z}px)`;
-    });
-}
-
-// Llamar a la función al cargar la página
-window.onload = positionWords;
-</script>
 {% endblock content %}

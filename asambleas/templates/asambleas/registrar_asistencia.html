@@ -1,4 +1,4 @@
-{% extends 'skeleton/base.html' %}
+{% extends 'asambleas/base.html' %}
 
 {% block title %}Registro de Asistencia{% endblock title %}
 
@@ -23,7 +23,8 @@
             background-color: #f0f0f0; /* Cambiar el color de fondo al pasar el mouse */
         }
     </style>
-    <h1>Registro de Asistencia a la Asamblea: {{ asamblea.nombre }}</h1>
+    <br><br>
+    <h1>Registro de Asistencia a la Asamblea: {{ asamblea.nombre }}</h1><br><br>
     {% if messages %}
         <ul class="messages">
             {% for message in messages %}
@@ -33,8 +34,11 @@
     {% endif %}
     <form method="POST" id="form">
         {% csrf_token %}
-        <label for="trabajador_id">Introduce tu ficha:</label>
-        <input type="text" id="searchInput" name="trabajador_id" placeholder="Buscar trabajador..." onkeyup="filterWorkers()">
+        <div class="input-group flex-nowrap">
+            <span class="input-group-text" id="addon-wrapping">Introduce tu Ficha:</span>
+            <input type="text" class="form-control" id="searchInput" name="trabajador_id" placeholder="Buscar trabajador..." onkeyup="filterWorkers()">
+          </div>
+        
         <ul id="workerList">
             <!-- Suponiendo que tienes una lista de trabajadores en el servidor -->
             {% for trabajador in trabajadores %}
@@ -44,7 +48,8 @@
 
         <input type="hidden" name="longitud" id="longitud">
         <input type="hidden" name="latitud" id="latitud">
-        <button type="button" onclick="validateForm()">Registrar Asistencia</button>
+        <br>
+        <button type="button" class="btn btn-secondary" onclick="validateForm()">Registrar Asistencia</button>
     </form>
 
     <script>

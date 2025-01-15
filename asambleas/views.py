@@ -50,6 +50,28 @@ def registrar_asistencia(request, asamblea_id):
         'trabajadores': trabajadores
         })
 
+def registrar_asistencia_kiosco(request, asamblea_id):
+    asamblea = Asamblea.objects.get(id=asamblea_id)
+    trabajadores = Trabajador.objects.all()
+    if request.method == 'POST':
+        trabajador_id = request.POST.get('trabajador_id')
+        trabajador = Trabajador.objects.get(ficha=trabajador_id)
+        # Verificar si el trabajador ya se ha registrado
+        if (Asistencia.objects.filter(trabajador=trabajador, asamblea=asamblea).exists()):
+            messages.error(request, 'Ya has registrado tu asistencia a esta asamblea.')
+        else:
+            # Registrar asistencia
+            Asistencia.objects.create(trabajador=trabajador, asamblea=asamblea, confirmacion=True)
+            messages.success(request, 'Asistencia registrada con éxito.')
+            # Establecer la cookie para indicar que el trabajador ha registrado asistencia
+            response = redirect(f'/asambleas/asamblea/{asamblea_id}/registrarKiosco/')            
+            return response
+        
+    return render(request, 'asambleas/registrar_asistencia.html', {
+        'asamblea': asamblea,
+        'trabajadores': trabajadores
+        })
+
 def upload_file(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
@@ -84,7 +106,7 @@ def upload_file(request):
 
 def reporte_asistencia(request, asamblea_id):
     asamblea = Asamblea.objects.get(id=asamblea_id)
-    asistencias = Asistencia.objects.filter(asamblea=asamblea).order_by('-fecha')[:500]
+    asistencias = Asistencia.objects.filter(asamblea=asamblea)
     trabajadores_asistieron = [asistencia.trabajador for asistencia in asistencias if asistencia.confirmacion]
     num_trabajadores = Asistencia.objects.filter(asamblea=asamblea)
 
@@ -93,3 +115,11 @@ def reporte_asistencia(request, asamblea_id):
         'trabajadores_asistieron': trabajadores_asistieron,
         'num_trabajadores': num_trabajadores
     })
+
+def kiosco(request):
+    asambleas = Asamblea.objects.all()
+    return render(request, 'asambleas/kiosco.html', {'asambleas': asambleas})
+
+def kioscoEvento(request, asamblea_id):
+    asamblea = Asamblea.objects.get(id=asamblea_id)
+    return render(request,  'asambleas/evento.html', {'asamblea': asamblea})

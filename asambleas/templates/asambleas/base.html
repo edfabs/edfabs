@@ -1,0 +1,76 @@
+<!-- #\edfabs\templates\base.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>
+		{% block title %}
+		{{ page_title|default:"Untitle page" }}
+		{% endblock title %}
+	</title>
+	{% load static %}
+	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+	<link rel="icon" href="{% static 'images/favicon.ico' %}">
+	<link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <style>
+        .title-body {
+            display: flex;
+            justify-content: center; /* Centrar horizontalmente */
+            align-items: center; /* Centrar verticalmente */
+            margin: 0; /* Eliminar márgenes por defecto */
+            background-color: #f0f0f0; /* Color de fondo */
+        }
+
+        .title-container {
+            display: flex; /* Usar flexbox para el contenedor */
+            align-items: center; /* Centrar verticalmente los elementos */
+            width: 80%; /* Ancho del contenedor */
+            max-width: 800px; /* Ancho máximo del contenedor */
+            margin: 0 auto; /* Centrar el contenedor en la página */
+        }
+
+        .image {
+            flex: 1; /* Permitir que las imágenes ocupen espacio igual */
+            display: flex; /* Usar flexbox para las imágenes */
+            justify-content: center; /* Centrar horizontalmente la imagen */
+        }
+
+        .image img {
+            max-width: 100%; /* Asegurarse de que la imagen no exceda el ancho del contenedor */
+            height: auto; /* Mantener la proporción de la imagen */
+        }
+
+        .text {
+            flex: 2; /* Permitir que el texto ocupe más espacio */
+            text-align: center; /* Centrar el texto */
+            padding: 20px; /* Espaciado interno */
+            font-size: 2em; /* Tamaño de fuente */
+            color: #333; /* Color del texto */
+        }
+    </style>
+</head>
+<body>
+	<div class="floatless"></div>
+    <div class="title-body">
+        <div class="title-container">
+            <div class="image">
+                <img src="{% static 'images/seccion35/stprm.svg' %}" alt="Imagen Izquierda">
+            </div>
+            <div class=" text h1">
+                Sindicato de Trabajadores Petroleros de la Republica Mexicana
+            </div>
+            <div class="image">
+                <img src="{% static 'images/seccion35/grus.svg' %}" alt="Imagen Derecha">
+            </div>
+        </div>
+    </div>
+	<div class="container">
+		{% block content %}
+			<p>Placeholder text in base template. Replace ith page content.</p>
+		{% endblock content %}
+	</div>
+</body>
+</html>

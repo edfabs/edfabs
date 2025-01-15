@@ -1,0 +1,22 @@
+{% extends 'asambleas/base.html' %}
+
+{% block title %}Esistentes Kiosco {% endblock title %}
+
+{% block content %}
+{% load static %}
+
+<h1>Kiosco</h1>
+
+<div class="">
+    <h2>Selecciona el evento</h2>
+</div>
+<div class="">    
+    <div class="">
+        {% for evento in asambleas %}
+            <div>
+                <a href="/asambleas/asamblea/{{evento.id}}/registrarKiosco">{{ evento.nombre }}</a> <a href="/asambleas/asamblea/{{evento.id}}/reporte">...</a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}
