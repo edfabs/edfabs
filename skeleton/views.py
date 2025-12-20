@@ -71,3 +71,7 @@ def contact(request):
 		recaptcha = os.getenv("GOOGLE_RECAPTCHA_WEB_SITE")
 		context = {'form': form, 'recaptcha': recaptcha}
 	return render(request, 'skeleton/contact.html', context)
+
+
+def privacidad(request):
+	return render(request, 'skeleton/privacidad.html', {'title': 'Aviso de Privacidad'})

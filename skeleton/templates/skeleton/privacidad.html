@@ -1,0 +1,78 @@
+{% extends 'skeleton/base.html' %}
+
+{% block title %}Aviso de Privacidad{% endblock title %}
+
+{% block content %}
+<div class="row justify-content-center">
+	<div class="col-lg-10 col-sm-12 py-4">
+		<h1 class="mb-3">Aviso de Privacidad</h1>
+		<p class="lead">Protegemos tu información personal y la utilizamos únicamente para ofrecerte nuestros servicios de manera segura y transparente.</p>
+
+		<div class="card mb-4">
+			<div class="card-body">
+				<h4 class="card-title">Datos que recopilamos</h4>
+				<p class="card-text mb-1">Recopilamos los datos que compartes cuando te pones en contacto con nosotros, como:</p>
+				<ul class="mb-0">
+					<li>Nombre y datos de contacto (correo electrónico y teléfono).</li>
+					<li>Información relacionada con la consulta o servicio que solicitas.</li>
+					<li>Datos técnicos básicos derivados del uso del sitio (por ejemplo, dirección IP y métricas de navegación).</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="card mb-4">
+			<div class="card-body">
+				<h4 class="card-title">Uso de la información</h4>
+				<ul class="mb-0">
+					<li>Responder mensajes enviados a través de nuestros formularios.</li>
+					<li>Proporcionar los servicios solicitados y dar seguimiento a tus requerimientos.</li>
+					<li>Mejorar la seguridad y el desempeño del sitio.</li>
+					<li>Cumplir con obligaciones legales aplicables.</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="card mb-4">
+			<div class="card-body">
+				<h4 class="card-title">Transferencia y resguardo</h4>
+				<ul class="mb-0">
+					<li>No vendemos tu información personal.</li>
+					<li>Podemos compartir datos con proveedores que nos ayudan a operar el sitio (por ejemplo, servicios de alojamiento), bajo acuerdos de confidencialidad.</li>
+					<li>Conservamos la información solo el tiempo necesario para cumplir las finalidades mencionadas y las obligaciones legales correspondientes.</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="card mb-4">
+			<div class="card-body">
+				<h4 class="card-title">Tus derechos</h4>
+				<p class="card-text mb-1">Puedes ejercer en cualquier momento tus derechos de acceso, rectificación, cancelación u oposición (ARCO), así como solicitar la limitación del uso o divulgación de tus datos personales.</p>
+				<p class="card-text mb-0">Para ejercerlos, envíanos tu solicitud a través de la página de contacto o el medio que prefieras. Daremos respuesta dentro de los plazos establecidos por la normativa aplicable.</p>
+			</div>
+		</div>
+
+		<div class="card mb-4">
+			<div class="card-body">
+				<h4 class="card-title">Medidas de seguridad</h4>
+				<p class="card-text mb-0">Aplicamos medidas administrativas, técnicas y físicas razonables para resguardar tu información. Sin embargo, recuerda que ninguna plataforma es completamente infalible; te recomendamos no compartir datos sensibles a través de formularios abiertos.</p>
+			</div>
+		</div>
+
+		<div class="card mb-4">
+			<div class="card-body">
+				<h4 class="card-title">Actualizaciones al aviso</h4>
+				<p class="card-text mb-0">Podemos modificar este aviso para reflejar cambios en nuestras prácticas o requisitos legales. Publicaremos la versión actualizada en esta misma página, indicando la fecha de la última modificación.</p>
+			</div>
+		</div>
+
+		<div class="card mb-3">
+			<div class="card-body">
+				<h4 class="card-title">Contacto</h4>
+				<p class="card-text mb-0">Si tienes dudas sobre el manejo de tus datos personales, contáctanos desde la sección de <a href="/contact">Contacto</a> y con gusto te ayudaremos.</p>
+			</div>
+		</div>
+
+		<p class="text-muted mb-0">Última actualización: {{ now|default:". . ." }}</p>
+	</div>
+</div>
+{% endblock content %}
