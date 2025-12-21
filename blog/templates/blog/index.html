@@ -1,35 +1,83 @@
 {% extends 'skeleton/base.html' %}
 
-{% block title %}Blog - detail{% endblock title %}
+{% block title %}Blog{% endblock title %}
 
 {% block content %}
 {% load static %}
-<h1>Post</h1>
+<div class="container py-4">
+	<div class="row align-items-center mb-4">
+		<div class="col">
+			<h1 class="mb-2">Blog de Tecnología</h1>
+			<p class="text-muted mb-0">Tendencias, tutoriales y notas breves sobre desarrollo, infraestructura y seguridad.</p>
+		</div>
+		<div class="col-auto">
+			{% if user.is_authenticated %}
+				<a class="btn btn-primary" href="{% url 'blog:add_post' %}"><i class="bi bi-plus"></i> Nuevo post</a>
+			{% endif %}
+		</div>
+	</div>
 
-{% if latest_post_list %}
-    <ul>
-        {% for post in latest_post_list %}
-            <li> <a href=" {% url 'blog:detail' post.id %} ">{{ post.title }}</a>
-                - <a href="{% url 'blog:category' post.category|slugify %}">{{ post.category }}</a>
-                - {{ post.author.first_name }} {{ post.author.last_name }}
-                - {{ post.created_on|date:"F d, Y" }}
-                <small>
-                    {% if user.is_authenticated %}
-                        {% if user.id == post.author.id %}
-                        - <a href="{% url 'blog:update_post' post.id %}">(Edit)</a>
-                        <a href="{% url 'blog:delete_post' post.pk %}">(Delete)</a>
-                        {% endif %}
-                    {% endif %}
+	{% if cat_menu %}
+	<div class="mb-4">
+		<div class="d-flex flex-wrap gap-2">
+			{% for category in cat_menu %}
+				<a class="badge bg-dark text-decoration-none" href="{% url 'blog:category' category.slug %}">{{ category.name }}</a>
+			{% endfor %}
+		</div>
+	</div>
+	{% endif %}
 
-            
-                </small><br>
-            {{ post.snippet|slice:":200"|safe}}</li>
-        {% endfor %}
-    </ul>
-    {% else %}
-        <p> No post are available. </p>
-    {% endif %}
+	{% if tag_menu %}
+	<div class="mb-4">
+		<div class="d-flex flex-wrap gap-2">
+			{% for tag in tag_menu %}
+				<a class="badge bg-light text-decoration-none border" href="{% url 'blog:tag' tag.slug %}">#{{ tag.name }}</a>
+			{% endfor %}
+		</div>
+	</div>
+	{% endif %}
 
-    
+	<div class="row">
+		{% for post in latest_post_list %}
+		<div class="col-lg-4 col-md-6 mb-4">
+			<div class="card h-100 shadow-sm border-0">
+				{% if post.header_image %}
+					<img src="{{ post.header_image.url }}" class="card-img-top" alt="{{ post.title }}">
+				{% endif %}
+				<div class="card-body d-flex flex-column">
+					<div class="d-flex justify-content-between align-items-start mb-2">
+						<span class="badge bg-secondary">{{ post.category }}</span>
+						<small class="text-muted">{{ post.created_on|date:"d M Y" }}</small>
+					</div>
+					<h5 class="card-title"><a href="{% url 'blog:detail' post.slug %}" class="text-decoration-none text-dark">{{ post.title }}</a></h5>
+					<p class="text-muted small mb-2">Por {{ post.author.first_name }} {{ post.author.last_name }}</p>
+					<p class="card-text mb-3">{{ post.excerpt|safe|truncatechars:160 }}</p>
+					<div class="mt-auto d-flex justify-content-between align-items-center">
+						<a class="btn btn-outline-primary btn-sm" href="{% url 'blog:detail' post.slug %}">Leer más</a>
+						<small class="text-muted">{{ post.total_likes }} ❤️</small>
+					</div>
+				</div>
+			</div>
+		</div>
+		{% empty %}
+			<div class="col">
+				<div class="alert alert-info">No hay publicaciones disponibles aún. Crea el primer post.</div>
+			</div>
+		{% endfor %}
+	</div>
 
+	{% if is_paginated %}
+	<nav aria-label="Paginación de blog">
+		<ul class="pagination justify-content-center">
+			{% if page_obj.has_previous %}
+				<li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a></li>
+			{% endif %}
+			<li class="page-item active"><span class="page-link">{{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span></li>
+			{% if page_obj.has_next %}
+				<li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Siguiente</a></li>
+			{% endif %}
+		</ul>
+	</nav>
+	{% endif %}
+</div>
 {% endblock content %}

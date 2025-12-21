@@ -1,17 +1,17 @@
 {% extends 'skeleton/base.html' %}
 
-{% block title %}{{category.name}}{% endblock title %}
+{% block title %}{{tag.name}}{% endblock title %}
 
 {% block content %}
 {% load static %}
 <div class="container py-4">
 	<div class="d-flex align-items-center justify-content-between mb-3">
-		<h1 class="mb-0">{{category.name}}</h1>
+		<h1 class="mb-0">#{{tag.name}}</h1>
 		<a href="{% url 'blog:index' %}" class="text-decoration-none"><i class="bi bi-arrow-left"></i> Volver al blog</a>
 	</div>
 
 	<div class="row">
-		{% for post in category_posts %}
+		{% for post in tag_posts %}
 		<div class="col-lg-4 col-md-6 mb-4">
 			<div class="card h-100 shadow-sm border-0">
 				{% if post.header_image %}
@@ -34,7 +34,7 @@
 		</div>
 		{% empty %}
 			<div class="col">
-				<div class="alert alert-info">No hay publicaciones en esta categoría todavía.</div>
+				<div class="alert alert-info">No hay publicaciones con esta etiqueta.</div>
 			</div>
 		{% endfor %}
 	</div>

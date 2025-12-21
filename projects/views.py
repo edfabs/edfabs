@@ -1,25 +1,16 @@
-from django.shortcuts import render
+from django.views.generic import ListView, DetailView
+from .models import Project
 
-# Create your views here.
 
-from django.http import HttpResponse
-from PIL import Image
-import pytesseract
-import os
+class ProjectListView(ListView):
+    model = Project
+    template_name = "projects/project_list.html"
+    context_object_name = "projects"
+    queryset = Project.objects.filter(is_active=True).order_by("order", "-created_at")
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-def index(request):
-	#return HttpResponse("Hello, world. You're at te skeleton index")
-	return render(request, 'projects/index.html', {'title': 'Projects'})
-
-def tesseract(request):
-	#print(pytesseract.image_to_string(Image.open('Escanear.jpg')))
-	#result = pytesseract.image_to_osd(Image.open(os.path.join(BASE_DIR, 'static/images/Escanear.jpeg')), config='--oem 3 --psm 6')
-	#print(pytesseract.image_to_string(Image.open(os.path.join(BASE_DIR, 'static/images/Escanear.jpeg'))))
-	#custom_oem_psm_config = r'--oem 3 --psm 6'
-	#result = pytesseract.image_to_osd(Image.open(os.path.join(BASE_DIR, 'static/images/Escanear.jpeg')))
-	result = pytesseract.image_to_pdf_or_hocr(Image.open(os.path.join(BASE_DIR, 'static/images/Escanear.jpeg')), extension='hocr')
-	#result = result.replace('\n', '&nbsp')
-	return HttpResponse("result: {}".format(result))
-	#return render(request, 'projects/index.html', {"result: {}".format(result)})
+class ProjectDetailView(DetailView):
+    model = Project
+    template_name = "projects/project_detail.html"
+    slug_field = "slug"
+    slug_url_kwarg = "slug"

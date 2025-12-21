@@ -1,0 +1,46 @@
+{% extends 'skeleton/base.html' %}
+
+{% block title %}Portafolio de proyectos{% endblock title %}
+
+{% block meta %}
+<meta name="description" content="Portafolio de proyectos de tecnología: redes, desarrollo web e infraestructura.">
+{% endblock meta %}
+
+{% block content %}
+{% load static %}
+<div class="container py-4">
+	<div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
+		<div>
+			<h1 class="mb-1">Portafolio</h1>
+			<p class="text-muted mb-0">Proyectos seleccionados de redes, desarrollo web e infraestructura.</p>
+		</div>
+	</div>
+
+	<div class="row">
+		{% for project in projects %}
+		<div class="col-lg-4 col-md-6 mb-4">
+			<div class="card h-100 shadow-sm border-0">
+				{% if project.image %}
+					<img src="{{ project.image.url }}" class="card-img-top" alt="{{ project.title }}">
+				{% else %}
+					<div class="d-flex align-items-center justify-content-center bg-light" style="height: 180px;">
+						<span class="text-muted">Sin imagen</span>
+					</div>
+				{% endif %}
+				<div class="card-body d-flex flex-column">
+					<h5 class="card-title">{{ project.title }}</h5>
+					<p class="card-text text-muted">{{ project.short_description }}</p>
+					<div class="mt-auto">
+						<a class="btn btn-outline-primary btn-sm" href="{% url 'projects:detail' project.slug %}">Ver proyecto</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		{% empty %}
+			<div class="col">
+				<div class="alert alert-info">No hay proyectos activos por ahora.</div>
+			</div>
+		{% endfor %}
+	</div>
+</div>
+{% endblock content %}

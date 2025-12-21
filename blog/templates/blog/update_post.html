@@ -6,15 +6,20 @@
 {% load static %}
 {% if user.is_authenticated %}
     {% if user.id == post.author.id %}
-        <h1>Update Blog Post...</h1>
-        <br><br>
-        <div class="form-group">
-            <form action="" method="post">
-                {% csrf_token %}
-                {{ form.media }}
-                {{ form.as_p }}
-                <button class="btn btn-secondary">Post</button>
+    <div class="container py-4">
+        <h1 class="mb-3">Editar post</h1>
+        <div class="card">
+            <div class="card-body">
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.media }}
+                    {{ form.as_p }}
+                    <button class="btn btn-primary" type="submit">Guardar cambios</button>
+                    <a class="btn btn-link" href="{% url 'blog:detail' post.slug %}">Cancelar</a>
+                </form>
+            </div>
         </div>
+    </div>
     {% else %}
     You're not allowed here !! (and you know it...)
     {% endif %}

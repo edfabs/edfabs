@@ -6,15 +6,19 @@
 {% load static %}
 {% if user.is_authenticated %}
     {% if user.id == post.author.id %}
-        <h1>Delete Blog Post...</h1>
-        <br><br>
-        <h3>Delete: {{ post.title }}</h3>
-        <div class="form-group">
-            <form action="" method="post">
-                {% csrf_token %}
-                <br>
-                <strong>Are you sure?!</strong><br><br>
-                <button class="btn btn-secondary">Delete Post!</button>
+        <div class="container py-4">
+            <h1 class="mb-3">Eliminar post</h1>
+            <div class="alert alert-warning">Vas a eliminar: <strong>{{ post.title }}</strong></div>
+            <div class="card">
+                <div class="card-body">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <p class="mb-3">¿Estás seguro? Esta acción no se puede deshacer.</p>
+                        <button class="btn btn-danger" type="submit">Eliminar</button>
+                        <a class="btn btn-link" href="{% url 'blog:detail' post.slug %}">Cancelar</a>
+                    </form>
+                </div>
+            </div>
         </div>
         {% else %}
         You're not allowed here !! (and you know it...)

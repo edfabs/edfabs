@@ -1,0 +1,38 @@
+{% extends 'skeleton/base.html' %}
+
+{% block title %}{{ project.title }}{% endblock title %}
+
+{% block meta %}
+<meta name="description" content="{{ project.short_description|truncatechars:155 }}">
+{% endblock meta %}
+
+{% block content %}
+{% load static %}
+<div class="container py-4">
+	<div class="mb-3">
+		<a class="text-decoration-none" href="{% url 'projects:list' %}"><i class="bi bi-arrow-left"></i> Volver al portafolio</a>
+	</div>
+
+	<div class="row">
+		<div class="col-lg-6 mb-3">
+			{% if project.image %}
+				<img src="{{ project.image.url }}" class="img-fluid rounded" alt="{{ project.title }}">
+			{% else %}
+				<div class="d-flex align-items-center justify-content-center bg-light rounded" style="height: 320px;">
+					<span class="text-muted">Sin imagen disponible</span>
+				</div>
+			{% endif %}
+		</div>
+		<div class="col-lg-6">
+			<h1 class="mb-3">{{ project.title }}</h1>
+			<p class="lead">{{ project.short_description }}</p>
+			<div class="mb-4">
+				{{ project.description|linebreaks }}
+			</div>
+			{% if project.project_url %}
+				<a class="btn btn-primary" href="{{ project.project_url }}" target="_blank" rel="noopener">Visitar proyecto</a>
+			{% endif %}
+		</div>
+	</div>
+</div>
+{% endblock content %}

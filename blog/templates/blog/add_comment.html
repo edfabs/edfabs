@@ -5,17 +5,21 @@
 {% block content %}
 {% load static %} 
 
-<h1>Add Blog Post...</h1>
-<br><br>
+<div class="container py-4">
+<h1 class="mb-3">Agregar comentario</h1>
 {% if user.is_authenticated %}
     <div class="form-group">
-        <form action="" method="post" ">
+        <form action="" method="post">
             {% csrf_token %}
             {{ form.as_p }}
-            <button class="btn btn-secondary">Add comment</button>
+            <button class="btn btn-primary">Publicar comentario</button>
+            {% if post_slug %}
+            <a class="btn btn-link" href="{% url 'blog:detail' post_slug %}">Volver al post</a>
+            {% endif %}
     </div>
 {% else %}
 <p> Para agregar un commentario debes <a href="{% url 'members:register' %}"> Registrarte</a></p>
 
 {% endif %}
+</div>
 {% endblock content %}
