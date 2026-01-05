@@ -4,113 +4,236 @@
 
 {% block content %}
 	{% load static %}
-	<div class="row">
-		<div class="container header-margin" >
-			<div class="row header-home">
-				<div class="col-md-7 col-sm-12">
-					<p class="title display-5" style="font-family: 'Playfair', serif; font-style: italic; font-weight: bold; color: white;">
-						<b>Tu aliado en desarrollo web: tecnología y diseño a tu medida</b><br>
-					</p>
-					<p style="    font-size: 1.25rem; font-weight: 300; color: white;">Especializado en la creación de sitios optimizados y funcionales para empresas y emprendedores. Con formación en ingeniería y experiencia en redes, combino tecnología y diseño para ofrecer soluciones personalizadas que ayudan a mis clientes a mejorar su presencia en línea y alcanzar sus objetivos digitales.</p>
-				</div>
-				<div class="col-md-5 col-sm-12">
-					<div class="image">
-						<img src="{% static 'images/edfabs-fondo-blanco-R.png' %}" class="mw-100" alt="Fabian Suchett">
-					</div>
-				</div>
-				<div class="col-md-8 col-sm-12 bio mt-2 h5">
-					<p class="links">
-						<a class="botton" href="/about">About me</a>
-						<a class="botton" target="_blank" href="https://github.com/EdFabS">Github</a>
-					</p>
-				</div>
-			</div>
-		</div>
-		<div class="container cards">
-			<div class="row">
-				
-				<div class="col-md-3 col-sm-12">
-					<div class="card" >
-						<img src="{% static  'images/home_code.png' %}" class="card-img-top" alt="Codigo">
-						<a class="attribution" target="_blank" href="">...</a>
-						<div class="card-body">
-						  <h5 class="card-title">Web Develop</h5>
-						  <p class="card-text">Creación, diseño, planeación de proyectos en la web</p>
-						  <p class="card-text">
-							<a href="#" class="stretched-link " style="position: relative;">Django (este sitio)</a>
-							<a href="#" class="stretched-link " style="position: relative;">Laravel (uno de los mejores frameworks de PHP que conozco)</a>
-							<a href="#" class="stretched-link " style="position: relative;">WordPress (framework para crear cosas de manera rápida y fácil. De las comunidades más nobles en el mundo de la web)</a>
-							<a href="#" class="stretched-link " style="position: relative;">Snippets útiles</a>
-						  </p>
-						</div>
-					  </div>
-				</div>
-				<div class="col-md-3 col-sm-12">
-					<div class="card" >
-						<img src="{% static  'images/network350.png' %}" class="card-img-top" alt="Emailing">
-						<a class="attribution" target="_blank" href="https://www.freepik.com/vectors/infographic">Infographic vector created by GarryKillian - www.freepik.com</a>
-						<div class="card-body">
-						  <h5 class="card-title">Network Engineer</h5>
-						  <p class="card-text">Diseño, administración, instalacion, mantenimiento de redes</p>
-						  <p class="card-text">
-							<a href="#" class="stretched-link " style="position: relative;">Switching and routing</a>
-							<a href="#" class="stretched-link " style="position: relative;">VoIP</a>
-							<a href="#" class="stretched-link " style="position: relative;">VLANs</a>
-							<a href="#" class="stretched-link " style="position: relative;">Subnetting</a>
-							<a href="#" class="stretched-link " style="position: relative;">DHCP</a>
-							<a href="#" class="stretched-link " style="position: relative;">Routing static, RIPv2, OSPF, EIGRP</a>
-							<a href="#" class="stretched-link " style="position: relative;">ACLs</a>
-							<a href="#" class="stretched-link " style="position: relative;">IPv6</a>
-						  </p>
-						</div>
-					  </div>
-				</div>
-				<div class="col-md-3 col-sm-12">
-					<div class="card" >
-						<img src="{% static  'images/home_electronica.png' %}" class="card-img-top" alt="Microcontroladores Texas Instrument">
-						<a class="attribution" target="_blank" href="">...</a>
-						<div class="card-body">
-						  <h5 class="card-title">Aficionado de la electrónica</h5>
-						  <p class="card-text">Hay veces que surgen problemas con nuestros equipos y hay que meterle mano para que esten en optimas opciones</p>
-						  <p class="card-text">
-							<a href="#" class="stretched-link " style="position: relative;">microPython</a>
-							<a href="#" class="stretched-link " style="position: relative;">Microcontroladores</a>
-							<a href="#" class="stretched-link " style="position: relative;">LINUX</a>
-							<a href="#" class="stretched-link " style="position: relative;">Problemas con el software</a>
-							<a href="#" class="stretched-link " style="position: relative;">Hardware</a>
-							<a href="#" class="stretched-link " style="position: relative;">Configuración</a>
-							<a href="#" class="stretched-link " style="position: relative;">Raspberry Pi</a>
-							<a href="#" class="stretched-link " style="position: relative;">Armando computadoras</a>
-						  </p>
-						</div>
-					  </div>
-				</div>
-				<div class="col-md-3 col-sm-12">
-					<div class="card" >
-						<img src="{% static  'images/home_code.png' %}" class="card-img-top" alt="Codigo">
-						<a class="attribution" target="_blank" href="">...</a>
-						<div class="card-body">
-						  <h5 class="card-title">Seguridad en casa</h5>
-						  <p class="card-text">En la CDMX no esta de mas tomarnos un poco en serio la seguridad en casa</p>
-						  <p class="card-text">
-							<a href="#" class="stretched-link " style="position: relative;">Instalación de camaras de seguridad Dahua</a>
-							<a href="#" class="stretched-link " style="position: relative;">Camaras Analogicas</a>
-							<a href="#" class="stretched-link " style="position: relative;">IP</a>
-							<a href="#" class="stretched-link " style="position: relative;">WiFi</a>
-							<a href="#" class="stretched-link " style="position: relative;">DVR's</a>
-							<a href="#" class="stretched-link " style="position: relative;">NVR's</a>
-							<a href="#" class="stretched-link " style="position: relative;">IoT</a>
-							<a href="#" class="stretched-link " style="position: relative;">Alarmas</a>
-						  </p>
-						</div>
-					  </div>
-				</div>
-			</div>
-		</div>
-		<div class="container cards">
-			<div class="row">
-				
-			</div>
-		</div>
-	</div>
+<!-- Hero Section -->
+<div class="layout-container flex flex-col items-center justify-center w-full">
+<div class="flex w-full max-w-[1200px] flex-col px-4 py-12 lg:px-10 lg:py-20">
+<div class="@container">
+<div class="flex flex-col-reverse gap-10 lg:flex-row lg:items-center lg:gap-16">
+<!-- Text Content -->
+<div class="flex flex-1 flex-col gap-6 text-left">
+<div class="flex flex-col gap-4">
+<div class="inline-flex w-fit items-center gap-2 rounded-full border border-surface-border bg-surface-dark px-3 py-1 text-xs font-medium text-primary">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+</span>
+                                    Disponible para proyectos
+                                </div>
+<h1 class="font-display text-4xl font-black leading-[1.1] tracking-tight text-slate-900 dark:text-white sm:text-5xl lg:text-6xl">
+                                    Ingeniería que conecta el <span class="text-primary">futuro</span>
+</h1>
+<h2 class="text-base font-normal leading-relaxed text-slate-600 dark:text-text-secondary sm:text-lg max-w-xl">
+                                    Soy Fabian Suchett, Ingeniero en Comunicaciones y Electrónica, con experiencia en redes de datos, radio trunking, cableado estructurado, sistemas eléctricos y electrónica aplicada.
+												<br><br>
+												Desarrollo soluciones tecnológicas integrales, que van desde la infraestructura física hasta la creación de sistemas web a la medida, optimizados, seguros y funcionales.
+												<br><br>
+												Mi enfoque combina ingeniería, tecnología y diseño para ayudar a empresas y emprendedores a construir una presencia digital sólida, alineada con sus procesos reales y objetivos de negocio.
+                                </h2>
+</div>
+<div class="flex flex-wrap gap-4 pt-4">
+<button class="flex h-12 min-w-[140px] items-center justify-center rounded-lg bg-primary px-6 text-base font-bold text-white shadow-lg shadow-primary/25 transition-transform hover:scale-105 hover:bg-blue-600">
+                                    Ver Portafolio
+                                </button>
+<button class="flex h-12 min-w-[140px] items-center justify-center rounded-lg border border-surface-border bg-surface-dark px-6 text-base font-bold text-white transition-colors hover:bg-surface-border">
+                                    Contactar
+                                </button>
+</div>
+<!-- Social Mini Links -->
+<div class="mt-4 flex gap-4">
+<a class="text-text-secondary hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">public</span>
+</a>
+<a class="text-text-secondary hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">code</span>
+</a>
+<a class="text-text-secondary hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">mail</span>
+</a>
+</div>
+</div>
+<!-- Image Content -->
+<div class="flex flex-1 justify-center lg:justify-end">
+<div class="relative h-[300px] w-[300px] sm:h-[400px] sm:w-[400px]">
+<!-- Decorative background blob -->
+<div class="absolute -inset-4 rounded-full bg-gradient-to-tr from-primary/20 to-transparent blur-2xl"></div>
+<div class="relative h-full w-full overflow-hidden rounded-2xl border border-surface-border bg-surface-dark shadow-2xl" data-alt="Close up professional portrait of an engineer with technical equipment background" style='background-image:url( {% static 'images/edfabs.png' %}); background-size: cover; background-position: center;'>
+<!-- Gradient overlay for text readability if needed later -->
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark/80 to-transparent opacity-60"></div>
+</div>
+<!-- Floating stats card 1 -->
+<div class="absolute -bottom-6 -left-6 hidden sm:flex items-center gap-3 rounded-xl border border-surface-border bg-surface-dark p-4 shadow-xl">
+<div class="flex h-10 w-10 items-center justify-center rounded-full bg-primary/20 text-primary">
+<span class="material-symbols-outlined">school</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xs text-text-secondary">Experiencia</span>
+<span class="font-display font-bold text-white">10+ Años</span>
+</div>
+</div>
+<!-- Floating stats card 2 -->
+<div class="absolute -right-6 -bottom-6 hidden sm:flex items-center gap-3 rounded-xl border border-surface-border bg-surface-dark p-4 shadow-xl">
+<div class="flex h-10 w-10 items-center justify-center rounded-full bg-green-500/20 text-green-500">
+<span class="material-symbols-outlined">check_circle</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xs text-text-secondary">Proyectos</span>
+<span class="font-display font-bold text-white">30+ Completados</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Specialization Section -->
+<div class="flex justify-center bg-surface-dark/30 py-20" id="specialization">
+<div class="layout-content-container flex w-full max-w-[1200px] flex-col px-4 lg:px-10">
+<div class="flex flex-col gap-12">
+<div class="flex flex-col gap-4 text-center md:text-left">
+<h2 class="font-display text-3xl font-bold leading-tight text-slate-900 dark:text-white sm:text-4xl">
+                            Áreas de Especialización
+                        </h2>
+<p class="text-base font-normal leading-normal text-slate-600 dark:text-text-secondary max-w-[720px]">
+                            Experiencia técnica enfocada en innovación, eficiencia energética y robustez de señal.
+                        </p>
+</div>
+<div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+<!-- Card 1 -->
+<div class="group flex flex-col gap-6 rounded-xl border border-surface-border bg-surface-dark p-6 transition-all hover:border-primary/50 hover:bg-surface-dark/80 hover:shadow-lg hover:shadow-primary/5">
+<div class="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined" style="font-size: 28px;">cell_tower</span>
+</div>
+<div class="flex flex-col gap-2">
+<h3 class="font-display text-xl font-bold leading-tight text-slate-900 dark:text-white">Telecomunicaciones</h3>
+<p class="text-sm font-normal leading-relaxed text-text-secondary">
+                                    Análisis de propagación, diseño de antenas (RF), implementación de protocolos 5G y optimización de redes inalámbricas de largo alcance.
+                                </p>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group flex flex-col gap-6 rounded-xl border border-surface-border bg-surface-dark p-6 transition-all hover:border-primary/50 hover:bg-surface-dark/80 hover:shadow-lg hover:shadow-primary/5">
+<div class="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined" style="font-size: 28px;">developer_board</span>
+</div>
+<div class="flex flex-col gap-2">
+<h3 class="font-display text-xl font-bold leading-tight text-slate-900 dark:text-white">Diseño Electrónico</h3>
+<p class="text-sm font-normal leading-relaxed text-text-secondary">
+                                    Desarrollo de PCBs multicapa con Altium Designer, simulación SPICE de circuitos analógicos y diseño de fuentes de alimentación conmutadas.
+                                </p>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group flex flex-col gap-6 rounded-xl border border-surface-border bg-surface-dark p-6 transition-all hover:border-primary/50 hover:bg-surface-dark/80 hover:shadow-lg hover:shadow-primary/5">
+<div class="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined" style="font-size: 28px;">memory</span>
+</div>
+<div class="flex flex-col gap-2">
+<h3 class="font-display text-xl font-bold leading-tight text-slate-900 dark:text-white">Sistemas Embebidos</h3>
+<p class="text-sm font-normal leading-relaxed text-text-secondary">
+                                    Programación de firmware en C/C++ para ARM Cortex y ESP32. Integración de sensores industriales y protocolos IoT (MQTT, LoRaWAN).
+                                </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Portfolio/Projects Section -->
+<div class="flex justify-center py-20" id="portfolio">
+<div class="layout-content-container flex w-full max-w-[1200px] flex-col px-4 lg:px-10">
+<div class="mb-10 flex flex-col gap-2">
+<h2 class="font-display text-3xl font-bold leading-tight text-slate-900 dark:text-white sm:text-4xl">
+                        Proyectos Destacados
+                    </h2>
+<p class="text-base font-normal text-text-secondary">Selección de trabajos recientes en industria e investigación.</p>
+</div>
+<div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+<!-- Project 1 -->
+<div class="flex flex-col overflow-hidden rounded-xl border border-surface-border bg-surface-dark transition-transform hover:-translate-y-1">
+<div class="h-48 w-full bg-cover bg-center" data-alt="Abstract blue circuit board representation for IoT project" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCzyBZeSyk45hP4faaovCUI7tM70EWJLE5s4HtQBOOzz9FtyMQ9lFAtnG599VQuJOt2ETYrQOW3C8GDnjEv6fL5bSgxRFJdBKSB2Di0-9A7SVoP8Vop3fpU9AHHU_IXPqRpeucNt-xO_9O1WKpkfrFhnUQhftsqynrKlj2NGDu5zFFbAkNhZ9wCfnoO3BfBqwce2y8rrKQeiSPgD8wWGzFDlUYeg8RwwOcO4Nle_kARNuewo9U7365NgFU7USYSpCZE2xAJcuKppck");'>
+</div>
+<div class="flex flex-1 flex-col justify-between p-6">
+<div class="flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<span class="text-xs font-bold uppercase tracking-wider text-primary">IoT Industrial</span>
+<span class="text-xs font-medium text-text-secondary">2023</span>
+</div>
+<h3 class="font-display text-xl font-bold text-white">Sistema de Monitoreo Remoto</h3>
+<p class="text-sm text-text-secondary">Plataforma IoT para sensores de temperatura y vibración en motores industriales con dashboard en tiempo real.</p>
+<div class="mt-2 flex flex-col gap-2">
+<div class="flex items-center gap-2 text-xs text-slate-300">
+<span class="material-symbols-outlined text-primary" style="font-size: 16px;">check_circle</span>
+<span>ESP32 &amp; MQTT</span>
+</div>
+<div class="flex items-center gap-2 text-xs text-slate-300">
+<span class="material-symbols-outlined text-primary" style="font-size: 16px;">check_circle</span>
+<span>AWS IoT Core</span>
+</div>
+</div>
+</div>
+<button class="mt-6 flex h-10 w-full items-center justify-center rounded-lg border border-surface-border bg-transparent text-sm font-bold text-white hover:bg-surface-border transition-colors">
+                                Ver detalles
+                            </button>
+</div>
+</div>
+<!-- Project 2 -->
+<div class="flex flex-col overflow-hidden rounded-xl border border-surface-border bg-surface-dark transition-transform hover:-translate-y-1">
+<div class="h-48 w-full bg-cover bg-center" data-alt="Antenna tower against blue sky" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAxtGCvjAIhWBXLZ3dI9GXh2Pifxd_V_kmShJHV0_FnlWRbzoWCgcMfbK2ju1Z8pcFT5FZO4RMs9Ii1ZTTUAR1sRdhC6xuDxwgsvlsvyWxHpYavE7PbheMdp2GTamNLPfqK7w1FnqF9cvr3cJPZSoLZ77LTRsPf3IVvf4vOEN1Fm6P8-z3nxfIZ84JAvEUOvv6fkObCicUJqCS84oSwxbMqy343fLr5KhzJNp86Y4xXTGtDuDJrNs3qB72Os9TMYKqPpe543ygFQFI");'>
+</div>
+<div class="flex flex-1 flex-col justify-between p-6">
+<div class="flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<span class="text-xs font-bold uppercase tracking-wider text-primary">Radiofrecuencia</span>
+<span class="text-xs font-medium text-text-secondary">2022</span>
+</div>
+<h3 class="font-display text-xl font-bold text-white">Diseño Antena Yagi-Uda</h3>
+<p class="text-sm text-text-secondary">Diseño, simulación y construcción de antena direccional de alta ganancia para banda UHF.</p>
+<div class="mt-2 flex flex-col gap-2">
+<div class="flex items-center gap-2 text-xs text-slate-300">
+<span class="material-symbols-outlined text-primary" style="font-size: 16px;">check_circle</span>
+<span>Simulación HFSS</span>
+</div>
+<div class="flex items-center gap-2 text-xs text-slate-300">
+<span class="material-symbols-outlined text-primary" style="font-size: 16px;">check_circle</span>
+<span>Mediciones con VNA</span>
+</div>
+</div>
+</div>
+<button class="mt-6 flex h-10 w-full items-center justify-center rounded-lg border border-surface-border bg-transparent text-sm font-bold text-white hover:bg-surface-border transition-colors">
+                                Ver detalles
+                            </button>
+</div>
+</div>
+<!-- Project 3 -->
+<div class="flex flex-col overflow-hidden rounded-xl border border-surface-border bg-surface-dark transition-transform hover:-translate-y-1">
+<div class="h-48 w-full bg-cover bg-center" data-alt="Robotic arm in automated assembly line" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCMbDhqqjM8IC5y-ZXMxPtpmN-5DAB6CDbtIHTs6IgHEG9sWdC0kYSMWxIGZmZaVmKmnqN-jDuLBarEaToxJeWdLVBc1Pb8ASmjdUcOkVV8vWoiSbyG2TsUkgTGXnkjOvV82CRPXupM7MZ3U2T8XEDFuVNU_qu4Afn46e6AL5zFzaa3VKLy7v-sB2PEBJ8gHF61cmkjRVpcMSJ-E4rQp36zHxljdwQOH7DHwH-bDJybPT0EO3dexXv3DfUrsLLljZld2fT9GT_4cqY");'>
+</div>
+<div class="flex flex-1 flex-col justify-between p-6">
+<div class="flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<span class="text-xs font-bold uppercase tracking-wider text-primary">Automatización</span>
+<span class="text-xs font-medium text-text-secondary">2023</span>
+</div>
+<h3 class="font-display text-xl font-bold text-white">Controlador de Lazo Cerrado</h3>
+<p class="text-sm text-text-secondary">Implementación de algoritmo PID en microcontrolador STM32 para control preciso de brazo robótico.</p>
+<div class="mt-2 flex flex-col gap-2">
+<div class="flex items-center gap-2 text-xs text-slate-300">
+<span class="material-symbols-outlined text-primary" style="font-size: 16px;">check_circle</span>
+<span>C/C++ Embedded</span>
+</div>
+<div class="flex items-center gap-2 text-xs text-slate-300">
+<span class="material-symbols-outlined text-primary" style="font-size: 16px;">check_circle</span>
+<span>RTOS</span>
+</div>
+</div>
+</div>
+<button class="mt-6 flex h-10 w-full items-center justify-center rounded-lg border border-surface-border bg-transparent text-sm font-bold text-white hover:bg-surface-border transition-colors">
+                                Ver detalles
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</div>
 {% endblock content %}
