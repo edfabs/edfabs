@@ -1,51 +1,70 @@
 {% extends 'skeleton/base.html' %}
 
-{% block title %}Home{% endblock title %}
+{% block title %}Contacto{% endblock title %}
 
 {% block content %}
+<section class="flex justify-center py-16">
+	<div class="layout-content-container flex w-full max-w-[900px] flex-col gap-10 px-4 lg:px-10">
+		<div class="flex flex-col gap-3 text-center sm:text-left">
+			<p class="text-sm font-bold uppercase tracking-widest text-primary">Contacto</p>
+			<h1 class="font-display text-3xl font-bold text-slate-900 dark:text-white sm:text-4xl">¿Quieres compartirme algo?</h1>
+			<p class="text-base leading-relaxed text-slate-600 dark:text-text-secondary">
+				Escríbeme y te respondo lo antes posible. Si ya tienes un proyecto en mente, cuéntame un poco sobre el contexto y tus objetivos.
+			</p>
+		</div>
 
-<!-- <form action="/contact/" method="post">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Submit">
-</form> -->
-<div class="contacto m-5">
-	<p class="h2 mb-5">¿Quieres  compartirme algo?</p>
-	{% if messages %}
-	<ul class="messages">
-		{% for message in messages %}
-		<li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-		{% endfor %}
-	</ul>
-{% endif %}
-		<form action="/contact/" method="post">
+		{% if messages %}
+		<ul class="flex flex-col gap-2">
+			{% for message in messages %}
+			<li class="rounded-lg border border-surface-border bg-surface-dark px-4 py-3 text-sm text-text-secondary{% if message.tags %} {{ message.tags }}{% endif %}">
+				{{ message }}
+			</li>
+			{% endfor %}
+		</ul>
+		{% endif %}
+
+		<form action="/contact/" method="post" class="rounded-2xl border border-surface-border bg-surface-dark p-6 shadow-lg">
 			{% csrf_token %}
-		<div class="container">
-			<div class="row">
-				<div class="col-md-6 col-sm-12 mb-5"><input type="text" class="form-control" placeholder="Nombre" id="id_name" name="name"></div>
-				<div class="col-md-6 col-sm-12 mb-5"><input type="email" class="form-control" placeholder="E-mail" id="id_sender" name="sender"></div>
+			<div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+				<div class="flex flex-col gap-2">
+					<label class="text-sm font-medium text-slate-300" for="id_name">Nombre</label>
+					<input type="text" class="h-12 rounded-lg border border-surface-border bg-background-dark px-4 text-sm text-white placeholder:text-text-secondary focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Tu nombre" id="id_name" name="name">
+				</div>
+				<div class="flex flex-col gap-2">
+					<label class="text-sm font-medium text-slate-300" for="id_sender">E-mail</label>
+					<input type="email" class="h-12 rounded-lg border border-surface-border bg-background-dark px-4 text-sm text-white placeholder:text-text-secondary focus:outline-none focus:ring-2 focus:ring-primary" placeholder="tucorreo@ejemplo.com" id="id_sender" name="sender">
+				</div>
 			</div>
-			<div class="form-floating mb-5">
-				<textarea class="form-control" id="id_mensaje" name="mensaje" style="height:100px;"></textarea>
-				<label for="floatingTextarea2">Mensaje</label>
+			<div class="mt-6 flex flex-col gap-2">
+				<label class="text-sm font-medium text-slate-300" for="id_mensaje">Mensaje</label>
+				<textarea class="min-h-[140px] rounded-lg border border-surface-border bg-background-dark px-4 py-3 text-sm text-white placeholder:text-text-secondary focus:outline-none focus:ring-2 focus:ring-primary" id="id_mensaje" name="mensaje" placeholder="Cuéntame sobre tu proyecto o consulta."></textarea>
 			</div>
-			<script src='https://www.google.com/recaptcha/api.js'></script>
-    		<div class="g-recaptcha" data-sitekey="{{ recaptcha }}"></div>
-
-			<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-				<input type="submit" value="Enviar" class="btn btn-primary">
+			<div class="mt-6">
+				<script src="https://www.google.com/recaptcha/api.js"></script>
+				<div class="g-recaptcha" data-sitekey="{{ recaptcha }}"></div>
 			</div>
-		</div>
+			<div class="mt-6 flex justify-end">
+				<input type="submit" value="Enviar" class="flex h-12 min-w-[140px] cursor-pointer items-center justify-center rounded-lg bg-primary px-6 text-sm font-bold text-white shadow-lg shadow-primary/20 transition-colors hover:bg-blue-600">
+			</div>
 		</form>
-		<p class="h3 mt-5 mb-5">Encuentrame también en:</p>
-		<div class="social-icons m-5">
-		<a href="https://github.com/EdFabS" target="_blank"><i class="bi-github h2"></i></a>
-		<a href="https://twitter.com/edfabs" target="_blank"><i class="bi-twitter h2"></i></a>
-		<a href="https://www.linkedin.com/in/edfabs/" target="_blank"><i class="bi-linkedin h2"></i></a>
-		<a href="https://www.reddit.com/user/edfabs" target="_blank"><i class="bi-reddit h2"></i></a>
+
+		<div class="flex flex-col gap-4">
+			<p class="text-lg font-bold text-white">Encuéntrame también en:</p>
+			<div class="flex flex-wrap gap-4">
+				<a class="flex h-10 w-10 items-center justify-center rounded-full border border-surface-border bg-surface-dark text-text-secondary transition-colors hover:border-primary hover:text-primary" href="https://github.com/EdFabS" target="_blank" rel="noopener noreferrer">
+					<span class="material-symbols-outlined">code</span>
+				</a>
+				<a class="flex h-10 w-10 items-center justify-center rounded-full border border-surface-border bg-surface-dark text-text-secondary transition-colors hover:border-primary hover:text-primary" href="https://twitter.com/edfabs" target="_blank" rel="noopener noreferrer">
+					<span class="material-symbols-outlined">public</span>
+				</a>
+				<a class="flex h-10 w-10 items-center justify-center rounded-full border border-surface-border bg-surface-dark text-text-secondary transition-colors hover:border-primary hover:text-primary" href="https://www.linkedin.com/in/edfabs/" target="_blank" rel="noopener noreferrer">
+					<span class="material-symbols-outlined">work</span>
+				</a>
+				<a class="flex h-10 w-10 items-center justify-center rounded-full border border-surface-border bg-surface-dark text-text-secondary transition-colors hover:border-primary hover:text-primary" href="https://www.reddit.com/user/edfabs" target="_blank" rel="noopener noreferrer">
+					<span class="material-symbols-outlined">forum</span>
+				</a>
+			</div>
 		</div>
-		&nbsp;
-		&nbsp;
-		&nbsp;
 	</div>
+</section>
 {% endblock content %}

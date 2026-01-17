@@ -1,83 +1,69 @@
 {% extends 'skeleton/base.html' %}
 
-{% block title %}Home{% endblock title %}
+{% block title %}Sobre mí{% endblock title %}
 
 {% block content %}
 {% load static %}
-	<!-- <p>{% autoescape off %}Esto es el About me{% endautoescape %}</p> -->
-	<div class="row no-gutters bg-light position-relative">
-		
-		
-		<div class="col-md-9 position-static p-4 pl-md ">
-			<h2 class="mt-2">Acerca de mi.</h2>
-		  <p class="h5">Soy Ingeniero en Comunicaciones y Electrónica con la especialidad en Computación. </p><br>
-		  <p class="h5">Mis <b>intereses</b> son el desarrollo de software, el networking y la seguridad.</p>
-		  <br>
-		  <p class="mt-2 h5" ><b style="color:black;text-align: justify;">Objetivo profesional:</b> Aplicar mis conocimientos para la creación de proyectos, solución de problemas; promoviendo la inovación, el desarrollo tecnológico con la finalidad de estar a la altura de los estandares internacionales.</5>
-		  <hr>
-			<p style="text-align: justify;" class="h5">Considero que quienes nos dedicamos a la tecnología tenemos el deber de actualizarnos constantemente, leyendo artículos, libros (en su mayoría técnicos), grupos de ingeniería (redes sociales), canales de youtube, cursos online, etc.</p>
+<section class="flex justify-center py-16">
+	<div class="layout-content-container flex w-full max-w-[1200px] flex-col gap-12 px-4 lg:px-10">
+		<div class="grid grid-cols-1 items-center gap-10 lg:grid-cols-[1.1fr,0.9fr]">
+			<div class="flex flex-col gap-4">
+				<p class="text-sm font-bold uppercase tracking-widest text-primary">Sobre mí</p>
+				<h1 class="font-display text-4xl font-black leading-tight text-slate-900 dark:text-white sm:text-5xl">
+					Ingeniería, tecnología y soluciones que sí funcionan
+				</h1>
+				<p class="text-base leading-relaxed text-slate-600 dark:text-text-secondary">
+					Soy Fabián Suchett, Ingeniero en Comunicaciones y Electrónica. Trabajo en la intersección entre infraestructura tecnológica, comunicaciones y sistemas web, desarrollando soluciones que responden a problemas reales de operación, control y crecimiento.
+				</p>
+			</div>
+			<div class="relative">
+				<div class="absolute -inset-4 rounded-full bg-gradient-to-tr from-primary/20 to-transparent blur-2xl"></div>
+				<img class="relative h-[360px] w-full rounded-2xl object-cover shadow-2xl" src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=900&q=80" alt="Profesional trabajando en tecnologia e ingenieria">
+			</div>
 		</div>
-		<div class="col-md-3 mb-md-0 p-md-4 ">
-			<img src="{% static 'images/edfabs.jpeg' %}" class="mw-100" alt="...">
-	  </div>
-	  <div class="row no-gutters bg-light position-relative about">
-		<div class="col-md-12 p-md-4">
-			<div style="text-align: center;"><h4 style="color:black;">Portafolio</h4><br></div>
-
-			<div class="accordion" id="accordionExample">
-				<div class="accordion-item">
-					<h2 class="accordion-header" id="headingNine">
-					  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNine" aria-expanded="true" aria-controls="collapseNine">
-						  Paginas Web
-					  </button>
-					</h2>
-					<div id="collapseNine" class="accordion-collapse collapse show" aria-labelledby="headingNine" data-bs-parent="#accordionExample">
-					  <div class="accordion-body">
-						  <p>Sitio web de liga de béisbol infaltil <a href="https://www.ligapetrolera.com.mx/" target="_blank">Liga Petrolera</a> </p>
-						  <p>Este sitio web <a href="https://www.edfabs.com/" target="_blank">edfabs.com</a> </p>
-					  </div>
-					</div>
-				  </div>
-				<div class="accordion-item">
-					<h2 class="accordion-header" id="headingEigth">
-					  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEigth" aria-expanded="false" aria-controls="collapseEigth">
-						  e-commerce
-					  </button>
-					</h2>
-					<div id="collapseEigth" class="accordion-collapse collapse" aria-labelledby="headingEigth" data-bs-parent="#accordionExample">
-					  <div class="accordion-body">
-						  <p>Fabricantes de piezas de madera <a href="https://marowooddecor.mx/" target="_blank">Maro Wood Decore</a> </p>
-					  </div>
-					</div>
-				  </div>
-				  <div class="accordion-item">
-					<h2 class="accordion-header" id="headingCicloTula">
-					  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCicloTula" aria-expanded="false" aria-controls="collapseCicloTula">
-						  Instalación de CCTV en Ciclo Combinado Tula
-					  </button>
-					</h2>
-					<div id="collapseCicloTula" class="accordion-collapse collapse" aria-labelledby="headingCicloTula" data-bs-parent="#accordionExample">
-					  <div class="accordion-body">
-						  <p>Proyecto de CFE, donde se instaló un Sistema de Videovigilancia IP marca Dahua</p>
-					  </div>
-					</div>
-				  </div>
-				<div class="accordion-item">
-					<h2 class="accordion-header" id="headingSeven">
-					  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
-						  Menú digital
-					  </button>
-					</h2>
-					<div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven" data-bs-parent="#accordionExample">
-					  <div class="accordion-body">
-						  <p>Restaurante de comida rapida <a href="/lacabanaRestaurante/"> La Cabaña Restaurante</a> </p>
-					  </div>
-					</div>
-				  </div>
-				
-				  
-			  </div>
+		<div class="grid grid-cols-1 gap-10 lg:grid-cols-2">
+			<div class="rounded-2xl border border-surface-border bg-surface-dark p-6 shadow-lg">
+				<h2 class="font-display text-2xl font-bold text-white">Experiencia con visión operativa</h2>
+				<p class="mt-3 text-sm leading-relaxed text-text-secondary">
+					A lo largo de mi trayectoria he participado en proyectos de redes de datos, radiocomunicaciones, videovigilancia, sistemas web a la medida y soluciones energéticas, combinando trabajo en campo con diseño y desarrollo de sistemas.
+				</p>
+				<p class="mt-3 text-sm leading-relaxed text-text-secondary">
+					Esta doble visión —operativa y técnica— me permite entender no solo qué se necesita, sino cómo debe funcionar en la práctica.
+				</p>
+			</div>
+			<div class="relative overflow-hidden rounded-2xl border border-surface-border bg-surface-dark">
+				<img class="h-full w-full object-cover opacity-90" src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=900&q=80" alt="Infraestructura y tecnologia en campo">
+			</div>
 		</div>
-	  </div>
+		<div class="grid grid-cols-1 items-center gap-10 lg:grid-cols-[0.9fr,1.1fr]">
+			<div class="relative overflow-hidden rounded-2xl border border-surface-border bg-surface-dark">
+				<img class="h-full w-full object-cover opacity-90" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80" alt="Trabajo tecnico y documentacion de proyectos">
+			</div>
+			<div class="flex flex-col gap-4">
+				<h2 class="font-display text-2xl font-bold text-white">Soluciones claras y bien documentadas</h2>
+				<p class="text-sm leading-relaxed text-text-secondary">
+					No creo en soluciones genéricas ni en vender tecnología por vender. Mi enfoque es analizar cada proyecto, entender su contexto técnico y humano, y diseñar una solución clara, funcional y bien documentada.
+				</p>
+				<div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+					<div class="flex items-center gap-2 text-sm text-slate-300">
+						<span class="material-symbols-outlined text-primary" style="font-size: 18px;">fact_check</span>
+						<span>Diagnóstico preciso</span>
+					</div>
+					<div class="flex items-center gap-2 text-sm text-slate-300">
+						<span class="material-symbols-outlined text-primary" style="font-size: 18px;">manage_search</span>
+						<span>Contexto técnico y humano</span>
+					</div>
+					<div class="flex items-center gap-2 text-sm text-slate-300">
+						<span class="material-symbols-outlined text-primary" style="font-size: 18px;">assignment</span>
+						<span>Documentación clara</span>
+					</div>
+					<div class="flex items-center gap-2 text-sm text-slate-300">
+						<span class="material-symbols-outlined text-primary" style="font-size: 18px;">engineering</span>
+						<span>Implementación funcional</span>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
+</section>
 {% endblock content %}

@@ -74,4 +74,7 @@ def contact(request):
 
 
 def privacidad(request):
-	return render(request, 'skeleton/privacidad.html', {'title': 'Aviso de Privacidad'})
+	return render(request, 'skeleton/privacidad.html', {'title': 'Política de Privacidad'})
+
+def terminos(request):
+	return render(request, 'skeleton/terminos.html', {'title': 'Términos de Uso'})
