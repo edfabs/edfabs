@@ -195,10 +195,12 @@
 </div>
 </div>
 </div>
-	<div class="container">
-		{% block content %}
-			<p>Placeholder text in base template. Replace ith page content.</p>
-		{% endblock content %}
+	<div class="flex justify-center">
+		<div class="layout-content-container flex w-full max-w-[1200px] flex-col px-4 lg:px-10">
+			{% block content %}
+				<p>Placeholder text in base template. Replace ith page content.</p>
+			{% endblock content %}
+		</div>
 	</div>
 <!-- Footer -->
 <div class="flex justify-center border-t border-surface-border bg-surface-dark py-10" id="contact">
