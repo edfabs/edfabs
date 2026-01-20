@@ -14,7 +14,11 @@
             </p>
         </div>
 
-        {% if form.errors %}
+        {% if form.non_field_errors %}
+        <div class="rounded-lg border border-rose-500/40 bg-rose-500/10 px-4 py-3 text-sm text-rose-200">
+            {{ form.non_field_errors|striptags }}
+        </div>
+        {% elif form.errors %}
         <div class="rounded-lg border border-rose-500/40 bg-rose-500/10 px-4 py-3 text-sm text-rose-200">
             Usuario o contraseña incorrectos. Intenta nuevamente.
         </div>
@@ -31,6 +35,16 @@
                     <label class="text-sm font-medium text-slate-300" for="id_password">Contraseña</label>
                     <input type="password" name="password" id="id_password" autocomplete="current-password" class="h-12 rounded-lg border border-surface-border bg-background-dark px-4 text-sm text-white placeholder:text-text-secondary focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Tu contraseña">
                 </div>
+                {% if recaptcha %}
+                <script src="https://www.google.com/recaptcha/api.js"></script>
+                <div class="flex justify-center">
+                    <div class="g-recaptcha" data-sitekey="{{ recaptcha }}"></div>
+                </div>
+                {% else %}
+                <div class="rounded-lg border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-sm text-amber-200">
+                    Falta configurar `GOOGLE_RECAPTCHA_WEB_SITE`.
+                </div>
+                {% endif %}
                 <button class="mt-2 flex h-12 w-full items-center justify-center rounded-lg bg-primary text-sm font-bold text-white shadow-lg shadow-primary/20 transition-colors hover:bg-blue-600" type="submit">
                     Entrar
                 </button>

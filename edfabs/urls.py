@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
+from members.views import RecaptchaLoginView
 
 urlpatterns = [
     path('asambleas/', include("asambleas.urls")),
@@ -25,6 +26,7 @@ urlpatterns = [
     path("projects/", include("projects.urls")),
     path("", include("skeleton.urls")),
     path("admin/", admin.site.urls),
+    path("members/login/", RecaptchaLoginView.as_view(), name="login"),
     path("members/", include("django.contrib.auth.urls")),
     path("members/", include("members.urls")),
     path("emailing/", include("emailing.urls")),

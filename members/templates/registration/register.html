@@ -4,13 +4,95 @@
 
 {% block content %}
 {% load static %}
-<h1>Register...</h1>
-<br><br>
-<div class="form-group">
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button class="btn btn-secondary">Register</button>
-</div>
+<section class="flex justify-center py-16">
+    <div class="layout-content-container flex w-full max-w-[520px] flex-col gap-8 px-4 lg:px-10">
+        <div class="flex flex-col gap-3 text-center">
+            <p class="text-sm font-bold uppercase tracking-widest text-primary">Registro</p>
+            <h1 class="font-display text-3xl font-bold text-slate-900 dark:text-white">Crear cuenta</h1>
+            <p class="text-base leading-relaxed text-slate-600 dark:text-text-secondary">
+                Completa tus datos para acceder a las herramientas privadas.
+            </p>
+        </div>
+
+        {% if form.errors %}
+        <div class="rounded-lg border border-rose-500/40 bg-rose-500/10 px-4 py-3 text-sm text-rose-200">
+            Revisa los campos marcados e intenta nuevamente.
+        </div>
+        {% endif %}
+
+        <form action="" method="post" class="rounded-2xl border border-surface-border bg-surface-dark p-6 shadow-lg">
+            {% csrf_token %}
+            <div class="flex flex-col gap-4">
+                <div class="flex flex-col gap-2">
+                    <label class="text-sm font-medium text-slate-300" for="id_username">Usuario</label>
+                    <input type="text" name="username" id="id_username" autocomplete="username" value="{{ form.username.value|default_if_none:'' }}" class="h-12 rounded-lg border border-surface-border bg-background-dark px-4 text-sm text-white placeholder:text-text-secondary focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Tu usuario">
+                    {% if form.username.errors %}
+                    <p class="text-xs text-rose-300">{{ form.username.errors|striptags }}</p>
+                    {% endif %}
+                </div>
+
+                <div class="grid gap-4 md:grid-cols-2">
+                    <div class="flex flex-col gap-2">
+                        <label class="text-sm font-medium text-slate-300" for="id_first_name">Nombre</label>
+                        <input type="text" name="first_name" id="id_first_name" autocomplete="given-name" value="{{ form.first_name.value|default_if_none:'' }}" class="h-12 rounded-lg border border-surface-border bg-background-dark px-4 text-sm text-white placeholder:text-text-secondary focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Tu nombre">
+                        {% if form.first_name.errors %}
+                        <p class="text-xs text-rose-300">{{ form.first_name.errors|striptags }}</p>
+                        {% endif %}
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <label class="text-sm font-medium text-slate-300" for="id_last_name">Apellido</label>
+                        <input type="text" name="last_name" id="id_last_name" autocomplete="family-name" value="{{ form.last_name.value|default_if_none:'' }}" class="h-12 rounded-lg border border-surface-border bg-background-dark px-4 text-sm text-white placeholder:text-text-secondary focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Tu apellido">
+                        {% if form.last_name.errors %}
+                        <p class="text-xs text-rose-300">{{ form.last_name.errors|striptags }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-2">
+                    <label class="text-sm font-medium text-slate-300" for="id_email">Correo</label>
+                    <input type="email" name="email" id="id_email" autocomplete="email" value="{{ form.email.value|default_if_none:'' }}" class="h-12 rounded-lg border border-surface-border bg-background-dark px-4 text-sm text-white placeholder:text-text-secondary focus:outline-none focus:ring-2 focus:ring-primary" placeholder="correo@dominio.com">
+                    {% if form.email.errors %}
+                    <p class="text-xs text-rose-300">{{ form.email.errors|striptags }}</p>
+                    {% endif %}
+                </div>
+
+                <div class="flex flex-col gap-2">
+                    <label class="text-sm font-medium text-slate-300" for="id_password1">Contraseña</label>
+                    <input type="password" name="password1" id="id_password1" autocomplete="new-password" class="h-12 rounded-lg border border-surface-border bg-background-dark px-4 text-sm text-white placeholder:text-text-secondary focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Crea una contraseña segura">
+                    {% if form.password1.errors %}
+                    <p class="text-xs text-rose-300">{{ form.password1.errors|striptags }}</p>
+                    {% endif %}
+                </div>
+
+                <div class="flex flex-col gap-2">
+                    <label class="text-sm font-medium text-slate-300" for="id_password2">Confirmar contraseña</label>
+                    <input type="password" name="password2" id="id_password2" autocomplete="new-password" class="h-12 rounded-lg border border-surface-border bg-background-dark px-4 text-sm text-white placeholder:text-text-secondary focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Repite tu contraseña">
+                    {% if form.password2.errors %}
+                    <p class="text-xs text-rose-300">{{ form.password2.errors|striptags }}</p>
+                    {% endif %}
+                </div>
+
+                {% if form.non_field_errors %}
+                <div class="rounded-lg border border-rose-500/40 bg-rose-500/10 px-4 py-3 text-sm text-rose-200">
+                    {{ form.non_field_errors|striptags }}
+                </div>
+                {% endif %}
+
+                <script src="https://www.google.com/recaptcha/api.js"></script>
+                <div class="flex justify-center">
+                    <div class="g-recaptcha" data-sitekey="{{ recaptcha }}"></div>
+                </div>
+
+                <button class="mt-2 flex h-12 w-full items-center justify-center rounded-lg bg-primary text-sm font-bold text-white shadow-lg shadow-primary/20 transition-colors hover:bg-blue-600" type="submit">
+                    Crear cuenta
+                </button>
+            </div>
+        </form>
+
+        <p class="text-center text-sm text-text-secondary">
+            ¿Ya tienes cuenta? <a class="text-primary hover:text-white" href="{% url 'login' %}">Inicia sesión</a>.
+        </p>
+    </div>
+</section>
 
 {% endblock content %}
