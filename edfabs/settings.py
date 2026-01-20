@@ -150,8 +150,17 @@ USE_TZ = True
 
 # MEDIA_URL = "/media/"
 
-# Static files in AWS
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
 
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+# if DEBUG:
+#     STATIC_URL = "/static/"
+#     MEDIA_URL = "/media/"
+# else:
+# Static files in AWS
 AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
 AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME_EDFABS")
@@ -161,12 +170,6 @@ AWS_S3_OBJECT_PARAMETERS = {
 }
 # s3 static settings
 AWS_LOCATION = "static"
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-]
-
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
 STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"

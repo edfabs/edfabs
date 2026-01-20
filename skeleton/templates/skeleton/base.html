@@ -180,9 +180,14 @@
 <div class="flex items-center gap-8">
 <nav class="hidden md:flex items-center gap-8">
 <a class="text-sm font-medium leading-normal text-slate-600 hover:text-primary dark:text-text-secondary dark:hover:text-white transition-colors" href="/about">Sobre mí</a>
-<a class="text-sm font-medium leading-normal text-slate-600 hover:text-primary dark:text-text-secondary dark:hover:text-white transition-colors" href="#specialization">Especialización</a>
-<a class="text-sm font-medium leading-normal text-slate-600 hover:text-primary dark:text-text-secondary dark:hover:text-white transition-colors" href="#portfolio">Portafolio</a>
+<a class="text-sm font-medium leading-normal text-slate-600 hover:text-primary dark:text-text-secondary dark:hover:text-white transition-colors" href="/#specialization">Especialización</a>
+<a class="text-sm font-medium leading-normal text-slate-600 hover:text-primary dark:text-text-secondary dark:hover:text-white transition-colors" href="/#portfolio">Portafolio</a>
 <a class="text-sm font-medium leading-normal text-slate-600 hover:text-primary dark:text-text-secondary dark:hover:text-white transition-colors" href="/contact">Contacto</a>
+{% if user.is_authenticated %}
+<a class="text-sm font-medium leading-normal text-slate-600 hover:text-primary dark:text-text-secondary dark:hover:text-white transition-colors" href="{% url 'logout' %}">Salir</a>
+{% else %}
+<a class="text-sm font-medium leading-normal text-slate-600 hover:text-primary dark:text-text-secondary dark:hover:text-white transition-colors" href="{% url 'login' %}">Acceder</a>
+{% endif %}
 </nav>
 <button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary hover:bg-blue-600 transition-colors text-white text-sm font-bold leading-normal tracking-wide shadow-lg shadow-primary/20">
 <span class="flex items-center gap-2">

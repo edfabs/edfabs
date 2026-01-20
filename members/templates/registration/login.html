@@ -1,26 +1,46 @@
 {% extends 'skeleton/base.html' %}
 
-{% block title %}Login!!!{% endblock title %}
+{% block title %}Iniciar sesión{% endblock title %}
 
 {% block content %}
 {% load static %}
-<h1>Login...</h1>
-<br><br>
-<div class="form-group">
-    <form action="" method="post">
-        {% csrf_token %}
-        <!-- {{ form.as_p }} -->
-        <div class="form-group">
-            <input type="text" name="username" class="form-control" placeholder="Username">
-          </div>
+<section class="flex justify-center py-16">
+    <div class="layout-content-container flex w-full max-w-[520px] flex-col gap-8 px-4 lg:px-10">
+        <div class="flex flex-col gap-3 text-center">
+            <p class="text-sm font-bold uppercase tracking-widest text-primary">Acceso</p>
+            <h1 class="font-display text-3xl font-bold text-slate-900 dark:text-white">Iniciar sesión</h1>
+            <p class="text-base leading-relaxed text-slate-600 dark:text-text-secondary">
+                Ingresa con tus credenciales para acceder a las funciones privadas.
+            </p>
+        </div>
 
-          <div class="form-group">
-            <input type="password" name="password" class="form-control" placeholder="Password">
-          </div><br>
-          
-        <button class="btn btn-secondary">Post</button>
-        <br><br>
-        <small class="form-text text-muted">¿No estas registrado? Registrate <a href="{% url 'members:register' %}">Aqui</a></small>
-</div>
+        {% if form.errors %}
+        <div class="rounded-lg border border-rose-500/40 bg-rose-500/10 px-4 py-3 text-sm text-rose-200">
+            Usuario o contraseña incorrectos. Intenta nuevamente.
+        </div>
+        {% endif %}
+
+        <form action="" method="post" class="rounded-2xl border border-surface-border bg-surface-dark p-6 shadow-lg">
+            {% csrf_token %}
+            <div class="flex flex-col gap-4">
+                <div class="flex flex-col gap-2">
+                    <label class="text-sm font-medium text-slate-300" for="id_username">Usuario</label>
+                    <input type="text" name="username" id="id_username" autocomplete="username" autofocus class="h-12 rounded-lg border border-surface-border bg-background-dark px-4 text-sm text-white placeholder:text-text-secondary focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Tu usuario">
+                </div>
+                <div class="flex flex-col gap-2">
+                    <label class="text-sm font-medium text-slate-300" for="id_password">Contraseña</label>
+                    <input type="password" name="password" id="id_password" autocomplete="current-password" class="h-12 rounded-lg border border-surface-border bg-background-dark px-4 text-sm text-white placeholder:text-text-secondary focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Tu contraseña">
+                </div>
+                <button class="mt-2 flex h-12 w-full items-center justify-center rounded-lg bg-primary text-sm font-bold text-white shadow-lg shadow-primary/20 transition-colors hover:bg-blue-600" type="submit">
+                    Entrar
+                </button>
+            </div>
+        </form>
+
+        <p class="text-center text-sm text-text-secondary">
+            ¿No estás registrado? <a class="text-primary hover:text-white" href="{% url 'members:register' %}">Regístrate aquí</a>.
+        </p>
+    </div>
+</section>
 
 {% endblock content %}
