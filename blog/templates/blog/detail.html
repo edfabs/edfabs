@@ -11,135 +11,174 @@
 
 {% block content %}
 {% load static %}
-<div class="container py-4">
-	<div class="row">
-		<div class="col-lg-9 col-sm-12">
-			<div class="mb-3 d-flex justify-content-between align-items-start">
-				<div>
-					<h1 class="mb-1">{{ post.title }}</h1>
-					<div class="text-muted small">
-						Por {{ post.author.first_name}} {{post.author.last_name}} · {{ post.created_on|date:"d M Y" }}
-						{% if post.updated_on and post.updated_on != post.created_on %}
-							· <span title="Última actualización">Actualizado {{ post.updated_on|date:"d M Y" }}</span>
-						{% endif %}
-						· {{ post.views_count }} vistas
-					</div>
-					<div class="mt-2 d-flex flex-wrap gap-2">
-						<span class="badge bg-secondary">{{ post.category }}</span>
-						{% for tag in post.tags.all %}
-							<a class="badge bg-light text-dark border" href="{% url 'blog:tag' tag.slug %}">#{{ tag.name }}</a>
-						{% empty %}
-							<span class="badge bg-light text-muted border">Sin etiquetas</span>
-						{% endfor %}
-					</div>
-				</div>
-				<div class="d-flex gap-2">
-					{% if user.is_authenticated %}
-						<form action="{% url 'blog:like_post' post.slug %}" method="POST">
-							{% csrf_token %}
-							<button type="submit" class="btn btn-outline-primary btn-sm">
-								{% if liked %}<i class="bi bi-heart-fill"></i>{% else %}<i class="bi bi-heart"></i>{% endif %}
-								<span class="ms-1">{{ total_likes }}</span>
-							</button>
-						</form>
-					{% else %}
-						<a class="btn btn-outline-primary btn-sm" href="{% url 'login' %}?next={% url 'blog:detail' post.slug %}">
-							<i class="bi bi-heart"></i> {{ total_likes }}
-						</a>
-					{% endif %}
-					{% if user.is_authenticated and user.id == post.author.id %}
-						<a class="btn btn-outline-secondary btn-sm" href="{% url 'blog:update_post' post.id %}"><i class="bi bi-pencil"></i></a>
-						<a class="btn btn-outline-danger btn-sm" href="{% url 'blog:delete_post' post.pk %}"><i class="bi bi-trash"></i></a>
-					{% endif %}
-				</div>
+<div class="relative py-10">
+	<div class="pointer-events-none absolute inset-0">
+		<div class="absolute -right-28 -top-28 h-72 w-72 rounded-full bg-primary/10 blur-3xl"></div>
+		<div class="absolute left-12 top-40 h-64 w-64 rounded-full bg-sky-200/40 blur-3xl dark:bg-sky-500/10"></div>
+	</div>
+
+	<div class="relative grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px]">
+		<main class="rounded-2xl border border-slate-200 bg-white/90 p-6 shadow-xl shadow-slate-200/40 dark:border-surface-border dark:bg-surface-dark/90 dark:shadow-black/40">
+			<div class="flex flex-wrap items-center gap-3">
+				<span class="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-slate-500 dark:border-surface-border dark:bg-surface-dark dark:text-text-secondary">{{ post.category }}</span>
+				<span class="text-xs font-medium text-slate-500 dark:text-text-secondary">{{ post.created_on|date:"d M Y" }}</span>
+				{% if post.updated_on and post.updated_on != post.created_on %}
+					<span class="text-xs text-slate-400 dark:text-text-secondary">Actualizado {{ post.updated_on|date:"d M Y" }}</span>
+				{% endif %}
+				<span class="text-xs text-slate-400 dark:text-text-secondary">{{ post.views_count }} vistas</span>
 			</div>
 
-			{% if post.header_image %}
-			<img src="{{post.header_image.url}}" class="img-fluid rounded mb-4" alt="{{ post.title }}">
+			<h1 class="mt-4 font-display text-4xl font-bold leading-tight text-slate-900 dark:text-white md:text-5xl">{{ post.title }}</h1>
+			{% if post.excerpt %}
+				<p class="mt-3 text-base text-slate-600 dark:text-text-secondary">{{ post.excerpt|striptags|truncatechars:160 }}</p>
 			{% endif %}
+			<p class="mt-4 text-sm text-slate-500 dark:text-text-secondary">Por {{ post.author.first_name }} {{ post.author.last_name }}</p>
 
-			<article class="mb-4">
-				{{post.content|safe}}
-			</article>
-
-			{% if related_posts %}
-			<div class="mb-4">
-				<h5 class="mb-3">Artículos relacionados</h5>
-				<div class="row">
-					{% for related in related_posts %}
-						<div class="col-md-4">
-							<div class="card h-100 border-0 shadow-sm">
-								<div class="card-body">
-									<a class="text-decoration-none" href="{% url 'blog:detail' related.slug %}">{{ related.title }}</a>
-									<p class="small text-muted mb-0">{{ related.created_on|date:"d M Y" }}</p>
-								</div>
-							</div>
-						</div>
-					{% endfor %}
-				</div>
-			</div>
-			{% endif %}
-
-			<hr>
-
-			<h4 class="mt-4 mb-3">Comentarios ({{ post.comments.count }})</h4>
-			{% for comment in post.comments.all %}
-				<div class="border rounded p-3 mb-3">
-					<div class="d-flex justify-content-between">
-						<strong>{{ comment.name }}</strong>
-						<small class="text-muted">{{ comment.date_added|date:"d M Y H:i" }}</small>
-					</div>
-					<p class="mb-0">{{ comment.body|linebreaks }}</p>
-				</div>
-			{% empty %}
-				<p class="text-muted">Aún no hay comentarios. Sé el primero en participar.</p>
-			{% endfor %}
-
-			<div class="mt-3">
+			<div class="mt-6 flex flex-wrap items-center gap-3">
 				{% if user.is_authenticated %}
-					<a class="btn btn-primary" href="{% url 'blog:add_comment' post.slug %}">Agregar comentario</a>
+					<form action="{% url 'blog:like_post' post.slug %}" method="POST">
+						{% csrf_token %}
+						<button type="submit" class="group inline-flex items-center gap-2 rounded-full border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-600 transition hover:border-rose-400 hover:text-rose-500 dark:border-surface-border dark:text-text-secondary">
+							<span class="material-symbols-outlined text-base transition group-hover:scale-110">
+								{% if liked %}favorite{% else %}favorite_border{% endif %}
+							</span>
+							<span>{{ total_likes }}</span>
+						</button>
+					</form>
 				{% else %}
-					<p class="text-muted">Inicia sesión para comentar: <a href="{% url 'login' %}">Login</a> o <a href="{% url 'members:register' %}">Regístrate</a>.</p>
+					<a class="inline-flex items-center gap-2 rounded-full border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-600 transition hover:border-rose-400 hover:text-rose-500 dark:border-surface-border dark:text-text-secondary" href="{% url 'login' %}?next={% url 'blog:detail' post.slug %}">
+						<span class="material-symbols-outlined text-base">favorite_border</span>
+						{{ total_likes }}
+					</a>
+				{% endif %}
+				<div class="flex items-center gap-2 text-xs text-slate-500 dark:text-text-secondary">
+					<span>Compartir:</span>
+					<button type="button" class="rounded-full border border-slate-200 p-2 transition hover:border-primary hover:text-primary dark:border-surface-border">
+						<span class="material-symbols-outlined text-sm">share</span>
+					</button>
+					<button type="button" class="rounded-full border border-slate-200 p-2 transition hover:border-primary hover:text-primary dark:border-surface-border">
+						<span class="material-symbols-outlined text-sm">link</span>
+					</button>
+				</div>
+				{% if user.is_authenticated and user.id == post.author.id %}
+					<a class="inline-flex items-center gap-2 rounded-full border border-slate-200 px-4 py-2 text-xs font-semibold text-slate-500 transition hover:border-primary hover:text-primary dark:border-surface-border dark:text-text-secondary" href="{% url 'blog:update_post' post.id %}">
+						<span class="material-symbols-outlined text-base">edit</span>
+						Editar
+					</a>
+					<a class="inline-flex items-center gap-2 rounded-full border border-rose-200 px-4 py-2 text-xs font-semibold text-rose-500 transition hover:border-rose-300 dark:border-rose-400/40" href="{% url 'blog:delete_post' post.pk %}">
+						<span class="material-symbols-outlined text-base">delete</span>
+						Eliminar
+					</a>
 				{% endif %}
 			</div>
 
-			<div class="mt-4">
-				<a href="{% url 'blog:index' %}" class="text-decoration-none"><i class="bi bi-arrow-left"></i> Volver al blog</a>
-			</div>
-		</div>
+			{% if post.header_image %}
+				<figure class="mt-8 overflow-hidden rounded-2xl border border-slate-200 dark:border-surface-border">
+					<img src="{{post.header_image.url}}" class="h-full w-full object-cover" alt="{{ post.title }}">
+				</figure>
+			{% endif %}
 
-		<div class="col-lg-3 col-sm-12">
-			<div class="card mb-3">
-				<div class="row g-0 align-items-center">
-					<div class="col-4 col-md-12 text-center p-3">
-						{% if post.author.profile.profile_pic %}
-							<img src="{{ post.author.profile.profile_pic.url }}" class="img-fluid rounded-circle" alt="{{ post.author.first_name}}">
-						{% else %}
-							<img src="{% static 'images/profile/default_profile.png' %}" class="img-fluid rounded-circle" alt="{{ post.author.first_name}}">
-						{% endif %}
-					</div>
-					<div class="col-8 col-md-12">
-						<div class="card-body">
-							<h5 class="card-title mb-1">{{ post.author.first_name}} {{post.author.last_name}}</h5>
-							<p class="small text-muted mb-2">
-								<a href="{% url 'members:show_profile_page' post.author.profile.id %}">Perfil</a>
-								{% if post.author.profile.website_url %}
-									| <a href="{{post.author.profile.website_url}}" target="blank">Sitio</a>
-								{% endif %}
-							</p>
-							<p class="card-text small mb-0">{{ post.author.profile.bio }}</p>
-						</div>
-					</div>
+			<article class="blog-content mt-8">
+				{{post.content|safe}}
+			</article>
+
+			<div class="mt-10 rounded-2xl border border-slate-200 bg-slate-50 p-6 text-sm text-slate-600 dark:border-surface-border dark:bg-surface-dark/80 dark:text-text-secondary">
+				<p class="font-semibold text-slate-800 dark:text-white">¿Te resulto util?</p>
+				<p class="mt-2">Consulta mas sobre infraestructura, redes y automatizacion para mejorar tu stack.</p>
+				<div class="mt-4 flex flex-wrap gap-3">
+					<a class="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-primary/20 transition hover:bg-blue-600" href="{% url 'blog:category' post.category.slug %}">
+						Ver mas posts de {{ post.category }}
+					</a>
+					<a class="inline-flex items-center gap-2 rounded-lg border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-600 transition hover:border-primary hover:text-primary dark:border-surface-border dark:text-text-secondary" href="/contact">
+						Contactar ahora
+						<span class="material-symbols-outlined text-base">trending_flat</span>
+					</a>
+					<a class="inline-flex items-center gap-2 text-sm font-semibold text-slate-500 transition hover:text-primary dark:text-text-secondary" href="{% url 'blog:index' %}">
+						<span class="material-symbols-outlined text-base">arrow_back</span>
+						Regresar al blog
+					</a>
 				</div>
 			</div>
 
+			{% if related_posts %}
+			<section class="mt-10">
+				<h2 class="font-display text-2xl font-semibold text-slate-900 dark:text-white">Articulos relacionados</h2>
+				<div class="mt-4 grid gap-4 md:grid-cols-3">
+					{% for related in related_posts %}
+						<a class="group rounded-xl border border-slate-200 bg-white/80 p-4 text-sm text-slate-700 transition hover:-translate-y-1 hover:border-primary hover:text-primary dark:border-surface-border dark:bg-surface-dark/70 dark:text-text-secondary" href="{% url 'blog:detail' related.slug %}">
+							<h3 class="font-semibold leading-snug">{{ related.title }}</h3>
+							<p class="mt-2 text-xs text-slate-400 dark:text-text-secondary">{{ related.created_on|date:"d M Y" }}</p>
+						</a>
+					{% endfor %}
+				</div>
+			</section>
+			{% endif %}
+
+			<section class="mt-10 border-t border-slate-200 pt-8 dark:border-surface-border">
+				<h2 class="font-display text-2xl font-semibold text-slate-900 dark:text-white">Comentarios ({{ post.comments.count }})</h2>
+				<div class="mt-4 space-y-4">
+					{% for comment in post.comments.all %}
+						<div class="rounded-xl border border-slate-200 bg-white/80 p-4 text-sm text-slate-600 dark:border-surface-border dark:bg-surface-dark/80 dark:text-text-secondary">
+							<div class="flex items-center justify-between text-xs text-slate-400 dark:text-text-secondary">
+								<strong class="text-slate-700 dark:text-white">{{ comment.name }}</strong>
+								<span>{{ comment.date_added|date:"d M Y H:i" }}</span>
+							</div>
+							<p class="mt-2">{{ comment.body|linebreaks }}</p>
+						</div>
+					{% empty %}
+						<p class="text-sm text-slate-500 dark:text-text-secondary">Aun no hay comentarios. Se el primero en participar.</p>
+					{% endfor %}
+				</div>
+
+				<div class="mt-4">
+					{% if user.is_authenticated %}
+						<a class="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-primary/20 transition hover:bg-blue-600" href="{% url 'blog:add_comment' post.slug %}">
+							<span class="material-symbols-outlined text-base">comment</span>
+							Agregar comentario
+						</a>
+					{% else %}
+						<p class="text-sm text-slate-500 dark:text-text-secondary">Inicia sesion para comentar: <a class="font-semibold text-primary hover:text-blue-600" href="{% url 'login' %}">Login</a> o <a class="font-semibold text-primary hover:text-blue-600" href="{% url 'members:register' %}">Registrate</a>.</p>
+					{% endif %}
+				</div>
+			</section>
+		</main>
+
+		<aside class="space-y-6">
+			<div class="rounded-2xl border border-slate-200 bg-white/80 p-5 text-sm text-slate-600 shadow-lg shadow-slate-200/30 dark:border-surface-border dark:bg-surface-dark/80 dark:text-text-secondary">
+				<div class="flex items-center gap-4">
+					{% if post.author.profile.profile_pic %}
+						<img src="{{ post.author.profile.profile_pic.url }}" class="h-14 w-14 rounded-full object-cover" alt="{{ post.author.first_name }}">
+					{% else %}
+						<img src="{% static 'images/profile/default_profile.png' %}" class="h-14 w-14 rounded-full object-cover" alt="{{ post.author.first_name }}">
+					{% endif %}
+					<div>
+						<p class="text-base font-semibold text-slate-900 dark:text-white">{{ post.author.first_name }} {{ post.author.last_name }}</p>
+						<p class="text-xs text-slate-500 dark:text-text-secondary">Autor del articulo</p>
+					</div>
+				</div>
+				<p class="mt-4 text-sm">{{ post.author.profile.bio }}</p>
+				<p class="mt-3 text-xs text-slate-500 dark:text-text-secondary">
+					{% if post.author.profile.id %}
+						<a class="font-semibold text-primary hover:text-blue-600" href="{% url 'members:show_profile_page' post.author.profile.id %}">Ver perfil</a>
+						{% if post.author.profile.website_url %}
+							· <a class="font-semibold text-primary hover:text-blue-600" href="{{post.author.profile.website_url}}" target="blank">Sitio</a>
+						{% endif %}
+					{% else %}
+						<span>Perfil no disponible</span>
+					{% endif %}
+				</p>
+			</div>
+
 			{% if cat_menu %}
-			<div class="card mb-3">
-				<div class="card-header">Categorías</div>
-				<ul class="list-group list-group-flush">
+			<div class="rounded-2xl border border-slate-200 bg-white/80 p-5 text-sm text-slate-600 dark:border-surface-border dark:bg-surface-dark/80 dark:text-text-secondary">
+				<h3 class="font-display text-lg font-semibold text-slate-900 dark:text-white">Categorias</h3>
+				<ul class="mt-4 space-y-2">
 					{% for category in cat_menu %}
-						<li class="list-group-item d-flex justify-content-between align-items-center">
-							<a href="{% url 'blog:category' category.slug %}" class="text-decoration-none">{{ category.name }}</a>
+						<li>
+							<a class="flex items-center justify-between rounded-lg border border-transparent px-3 py-2 transition hover:border-primary hover:text-primary" href="{% url 'blog:category' category.slug %}">
+								<span>{{ category.name }}</span>
+								<span class="material-symbols-outlined text-base">arrow_forward</span>
+							</a>
 						</li>
 					{% endfor %}
 				</ul>
@@ -147,16 +186,73 @@
 			{% endif %}
 
 			{% if post.tags.all %}
-			<div class="card">
-				<div class="card-header">Etiquetas</div>
-				<ul class="list-group list-group-flush">
+			<div class="rounded-2xl border border-slate-200 bg-white/80 p-5 text-sm text-slate-600 dark:border-surface-border dark:bg-surface-dark/80 dark:text-text-secondary">
+				<h3 class="font-display text-lg font-semibold text-slate-900 dark:text-white">Etiquetas</h3>
+				<div class="mt-4 flex flex-wrap gap-2">
 					{% for tag in post.tags.all %}
-						<li class="list-group-item"><a href="{% url 'blog:tag' tag.slug %}" class="text-decoration-none">#{{ tag.name }}</a></li>
+						<a class="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-500 transition hover:bg-slate-200 hover:text-primary dark:bg-surface-dark dark:text-text-secondary" href="{% url 'blog:tag' tag.slug %}">#{{ tag.name }}</a>
 					{% endfor %}
-				</ul>
+				</div>
 			</div>
 			{% endif %}
-		</div>
+		</aside>
 	</div>
 </div>
+
+<style>
+	.blog-content {
+		color: #0f172a;
+		font-size: 1rem;
+		line-height: 1.8;
+	}
+	.dark .blog-content {
+		color: #e2e8f0;
+	}
+	.blog-content h2 {
+		margin-top: 2rem;
+		margin-bottom: 0.75rem;
+		font-size: 1.5rem;
+		font-weight: 700;
+	}
+	.blog-content h3 {
+		margin-top: 1.5rem;
+		margin-bottom: 0.5rem;
+		font-size: 1.25rem;
+		font-weight: 600;
+	}
+	.blog-content p {
+		margin-bottom: 1rem;
+	}
+	.blog-content ul,
+	.blog-content ol {
+		margin: 1rem 0 1rem 1.5rem;
+	}
+	.blog-content blockquote {
+		margin: 1.5rem 0;
+		border-left: 4px solid #136dec;
+		background: #f1f5f9;
+		padding: 1rem 1.25rem;
+		color: #475569;
+		font-style: italic;
+		border-radius: 0.75rem;
+	}
+	.dark .blog-content blockquote {
+		background: rgba(59, 69, 84, 0.35);
+		color: #cbd5f5;
+	}
+	.blog-content pre {
+		margin: 1.5rem 0;
+		overflow-x: auto;
+		border-radius: 0.75rem;
+		background: #0b1220;
+		color: #e2e8f0;
+		padding: 1rem 1.25rem;
+		font-size: 0.9rem;
+	}
+	.blog-content img {
+		margin: 1.5rem auto;
+		border-radius: 1rem;
+		max-width: 100%;
+	}
+</style>
 {% endblock content %}

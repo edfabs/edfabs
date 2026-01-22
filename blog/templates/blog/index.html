@@ -4,79 +4,105 @@
 
 {% block content %}
 {% load static %}
-<div class="container py-4">
-	<div class="row align-items-center mb-4">
-		<div class="col">
-			<h1 class="mb-2">Blog de Tecnología</h1>
-			<p class="text-muted mb-0">Tendencias, tutoriales y notas breves sobre desarrollo, infraestructura y seguridad.</p>
-		</div>
-		<div class="col-auto">
-			{% if user.is_authenticated %}
-				<a class="btn btn-primary" href="{% url 'blog:add_post' %}"><i class="bi bi-plus"></i> Nuevo post</a>
-			{% endif %}
-		</div>
+<div class="relative overflow-hidden py-10">
+	<div class="pointer-events-none absolute inset-0">
+		<div class="absolute -right-32 -top-32 h-80 w-80 rounded-full bg-primary/10 blur-3xl"></div>
+		<div class="absolute -left-32 top-40 h-72 w-72 rounded-full bg-sky-200/30 blur-3xl dark:bg-sky-500/10"></div>
 	</div>
 
-	{% if cat_menu %}
-	<div class="mb-4">
-		<div class="d-flex flex-wrap gap-2">
-			{% for category in cat_menu %}
-				<a class="badge bg-dark text-decoration-none" href="{% url 'blog:category' category.slug %}">{{ category.name }}</a>
-			{% endfor %}
-		</div>
-	</div>
-	{% endif %}
-
-	{% if tag_menu %}
-	<div class="mb-4">
-		<div class="d-flex flex-wrap gap-2">
-			{% for tag in tag_menu %}
-				<a class="badge bg-light text-decoration-none border" href="{% url 'blog:tag' tag.slug %}">#{{ tag.name }}</a>
-			{% endfor %}
-		</div>
-	</div>
-	{% endif %}
-
-	<div class="row">
-		{% for post in latest_post_list %}
-		<div class="col-lg-4 col-md-6 mb-4">
-			<div class="card h-100 shadow-sm border-0">
-				{% if post.header_image %}
-					<img src="{{ post.header_image.url }}" class="card-img-top" alt="{{ post.title }}">
+	<section class="relative">
+		<div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+			<div class="max-w-2xl">
+				<p class="text-sm font-medium uppercase tracking-[0.2em] text-slate-500 dark:text-text-secondary">Blog de tecnologia</p>
+				<h1 class="mt-3 font-display text-4xl font-bold tracking-tight text-slate-900 dark:text-white md:text-5xl">Ideas claras sobre redes, infraestructura y seguridad.</h1>
+				<p class="mt-4 text-base text-slate-600 dark:text-text-secondary">Lecturas concretas para resolver problemas reales. Guia rapida, patrones y buenas practicas.</p>
+			</div>
+			<div class="flex items-center gap-3">
+				{% if user.is_authenticated %}
+					<a class="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-primary/20 transition hover:bg-blue-600" href="{% url 'blog:add_post' %}">
+						<span class="material-symbols-outlined text-base">add</span>
+						Nuevo post
+					</a>
 				{% endif %}
-				<div class="card-body d-flex flex-column">
-					<div class="d-flex justify-content-between align-items-start mb-2">
-						<span class="badge bg-secondary">{{ post.category }}</span>
-						<small class="text-muted">{{ post.created_on|date:"d M Y" }}</small>
+				<a class="flex items-center gap-2 rounded-lg border border-surface-border px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary dark:text-text-secondary dark:hover:text-white" href="/contact">
+					<span class="material-symbols-outlined text-base">chat_bubble</span>
+					Contactar ahora
+				</a>
+			</div>
+		</div>
+
+		{% if cat_menu %}
+		<div class="mt-8 flex flex-wrap gap-2">
+			{% for category in cat_menu %}
+				<a class="rounded-full border border-slate-200 bg-white/80 px-3 py-1 text-xs font-medium text-slate-600 transition hover:border-primary hover:text-primary dark:border-surface-border dark:bg-surface-dark/70 dark:text-text-secondary" href="{% url 'blog:category' category.slug %}">{{ category.name }}</a>
+			{% endfor %}
+		</div>
+		{% endif %}
+
+		{% if tag_menu %}
+		<div class="mt-4 flex flex-wrap gap-2">
+			{% for tag in tag_menu %}
+				<a class="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-500 transition hover:bg-slate-200 dark:bg-surface-dark dark:text-text-secondary dark:hover:text-white" href="{% url 'blog:tag' tag.slug %}">#{{ tag.name }}</a>
+			{% endfor %}
+		</div>
+		{% endif %}
+	</section>
+
+	<section class="relative mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+		{% for post in latest_post_list %}
+		<article class="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white/90 shadow-lg shadow-slate-200/40 transition hover:-translate-y-1 hover:shadow-xl dark:border-surface-border dark:bg-surface-dark/80 dark:shadow-black/40">
+			<div class="relative h-48 w-full overflow-hidden">
+				{% if post.header_image %}
+					<img src="{{ post.header_image.url }}" class="h-full w-full object-cover transition duration-500 group-hover:scale-105" alt="{{ post.title }}">
+				{% else %}
+					<div class="flex h-full w-full items-center justify-center bg-gradient-to-br from-slate-200 via-slate-100 to-slate-300 text-slate-500 dark:from-slate-800 dark:via-slate-900 dark:to-slate-700">
+						<span class="material-symbols-outlined text-4xl">network_check</span>
 					</div>
-					<h5 class="card-title"><a href="{% url 'blog:detail' post.slug %}" class="text-decoration-none text-dark">{{ post.title }}</a></h5>
-					<p class="text-muted small mb-2">Por {{ post.author.first_name }} {{ post.author.last_name }}</p>
-					<p class="card-text mb-3">{{ post.excerpt|safe|truncatechars:160 }}</p>
-					<div class="mt-auto d-flex justify-content-between align-items-center">
-						<a class="btn btn-outline-primary btn-sm" href="{% url 'blog:detail' post.slug %}">Leer más</a>
-						<small class="text-muted">{{ post.total_likes }} ❤️</small>
-					</div>
+				{% endif %}
+				<span class="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-slate-600 shadow-sm dark:bg-surface-dark/80 dark:text-text-secondary">{{ post.category }}</span>
+			</div>
+			<div class="flex flex-1 flex-col p-5">
+				<h2 class="font-display text-xl font-bold leading-snug text-slate-900 transition group-hover:text-primary dark:text-white">
+					<a href="{% url 'blog:detail' post.slug %}">{{ post.title }}</a>
+				</h2>
+				<p class="mt-3 text-sm text-slate-500 dark:text-text-secondary" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+					{{ post.excerpt|safe|truncatechars:200 }}
+				</p>
+				<div class="mt-4 flex items-center justify-between text-xs text-slate-500 dark:text-text-secondary">
+					<span>Por {{ post.author.first_name }} {{ post.author.last_name }}</span>
+					<span class="flex items-center gap-1">
+						<span class="material-symbols-outlined text-sm">schedule</span>
+						{{ post.created_on|date:"d M Y" }}
+					</span>
+				</div>
+				<div class="mt-5 flex items-center justify-between">
+					<a class="inline-flex items-center gap-2 text-sm font-semibold text-primary transition hover:text-blue-600" href="{% url 'blog:detail' post.slug %}">
+						Leer mas
+						<span class="material-symbols-outlined text-base">trending_flat</span>
+					</a>
+					<span class="flex items-center gap-1 text-sm text-slate-500 transition group-hover:text-rose-500 dark:text-text-secondary">
+						<span class="material-symbols-outlined text-base">favorite</span>
+						{{ post.total_likes }}
+					</span>
 				</div>
 			</div>
-		</div>
+		</article>
 		{% empty %}
-			<div class="col">
-				<div class="alert alert-info">No hay publicaciones disponibles aún. Crea el primer post.</div>
+			<div class="rounded-2xl border border-dashed border-slate-300 bg-white/70 p-10 text-center text-slate-500 dark:border-surface-border dark:bg-surface-dark/70 dark:text-text-secondary">
+				No hay publicaciones disponibles aun. Crea el primer post.
 			</div>
 		{% endfor %}
-	</div>
+	</section>
 
 	{% if is_paginated %}
-	<nav aria-label="Paginación de blog">
-		<ul class="pagination justify-content-center">
-			{% if page_obj.has_previous %}
-				<li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a></li>
-			{% endif %}
-			<li class="page-item active"><span class="page-link">{{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span></li>
-			{% if page_obj.has_next %}
-				<li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Siguiente</a></li>
-			{% endif %}
-		</ul>
+	<nav aria-label="Paginacion de blog" class="mt-10 flex items-center justify-center gap-4 text-sm">
+		{% if page_obj.has_previous %}
+			<a class="rounded-full border border-slate-200 px-4 py-2 text-slate-600 transition hover:border-primary hover:text-primary dark:border-surface-border dark:text-text-secondary" href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+		{% endif %}
+		<span class="rounded-full bg-slate-100 px-4 py-2 text-slate-600 dark:bg-surface-dark dark:text-text-secondary">{{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span>
+		{% if page_obj.has_next %}
+			<a class="rounded-full border border-slate-200 px-4 py-2 text-slate-600 transition hover:border-primary hover:text-primary dark:border-surface-border dark:text-text-secondary" href="?page={{ page_obj.next_page_number }}">Siguiente</a>
+		{% endif %}
 	</nav>
 	{% endif %}
 </div>
