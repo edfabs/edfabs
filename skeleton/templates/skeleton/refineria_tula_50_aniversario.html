@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Refineria Tula 50 Aniversario | TI y Comunicaciones</title>
+  <meta
+    name="description"
+    content="Landing temporal para la participacion del area de TI y Comunicaciones en el 50 aniversario de la Refineria Tula."
+  />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1"
+    rel="stylesheet"
+  />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#7b161c",
+            secondary: "#c0a060",
+            ink: "#18181b",
+            sand: "#f7f4ef",
+            panel: "#fffdf9",
+            slatewarm: "#625c54",
+          },
+          boxShadow: {
+            soft: "0 20px 60px rgba(54, 34, 18, 0.10)",
+          },
+          fontFamily: {
+            sans: ["Inter", "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(192, 160, 96, 0.18), transparent 28%),
+        radial-gradient(circle at bottom left, rgba(123, 22, 28, 0.12), transparent 30%),
+        #f7f4ef;
+    }
+
+    .mesh {
+      background-image:
+        linear-gradient(rgba(123, 22, 28, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(123, 22, 28, 0.05) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+  </style>
+</head>
+<body class="text-ink">
+  <nav class="sticky top-0 z-50 border-b border-primary/10 bg-panel/90 backdrop-blur-md">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+      <a href="/" class="flex items-center gap-3">
+        <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary text-white shadow-soft">
+          <span class="material-symbols-outlined">router</span>
+        </div>
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-[0.25em] text-primary">Evento Temporal</p>
+          <p class="text-sm font-bold text-ink sm:text-base">TI y Comunicaciones</p>
+        </div>
+      </a>
+      <div class="hidden items-center gap-6 md:flex">
+        <a href="#evolucion" class="text-sm font-semibold text-slatewarm transition hover:text-primary">Evolucion</a>
+        <a href="#arquitectura" class="text-sm font-semibold text-slatewarm transition hover:text-primary">Arquitectura</a>
+        <a href="#tendencias" class="text-sm font-semibold text-slatewarm transition hover:text-primary">Tendencias</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="relative overflow-hidden">
+      <div class="absolute inset-0 mesh opacity-60"></div>
+      <div class="relative mx-auto grid max-w-7xl gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[1.2fr_0.8fr] lg:px-8 lg:py-28">
+        <div class="max-w-3xl">
+          <p class="mb-4 inline-flex rounded-full border border-primary/20 bg-white/80 px-4 py-2 text-xs font-bold uppercase tracking-[0.25em] text-primary">
+            Refineria Tula · 50 aniversario
+          </p>
+          <h1 class="text-4xl font-black uppercase tracking-tight text-ink sm:text-5xl lg:text-6xl">
+            Evolucion tecnologica en TI y comunicaciones industriales
+          </h1>
+          <p class="mt-6 max-w-2xl text-lg leading-8 text-slatewarm">
+            Una mirada al papel de la infraestructura digital, las telecomunicaciones y la ciberseguridad
+            industrial en la continuidad operativa, la eficiencia y la toma de decisiones.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <span class="rounded-full bg-primary px-4 py-2 text-sm font-bold text-white">OT + IT</span>
+            <span class="rounded-full border border-secondary/50 bg-white px-4 py-2 text-sm font-bold text-secondary">Ciberseguridad</span>
+            <span class="rounded-full border border-secondary/50 bg-white px-4 py-2 text-sm font-bold text-secondary">Infraestructura critica</span>
+          </div>
+        </div>
+
+        <div class="rounded-[2rem] border border-primary/10 bg-white p-8 shadow-soft">
+          <div class="mb-6 flex items-center gap-4">
+            <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+              <span class="material-symbols-outlined text-3xl">settings_ethernet</span>
+            </div>
+            <div>
+              <p class="text-sm font-bold uppercase tracking-[0.2em] text-primary">Area participante</p>
+              <h2 class="text-2xl font-black">TI y Comunicaciones</h2>
+            </div>
+          </div>
+          <div class="space-y-4 text-sm leading-7 text-slatewarm">
+            <p>
+              Esta seccion resume como la conectividad, las redes industriales, la administracion de datos y la
+              seguridad digital respaldan la operacion moderna de una instalacion estrategica.
+            </p>
+            <p>
+              El enfoque esta en mostrar la transicion desde esquemas tradicionales hacia plataformas mas
+              integradas, seguras y orientadas a datos.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="evolucion" class="px-4 py-20 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <div class="mb-12 max-w-3xl">
+          <p class="text-sm font-bold uppercase tracking-[0.25em] text-primary">Linea de tiempo</p>
+          <h2 class="mt-3 text-3xl font-black sm:text-4xl">De la operacion aislada a la industria conectada</h2>
+          <p class="mt-4 text-lg leading-8 text-slatewarm">
+            La transformacion tecnologica ha cambiado la forma en que se supervisan procesos, se intercambia
+            informacion y se protege la infraestructura.
+          </p>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-3">
+          <article class="rounded-[1.75rem] border border-primary/10 bg-white p-8 shadow-soft">
+            <p class="text-sm font-bold uppercase tracking-[0.25em] text-secondary">1970 - 1990</p>
+            <h3 class="mt-3 text-2xl font-black">Automatizacion local</h3>
+            <p class="mt-4 leading-7 text-slatewarm">
+              Sistemas de control independientes, cableado dedicado y comunicaciones limitadas entre areas
+              operativas y administrativas.
+            </p>
+          </article>
+
+          <article class="rounded-[1.75rem] border border-primary/10 bg-white p-8 shadow-soft">
+            <p class="text-sm font-bold uppercase tracking-[0.25em] text-secondary">1990 - 2015</p>
+            <h3 class="mt-3 text-2xl font-black">Digitalizacion operativa</h3>
+            <p class="mt-4 leading-7 text-slatewarm">
+              Integracion de redes, servidores, historicos, monitoreo remoto y mayor intercambio de datos
+              entre procesos industriales y sistemas corporativos.
+            </p>
+          </article>
+
+          <article class="rounded-[1.75rem] border border-primary/10 bg-white p-8 shadow-soft">
+            <p class="text-sm font-bold uppercase tracking-[0.25em] text-secondary">2015 - actual</p>
+            <h3 class="mt-3 text-2xl font-black">Convergencia inteligente</h3>
+            <p class="mt-4 leading-7 text-slatewarm">
+              Plataformas conectadas, analitica, monitoreo en tiempo real, seguridad multicapa y servicios
+              preparados para continuidad, trazabilidad y eficiencia.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="arquitectura" class="bg-white px-4 py-20 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <div class="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+          <div class="rounded-[2rem] bg-sand p-8 shadow-soft">
+            <div class="grid gap-5 sm:grid-cols-2">
+              <div class="rounded-3xl bg-panel p-6">
+                <span class="material-symbols-outlined text-4xl text-primary">lan</span>
+                <h3 class="mt-4 text-xl font-black">Infraestructura critica</h3>
+                <p class="mt-3 text-sm leading-7 text-slatewarm">
+                  Redes, enlaces, equipos y servicios preparados para operar con disponibilidad y estabilidad.
+                </p>
+              </div>
+              <div class="rounded-3xl bg-panel p-6">
+                <span class="material-symbols-outlined text-4xl text-primary">security</span>
+                <h3 class="mt-4 text-xl font-black">Ciberseguridad industrial</h3>
+                <p class="mt-3 text-sm leading-7 text-slatewarm">
+                  Segmentacion, control de acceso, monitoreo y proteccion para entornos OT e IT.
+                </p>
+              </div>
+              <div class="rounded-3xl bg-panel p-6">
+                <span class="material-symbols-outlined text-4xl text-primary">cloud_sync</span>
+                <h3 class="mt-4 text-xl font-black">Integracion de datos</h3>
+                <p class="mt-3 text-sm leading-7 text-slatewarm">
+                  Flujo de informacion desde proceso hasta plataformas de analisis y decision.
+                </p>
+              </div>
+              <div class="rounded-3xl bg-panel p-6">
+                <span class="material-symbols-outlined text-4xl text-primary">monitoring</span>
+                <h3 class="mt-4 text-xl font-black">Visibilidad operativa</h3>
+                <p class="mt-3 text-sm leading-7 text-slatewarm">
+                  Indicadores, supervision remota y deteccion oportuna para mejorar respuesta y continuidad.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <p class="text-sm font-bold uppercase tracking-[0.25em] text-primary">Arquitectura tecnologica</p>
+            <h2 class="mt-3 text-3xl font-black sm:text-4xl">Convergencia OT e IT para una operacion mas segura</h2>
+            <p class="mt-6 text-lg leading-8 text-slatewarm">
+              La integracion entre Operational Technology y Information Technology permite transformar datos
+              del proceso en informacion util para mantenimiento, monitoreo, trazabilidad y decisiones
+              estrategicas.
+            </p>
+            <div class="mt-8 space-y-5">
+              <div class="flex gap-4 rounded-3xl border border-primary/10 bg-sand p-5">
+                <span class="material-symbols-outlined text-3xl text-primary">hub</span>
+                <div>
+                  <h3 class="font-black">Comunicacion transversal</h3>
+                  <p class="mt-2 text-sm leading-7 text-slatewarm">
+                    Enlaces entre campo, control, supervision y sistemas corporativos con mejores tiempos de respuesta.
+                  </p>
+                </div>
+              </div>
+              <div class="flex gap-4 rounded-3xl border border-primary/10 bg-sand p-5">
+                <span class="material-symbols-outlined text-3xl text-primary">shield_locked</span>
+                <div>
+                  <h3 class="font-black">Proteccion de activos digitales</h3>
+                  <p class="mt-2 text-sm leading-7 text-slatewarm">
+                    Defensas multicapa para reducir superficie de exposicion y fortalecer la resiliencia operativa.
+                  </p>
+                </div>
+              </div>
+              <div class="flex gap-4 rounded-3xl border border-primary/10 bg-sand p-5">
+                <span class="material-symbols-outlined text-3xl text-primary">insights</span>
+                <div>
+                  <h3 class="font-black">Decision basada en datos</h3>
+                  <p class="mt-2 text-sm leading-7 text-slatewarm">
+                    Mayor visibilidad para detectar desviaciones, optimizar recursos y planear con mejor informacion.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tendencias" class="px-4 py-20 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <div class="mb-12">
+          <p class="text-sm font-bold uppercase tracking-[0.25em] text-primary">Tendencias actuales</p>
+          <h2 class="mt-3 text-3xl font-black sm:text-4xl">Tecnologias que estan redefiniendo la operacion industrial</h2>
+        </div>
+
+        <div class="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+          <article class="rounded-[1.75rem] border border-primary/10 bg-white p-7 shadow-soft">
+            <span class="material-symbols-outlined text-4xl text-primary">sensors</span>
+            <h3 class="mt-4 text-xl font-black">IIoT</h3>
+            <p class="mt-3 text-sm leading-7 text-slatewarm">
+              Sensores, telemetria y visibilidad ampliada para captura de variables y eventos en tiempo real.
+            </p>
+          </article>
+
+          <article class="rounded-[1.75rem] border border-primary/10 bg-white p-7 shadow-soft">
+            <span class="material-symbols-outlined text-4xl text-primary">neurology</span>
+            <h3 class="mt-4 text-xl font-black">IA y analitica</h3>
+            <p class="mt-3 text-sm leading-7 text-slatewarm">
+              Analisis predictivo y apoyo a decisiones sobre mantenimiento, disponibilidad y desempeno.
+            </p>
+          </article>
+
+          <article class="rounded-[1.75rem] border border-primary/10 bg-white p-7 shadow-soft">
+            <span class="material-symbols-outlined text-4xl text-primary">cell_tower</span>
+            <h3 class="mt-4 text-xl font-black">Conectividad avanzada</h3>
+            <p class="mt-3 text-sm leading-7 text-slatewarm">
+              Redes de alta disponibilidad y baja latencia para aplicaciones de operacion y supervision.
+            </p>
+          </article>
+
+          <article class="rounded-[1.75rem] border border-primary/10 bg-white p-7 shadow-soft">
+            <span class="material-symbols-outlined text-4xl text-primary">verified_user</span>
+            <h3 class="mt-4 text-xl font-black">Zero Trust</h3>
+            <p class="mt-3 text-sm leading-7 text-slatewarm">
+              Modelos de seguridad enfocados en verificacion continua, segmentacion y control estricto.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-primary px-4 py-20 text-white sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-4xl text-center">
+        <p class="text-sm font-bold uppercase tracking-[0.3em] text-secondary">Mensaje central</p>
+        <h2 class="mt-4 text-3xl font-black sm:text-5xl">Eficiencia y seguridad a traves de la integracion</h2>
+        <p class="mx-auto mt-6 max-w-3xl text-lg leading-8 text-white/80">
+          La tecnologia no es un fin por si misma. Es el medio para fortalecer la continuidad operativa,
+          mejorar la visibilidad del proceso y respaldar una industria energetica mas segura, confiable y productiva.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-primary/10 bg-panel px-4 py-10 sm:px-6 lg:px-8">
+    <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 text-center md:flex-row md:text-left">
+      <div>
+        <p class="text-sm font-bold text-primary">edfabs · pagina temporal</p>
+        <p class="text-sm text-slatewarm">Refineria Tula 50 Aniversario · TI y Comunicaciones</p>
+      </div>
+      <a
+        href="/"
+        class="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-white px-5 py-3 text-sm font-bold text-primary transition hover:bg-primary hover:text-white"
+      >
+        <span class="material-symbols-outlined text-base">arrow_back</span>
+        Volver al sitio
+      </a>
+    </div>
+  </footer>
+</body>
+</html>

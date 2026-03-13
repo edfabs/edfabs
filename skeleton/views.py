@@ -31,6 +31,13 @@ def about(request):
 def servicios(request):
 	return render(request, 'skeleton/servicios.html', {'title': 'Servicios'})
 
+def refineria_tula_50_aniversario(request):
+	return render(
+		request,
+		'skeleton/refineria_tula_50_aniversario.html',
+		{'title': 'Refineria Tula 50 Aniversario'},
+	)
+
 def contact(request):
 	if request.method == 'POST':
 		form = Contacto(request.POST)
