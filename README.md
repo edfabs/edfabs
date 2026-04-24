@@ -1,5 +1,5 @@
 # Fabian Suchett
-doing projects to shaer con el ofo...
+doing projects to shaer!
 
 <!---
 EdFabS/EdFabS is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
