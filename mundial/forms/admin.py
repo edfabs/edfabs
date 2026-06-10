@@ -42,7 +42,7 @@ class MatchEditForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # Format datetime for the input widget
+        self.fields['match_date'].input_formats = ['%Y-%m-%dT%H:%M']
         if self.instance and self.instance.match_date:
             self.fields['match_date'].initial = (
                 self.instance.match_date.strftime('%Y-%m-%dT%H:%M')
