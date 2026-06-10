@@ -1,7 +1,5 @@
 import uuid
-from datetime import timedelta
 from django.db import models
-from django.utils.timezone import now as tz_now
 
 
 class Team(models.Model):
@@ -85,12 +83,8 @@ class Match(models.Model):
         return f'{home} vs {away} — {self.get_phase_display()}'
 
     @property
-    def prediction_deadline(self):
-        return self.match_date - timedelta(hours=1)
-
-    @property
     def is_open_for_predictions(self):
-        return tz_now() < self.prediction_deadline
+        return self.status == self.SCHEDULED
 
     @property
     def home_display(self):

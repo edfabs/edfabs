@@ -138,40 +138,5 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 {% block extra_js %}{% endblock %}
 
-<script>
-// Cuenta regresiva para partidos
-(function () {
-  function pad(n) { return String(n).padStart(2, '0'); }
-  function updateCountdowns() {
-    document.querySelectorAll('[data-deadline]').forEach(function (el) {
-      var dl = new Date(el.dataset.deadline);
-      var now = new Date();
-      var diff = dl - now;
-      if (diff <= 0) {
-        el.textContent = 'Plazo cerrado';
-        el.classList.add('urgent');
-        // Disable buttons in parent match-card
-        var card = el.closest('.match-card');
-        if (card) {
-          card.querySelectorAll('.prediction-btn:not([disabled])').forEach(function (btn) {
-            btn.disabled = true;
-            btn.classList.add('btn-secondary');
-            btn.classList.remove('btn-outline-primary', 'btn-outline-success', 'btn-outline-danger');
-          });
-        }
-        return;
-      }
-      var h = Math.floor(diff / 3600000);
-      var m = Math.floor((diff % 3600000) / 60000);
-      var s = Math.floor((diff % 60000) / 1000);
-      var text = h > 0 ? h + 'h ' + pad(m) + 'm' : pad(m) + 'm ' + pad(s) + 's';
-      el.textContent = 'Cierra en: ' + text;
-      if (diff < 3600000) el.classList.add('urgent');
-    });
-  }
-  updateCountdowns();
-  setInterval(updateCountdowns, 1000);
-})();
-</script>
 </body>
 </html>
