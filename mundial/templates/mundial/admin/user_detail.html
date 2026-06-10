@@ -1,0 +1,77 @@
+{% extends "mundial/base.html" %}
+{% block title %}Detalle Usuario{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h2 class="fw-bold mb-0"><i class="bi bi-person-lines-fill text-primary"></i> {{ target_user.full_name }}</h2>
+  <a href="{% url 'mundial:admin_users' %}" class="btn btn-outline-secondary btn-sm">
+    <i class="bi bi-arrow-left"></i> Volver
+  </a>
+</div>
+
+<div class="row g-4 mb-4">
+  <div class="col-md-4">
+    <div class="card text-center p-4">
+      {% if target_user.avatar %}
+        <img src="{{ target_user.avatar.url }}" width="80" height="80" class="rounded-circle mx-auto mb-3">
+      {% else %}
+        <div style="font-size:3rem;">👤</div>
+      {% endif %}
+      <h5 class="fw-bold">{{ target_user.full_name }}</h5>
+      <p class="text-muted small">{{ target_user.email }}</p>
+      <div class="d-flex justify-content-center gap-2 flex-wrap">
+        {% if target_user.is_verified %}
+          <span class="badge bg-success">Verificado</span>
+        {% else %}
+          <span class="badge bg-warning text-dark">Sin verificar</span>
+        {% endif %}
+        {% if target_user.is_active %}
+          <span class="badge bg-success">Activo</span>
+        {% else %}
+          <span class="badge bg-danger">Inactivo</span>
+        {% endif %}
+      </div>
+      <hr>
+      <small class="text-muted">Miembro desde {{ target_user.date_joined|date:"d/m/Y" }}</small>
+      {% if target_user.mundial_score %}
+        <div class="mt-2">
+          <strong class="fs-4 text-primary">{{ target_user.mundial_score.total_points }}</strong> pts
+          <br>
+          <small class="text-success">{{ target_user.mundial_score.correct_predictions }} correctas</small> ·
+          <small class="text-danger">{{ target_user.mundial_score.incorrect_predictions }} incorrectas</small>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div class="card h-100">
+      <div class="card-header fw-bold">Predicciones</div>
+      <div class="table-responsive">
+        <table class="table table-sm mb-0">
+          <thead class="table-light">
+            <tr><th>Partido</th><th>Fase</th><th>Predicción</th><th>Resultado</th><th>Estado</th></tr>
+          </thead>
+          <tbody>
+            {% for pred in predictions %}
+              <tr>
+                <td><small>{{ pred.match.home_display }} vs {{ pred.match.away_display }}</small></td>
+                <td><small>{{ pred.match.get_phase_display }}</small></td>
+                <td>{{ pred.get_choice_display }}</td>
+                <td>{% if pred.match.home_goals is not None %}{{ pred.match.home_goals }}-{{ pred.match.away_goals }}{% else %}—{% endif %}</td>
+                <td>
+                  {% if pred.result == 'CORRECT' %}<span class="badge bg-success">✓</span>
+                  {% elif pred.result == 'INCORRECT' %}<span class="badge bg-danger">✗</span>
+                  {% elif pred.result == 'NULL' %}<span class="badge bg-secondary">—</span>
+                  {% else %}<span class="badge bg-warning text-dark">Pend.</span>{% endif %}
+                </td>
+              </tr>
+            {% empty %}
+              <tr><td colspan="5" class="text-center text-muted py-3">Sin predicciones.</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

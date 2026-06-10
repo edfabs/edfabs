@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     "emailing",
     "lacabanaRestaurante",
     "asambleas",
+    # Quiniela Mundial 2026
+    "mundial.apps.MundialConfig",
 ]
 
 MIDDLEWARE = [
@@ -127,9 +129,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "es-mx"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "America/Mexico_City"
 
 USE_I18N = True
 
@@ -179,8 +181,21 @@ MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, AWS_MEDIA_LOCATION)
 DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
 
-LOGIN_REDIRECT_URL = "blog:index"
-LOGOUT_REDIRECT_URL = "blog:index"
+# ── Auth ──────────────────────────────────────────────────────────────────
+AUTH_USER_MODEL = 'mundial.CustomUser'
+
+AUTHENTICATION_BACKENDS = [
+    'mundial.backends.EmailAuthBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+LOGIN_URL = 'mundial:login'
+LOGIN_REDIRECT_URL = 'mundial:dashboard'
+LOGOUT_REDIRECT_URL = 'mundial:login'
+
+PASSWORD_RESET_TIMEOUT = 3600  # 1 hora
+
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', os.getenv('EMAIL_HOST_USER', 'noreply@quiniela.com'))
 
 
  # Parametros del servidor SMTP

@@ -1,0 +1,21 @@
+{% extends "mundial/base.html" %}
+{% block title %}Verifica tu Email{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6 text-center">
+    <div class="card p-5">
+      <div style="font-size:4rem;">📧</div>
+      <h3 class="mt-3 fw-bold text-primary">Verifica tu Correo</h3>
+      <p class="text-muted">
+        Enviamos un enlace de verificación a tu correo electrónico.<br>
+        <strong>Debes verificar tu email</strong> para participar en la quiniela.
+      </p>
+      <a href="{% url 'mundial:resend_verification' %}" class="btn btn-outline-primary mb-2">
+        <i class="bi bi-envelope-arrow-up"></i> Reenviar correo de verificación
+      </a>
+      <a href="{% url 'mundial:logout' %}" class="btn btn-outline-secondary btn-sm">Cerrar Sesión</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends "mundial/base.html" %}
+{% block title %}Admin — Partidos{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h2 class="fw-bold mb-0"><i class="bi bi-calendar3 text-primary"></i> Gestión de Partidos</h2>
+  <a href="{% url 'mundial:admin_dashboard' %}" class="btn btn-outline-secondary btn-sm">
+    <i class="bi bi-arrow-left"></i> Volver
+  </a>
+</div>
+
+<div class="card">
+  <div class="table-responsive">
+    <table class="table table-hover mb-0 align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th>#</th>
+          <th>Partido</th>
+          <th>Fase</th>
+          <th>Fecha</th>
+          <th>Ciudad</th>
+          <th class="text-center">Estado</th>
+          <th class="text-center">Resultado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for match in matches %}
+          <tr>
+            <td><small class="text-muted">{{ match.match_number }}</small></td>
+            <td>
+              <span class="fw-semibold">{{ match.home_display }}</span>
+              <span class="text-muted mx-1">vs</span>
+              <span class="fw-semibold">{{ match.away_display }}</span>
+            </td>
+            <td><small>{{ match.get_phase_display }}{% if match.group %} G{{ match.group }}{% endif %}</small></td>
+            <td><small>{{ match.match_date|date:"d/m/Y H:i" }}</small></td>
+            <td><small>{{ match.city }}</small></td>
+            <td class="text-center">
+              {% if match.status == 'FINISHED' %}
+                <span class="badge bg-dark">Finalizado</span>
+              {% elif match.status == 'IN_PLAY' %}
+                <span class="badge bg-success">En Juego</span>
+              {% else %}
+                <span class="badge bg-secondary">Programado</span>
+              {% endif %}
+            </td>
+            <td class="text-center fw-bold">
+              {% if match.home_goals is not None %}
+                {{ match.home_goals }} - {{ match.away_goals }}
+              {% else %}—{% endif %}
+            </td>
+            <td>
+              <div class="d-flex gap-1 flex-wrap">
+                <a href="{% url 'mundial:admin_match_edit' match.id %}" class="btn btn-xs btn-outline-secondary" title="Editar">
+                  <i class="bi bi-pencil"></i>
+                </a>
+                {% if match.status == 'SCHEDULED' %}
+                  <form method="post" action="{% url 'mundial:admin_match_inplay' match.id %}" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-xs btn-outline-success" title="Marcar En Juego"
+                            onclick="return confirm('¿Marcar partido como EN JUEGO?')">
+                      <i class="bi bi-play-circle"></i>
+                    </button>
+                  </form>
+                {% endif %}
+                {% if match.status != 'FINISHED' %}
+                  <a href="{% url 'mundial:admin_match_result' match.id %}" class="btn btn-xs btn-outline-primary" title="Registrar Resultado">
+                    <i class="bi bi-flag-fill"></i>
+                  </a>
+                {% endif %}
+              </div>
+            </td>
+          </tr>
+        {% empty %}
+          <tr><td colspan="8" class="text-center text-muted py-4">No hay partidos. Ejecuta el comando seed_tournament.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

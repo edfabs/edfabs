@@ -1,0 +1,79 @@
+{% extends "mundial/base.html" %}
+{% block title %}Admin — Configuración de Puntos{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h2 class="fw-bold mb-0"><i class="bi bi-star text-warning"></i> Configuración de Puntos</h2>
+  <a href="{% url 'mundial:admin_dashboard' %}" class="btn btn-outline-secondary btn-sm">
+    <i class="bi bi-arrow-left"></i> Volver
+  </a>
+</div>
+
+{% if finished_count > 0 %}
+  <div class="alert alert-warning">
+    <i class="bi bi-exclamation-triangle-fill"></i>
+    <strong>Advertencia:</strong> Hay {{ finished_count }} partido(s) finalizado(s).
+    Si cambias los puntos ahora, usa el botón <strong>"Recalcular Puntos"</strong> para actualizar el marcador.
+  </div>
+{% endif %}
+
+<div class="row g-4">
+  <div class="col-md-7">
+    <div class="card">
+      <div class="card-header fw-bold">Puntos por Fase</div>
+      <div class="card-body">
+        <form method="post" novalidate>
+          {% csrf_token %}
+          <div class="table-responsive">
+            <table class="table align-middle">
+              <thead class="table-light">
+                <tr><th>Fase</th><th>Puntos por Acierto</th></tr>
+              </thead>
+              <tbody>
+                {% for config in configs %}
+                  <tr>
+                    <td class="fw-semibold">{{ config.get_phase_display }}</td>
+                    <td style="width:140px;">
+                      <input type="number" name="points_{{ config.phase }}"
+                             value="{{ config.points }}" min="0" max="100"
+                             class="form-control form-control-sm text-center fw-bold">
+                    </td>
+                  </tr>
+                {% empty %}
+                  <tr><td colspan="2" class="text-muted text-center">Sin configuración. Ejecuta seed_tournament.</td></tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          {% if configs %}
+            <button type="submit" class="btn btn-mundial">
+              <i class="bi bi-save"></i> Guardar Cambios
+            </button>
+          {% endif %}
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-5">
+    <div class="card border-danger">
+      <div class="card-header bg-danger text-white fw-bold">
+        <i class="bi bi-arrow-clockwise"></i> Recalcular Todos los Puntos
+      </div>
+      <div class="card-body">
+        <p class="text-muted small">
+          Esto borrará todos los puntajes actuales y los recalculará desde cero usando los valores de puntos vigentes.
+          Solo usar después de cambiar la configuración de puntos con partidos ya calificados.
+        </p>
+        <form method="post" action="{% url 'mundial:admin_recalculate' %}">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger w-100"
+                  onclick="return confirm('¿Recalcular TODOS los puntajes? Esta acción no se puede deshacer.')">
+            <i class="bi bi-arrow-clockwise"></i> Recalcular Puntajes
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

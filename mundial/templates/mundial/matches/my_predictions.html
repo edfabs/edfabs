@@ -1,0 +1,108 @@
+{% extends "mundial/base.html" %}
+{% block title %}Mis Predicciones{% endblock %}
+
+{% block content %}
+<h2 class="fw-bold mb-4"><i class="bi bi-check2-square text-primary"></i> Mis Predicciones</h2>
+
+<!-- Totales -->
+<div class="row g-3 mb-4">
+  <div class="col-6 col-md-2">
+    <div class="card text-center p-3">
+      <div class="fw-bold fs-3 text-success">{{ totals.correct }}</div>
+      <small class="text-muted">Correctas</small>
+    </div>
+  </div>
+  <div class="col-6 col-md-2">
+    <div class="card text-center p-3">
+      <div class="fw-bold fs-3 text-danger">{{ totals.incorrect }}</div>
+      <small class="text-muted">Incorrectas</small>
+    </div>
+  </div>
+  <div class="col-6 col-md-2">
+    <div class="card text-center p-3">
+      <div class="fw-bold fs-3 text-secondary">{{ totals.null }}</div>
+      <small class="text-muted">Nulas</small>
+    </div>
+  </div>
+  <div class="col-6 col-md-2">
+    <div class="card text-center p-3">
+      <div class="fw-bold fs-3 text-warning">{{ totals.pending }}</div>
+      <small class="text-muted">Pendientes</small>
+    </div>
+  </div>
+  <div class="col-12 col-md-4">
+    <div class="card text-center p-3 bg-primary text-white">
+      <div class="fw-bold fs-3">{{ totals.points }}</div>
+      <small class="opacity-75">Puntos Totales</small>
+    </div>
+  </div>
+</div>
+
+{% for phase, data in by_phase %}
+  <div class="card mb-4">
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+      <span class="fw-bold">{{ data.label }}</span>
+      <div class="d-flex gap-2">
+        <span class="badge bg-success">{{ data.correct }} ✓</span>
+        <span class="badge bg-danger">{{ data.incorrect }} ✗</span>
+        <span class="badge bg-secondary">{{ data.null }} —</span>
+        <span class="badge bg-warning text-dark">{{ data.points }} pts</span>
+      </div>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-hover mb-0">
+        <thead class="table-light">
+          <tr>
+            <th>Partido</th>
+            <th>Fecha</th>
+            <th>Mi Predicción</th>
+            <th>Resultado</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for pred in data.preds %}
+            <tr>
+              <td>
+                <strong>{{ pred.match.home_display }}</strong>
+                <span class="text-muted mx-1">vs</span>
+                <strong>{{ pred.match.away_display }}</strong>
+              </td>
+              <td><small>{{ pred.match.match_date|date:"d/m H:i" }}</small></td>
+              <td>{{ pred.get_choice_display }}</td>
+              <td>
+                {% if pred.match.home_goals is not None %}
+                  {{ pred.match.home_goals }} - {{ pred.match.away_goals }}
+                {% else %}—{% endif %}
+              </td>
+              <td>
+                {% if pred.result == 'CORRECT' %}
+                  <span class="badge badge-correct"><i class="bi bi-check-lg"></i> Correcta</span>
+                {% elif pred.result == 'INCORRECT' %}
+                  <span class="badge badge-incorrect"><i class="bi bi-x-lg"></i> Incorrecta</span>
+                {% elif pred.result == 'NULL' %}
+                  <span class="badge badge-null">— Nula</span>
+                {% else %}
+                  <span class="badge badge-pending">
+                    {% if pred.match.is_open_for_predictions %}
+                      <i class="bi bi-clock"></i> Pendiente
+                    {% else %}
+                      <i class="bi bi-lock"></i> Cerrado
+                    {% endif %}
+                  </span>
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% empty %}
+  <div class="text-center py-5">
+    <div style="font-size:4rem;">📋</div>
+    <h4 class="text-muted mt-3">Aún no tienes predicciones.</h4>
+    <a href="{% url 'mundial:matches' %}" class="btn btn-mundial mt-2">Ver Partidos</a>
+  </div>
+{% endfor %}
+{% endblock %}

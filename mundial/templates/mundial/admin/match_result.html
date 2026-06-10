@@ -1,0 +1,50 @@
+{% extends "mundial/base.html" %}
+{% block title %}Registrar Resultado{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-5">
+    <div class="card">
+      <div class="card-header fw-bold bg-success text-white">
+        <i class="bi bi-flag-fill"></i> Registrar Resultado
+      </div>
+      <div class="card-body">
+        <h5 class="text-center mb-4">
+          <span class="text-primary">{{ match.home_display }}</span>
+          <span class="text-muted mx-2">vs</span>
+          <span class="text-danger">{{ match.away_display }}</span>
+        </h5>
+        <p class="text-muted text-center small mb-4">
+          {{ match.match_date|date:"d/m/Y H:i" }} · {{ match.city }} · {{ match.get_phase_display }}
+        </p>
+        <div class="alert alert-warning small">
+          <i class="bi bi-exclamation-triangle"></i>
+          Al guardar el resultado, se calificarán automáticamente todas las predicciones de este partido.
+        </div>
+        <form method="post" novalidate>
+          {% csrf_token %}
+          <div class="row g-3">
+            <div class="col-6">
+              <label class="form-label fw-semibold text-primary">{{ match.home_display }}</label>
+              {{ form.home_goals }}
+              {% if form.home_goals.errors %}<div class="invalid-feedback d-block">{{ form.home_goals.errors.0 }}</div>{% endif %}
+            </div>
+            <div class="col-6">
+              <label class="form-label fw-semibold text-danger">{{ match.away_display }}</label>
+              {{ form.away_goals }}
+              {% if form.away_goals.errors %}<div class="invalid-feedback d-block">{{ form.away_goals.errors.0 }}</div>{% endif %}
+            </div>
+          </div>
+          <div class="d-flex gap-2 mt-4">
+            <button type="submit" class="btn btn-success fw-semibold"
+                    onclick="return confirm('¿Confirmar resultado? Esto calificará todas las predicciones.')">
+              <i class="bi bi-check-lg"></i> Guardar Resultado
+            </button>
+            <a href="{% url 'mundial:admin_matches' %}" class="btn btn-outline-secondary">Cancelar</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

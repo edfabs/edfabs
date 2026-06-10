@@ -1,0 +1,202 @@
+{% extends "mundial/base.html" %}
+{% load mundial_tags %}
+{% block title %}Partidos{% endblock %}
+{% block meta_description %}Todos los partidos del Mundial FIFA 2026 — haz tus predicciones{% endblock %}
+
+{% block extra_head %}
+<style>
+  .match-card { transition: box-shadow .2s; }
+  .match-card:hover { box-shadow: 0 4px 20px rgba(0,63,136,.15); }
+  .team-name { font-weight: 600; font-size: 1rem; }
+  .score-display { font-size: 1.5rem; font-weight: 700; min-width: 60px; text-align: center; }
+  .btn-home { --bs-btn-color: #003f88; --bs-btn-border-color: #003f88; }
+  .btn-home:hover, .btn-home.selected { background: #003f88; color: #fff; }
+  .btn-draw { --bs-btn-color: #6c757d; --bs-btn-border-color: #6c757d; }
+  .btn-draw:hover, .btn-draw.selected { background: #6c757d; color: #fff; }
+  .btn-away { --bs-btn-color: #c8102e; --bs-btn-border-color: #c8102e; }
+  .btn-away:hover, .btn-away.selected { background: #c8102e; color: #fff; }
+  .phase-header { position: sticky; top: 56px; z-index: 10; }
+</style>
+{% endblock %}
+
+{% block content %}
+<h2 class="fw-bold mb-4"><i class="bi bi-calendar3 text-primary"></i> Partidos del Mundial 2026</h2>
+
+{% if phases %}
+  <!-- Phase nav -->
+  <div class="d-flex gap-2 flex-wrap mb-4">
+    {% for phase_data in phases %}
+      <a href="#phase-{{ phase_data.phase }}" class="btn btn-sm btn-outline-primary">
+        {{ phase_data.label }}
+      </a>
+    {% endfor %}
+  </div>
+
+  {% for phase_data in phases %}
+    <div id="phase-{{ phase_data.phase }}" class="mb-5">
+      <div class="phase-header bg-primary text-white rounded-top px-3 py-2 mb-3 d-flex justify-content-between align-items-center">
+        <h5 class="mb-0 fw-bold">{{ phase_data.label }}</h5>
+        <span class="badge bg-white text-primary">{{ phase_data.matches|length }} partidos</span>
+      </div>
+
+      <div class="row g-3">
+        {% for match in phase_data.matches %}
+          {% with pred=user_preds|dict_get:match.id %}
+          <div class="col-12 col-md-6 col-xl-4">
+            <div class="card match-card h-100 p-3" id="match-{{ match.id }}">
+              <!-- Meta info -->
+              <div class="d-flex justify-content-between mb-2">
+                <small class="text-muted">
+                  <i class="bi bi-geo-alt"></i> {{ match.city }} · {{ match.stadium }}
+                </small>
+                <small>
+                  {% if match.status == 'FINISHED' %}
+                    <span class="badge bg-dark">Finalizado</span>
+                  {% elif match.status == 'IN_PLAY' %}
+                    <span class="badge bg-success">En Juego</span>
+                  {% else %}
+                    <span class="badge bg-secondary">{{ match.match_date|date:"d/m H:i" }}</span>
+                  {% endif %}
+                </small>
+              </div>
+
+              <!-- Teams and score -->
+              <div class="d-flex align-items-center justify-content-between mb-3">
+                <div class="text-center flex-fill">
+                  <div class="team-name">{{ match.home_display }}</div>
+                </div>
+                <div class="score-display text-primary mx-2">
+                  {% if match.status == 'FINISHED' or match.status == 'IN_PLAY' %}
+                    {{ match.home_goals|default:"0" }} — {{ match.away_goals|default:"0" }}
+                  {% else %}
+                    vs
+                  {% endif %}
+                </div>
+                <div class="text-center flex-fill">
+                  <div class="team-name">{{ match.away_display }}</div>
+                </div>
+              </div>
+
+              <!-- Prediction buttons -->
+              {% if match.status == 'FINISHED' %}
+                <!-- Show result and user prediction -->
+                <div class="d-flex justify-content-center gap-2 mb-2">
+                  {% with user_choice=user_preds|dict_get:match.id %}
+                    {% if user_choice %}
+                      {% if user_choice.result == 'CORRECT' %}
+                        <span class="badge bg-success fs-6 px-3 py-2">
+                          <i class="bi bi-check-lg"></i> {{ user_choice.choice|choice_label }} — Correcta
+                        </span>
+                      {% elif user_choice.result == 'INCORRECT' %}
+                        <span class="badge bg-danger fs-6 px-3 py-2">
+                          <i class="bi bi-x-lg"></i> {{ user_choice.choice|choice_label }} — Incorrecta
+                        </span>
+                      {% else %}
+                        <span class="badge bg-secondary fs-6 px-3 py-2">
+                          — Nula
+                        </span>
+                      {% endif %}
+                    {% else %}
+                      <span class="badge bg-secondary">— Sin predicción</span>
+                    {% endif %}
+                  {% endwith %}
+                </div>
+              {% elif match.is_open_for_predictions %}
+                <!-- Interactive prediction buttons -->
+                <div class="d-flex justify-content-center gap-2" data-match-id="{{ match.id }}">
+                  {% with user_choice=user_preds|dict_get:match.id %}
+                    <button
+                      class="btn btn-sm btn-outline-primary prediction-btn btn-home {% if user_choice.choice == 'HOME_WIN' %}selected{% endif %}"
+                      data-match="{{ match.id }}" data-choice="HOME_WIN">
+                      Local
+                    </button>
+                    <button
+                      class="btn btn-sm btn-outline-secondary prediction-btn btn-draw {% if user_choice.choice == 'DRAW' %}selected{% endif %}"
+                      data-match="{{ match.id }}" data-choice="DRAW">
+                      Empate
+                    </button>
+                    <button
+                      class="btn btn-sm btn-outline-danger prediction-btn btn-away {% if user_choice.choice == 'AWAY_WIN' %}selected{% endif %}"
+                      data-match="{{ match.id }}" data-choice="AWAY_WIN">
+                      Visitante
+                    </button>
+                  {% endwith %}
+                </div>
+                <!-- Countdown -->
+                <div class="text-center mt-2">
+                  <span class="countdown-timer" data-deadline="{{ match.prediction_deadline|date:'c' }}"></span>
+                </div>
+              {% else %}
+                <!-- Closed for predictions -->
+                <div class="d-flex justify-content-center gap-2">
+                  {% with user_choice=user_preds|dict_get:match.id %}
+                    <button class="btn btn-sm prediction-btn btn-home {% if user_choice.choice == 'HOME_WIN' %}selected{% endif %}" disabled>Local</button>
+                    <button class="btn btn-sm prediction-btn btn-draw {% if user_choice.choice == 'DRAW' %}selected{% endif %}" disabled>Empate</button>
+                    <button class="btn btn-sm prediction-btn btn-away {% if user_choice.choice == 'AWAY_WIN' %}selected{% endif %}" disabled>Visitante</button>
+                  {% endwith %}
+                </div>
+                <div class="text-center mt-2">
+                  <span class="countdown-timer urgent">Plazo cerrado</span>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+          {% endwith %}
+        {% endfor %}
+      </div>
+    </div>
+  {% endfor %}
+{% else %}
+  <div class="text-center py-5">
+    <div style="font-size:4rem;">⚽</div>
+    <h4 class="text-muted mt-3">No hay partidos cargados aún.</h4>
+  </div>
+{% endif %}
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(function () {
+  var PREDICT_URL_TPL = '{% url "mundial:predict" "00000000-0000-0000-0000-000000000000" %}';
+
+  document.querySelectorAll('.prediction-btn:not([disabled])').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var matchId = btn.dataset.match;
+      var choice = btn.dataset.choice;
+      var url = PREDICT_URL_TPL.replace('00000000-0000-0000-0000-000000000000', matchId);
+      var csrfToken = document.cookie.match(/csrftoken=([^;]+)/);
+      csrfToken = csrfToken ? csrfToken[1] : '';
+
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'X-CSRFToken': csrfToken,
+          'X-Requested-With': 'XMLHttpRequest',
+        },
+        body: 'choice=' + encodeURIComponent(choice),
+      })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data.success) {
+          // Update selected button in this match card
+          var card = document.getElementById('match-' + matchId);
+          card.querySelectorAll('.prediction-btn').forEach(function (b) {
+            b.classList.remove('selected');
+          });
+          btn.classList.add('selected');
+          // Brief confirmation flash
+          btn.textContent = '✓ ' + btn.textContent.replace('✓ ', '');
+          setTimeout(function () {
+            btn.textContent = btn.textContent.replace('✓ ', '');
+          }, 1500);
+        }
+      })
+      .catch(function () {
+        alert('Error al guardar predicción. Verifica tu conexión.');
+      });
+    });
+  });
+})();
+</script>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends "mundial/base.html" %}
+{% block title %}Tabla de Posiciones{% endblock %}
+
+{% block content %}
+<h2 class="fw-bold mb-4"><i class="bi bi-trophy text-warning"></i> Tabla de Posiciones</h2>
+
+{% if user_rank %}
+  <div class="alert alert-primary">
+    <i class="bi bi-person-check-fill"></i>
+    Tu posición actual: <strong>#{{ user_rank }}</strong>
+  </div>
+{% endif %}
+
+<div class="card">
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-hover mb-0 align-middle">
+        <thead class="table-dark">
+          <tr>
+            <th class="text-center" style="width:50px">#</th>
+            <th>Jugador</th>
+            <th class="text-center text-success" title="Correctas"><i class="bi bi-check-lg"></i></th>
+            <th class="text-center text-danger" title="Incorrectas"><i class="bi bi-x-lg"></i></th>
+            <th class="text-center text-secondary" title="Nulas">—</th>
+            <th class="text-center" title="Aciertos Eliminatorias"><i class="bi bi-star-fill text-warning"></i></th>
+            <th class="text-center fw-bold">Puntos</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for score in scores %}
+            <tr {% if score.user == user %}class="leaderboard-row-me"{% endif %}>
+              <td class="text-center fw-bold">
+                {% if forloop.counter == 1 %}🥇
+                {% elif forloop.counter == 2 %}🥈
+                {% elif forloop.counter == 3 %}🥉
+                {% else %}{{ forloop.counter }}{% endif %}
+              </td>
+              <td>
+                <div class="d-flex align-items-center gap-2">
+                  {% if score.user.avatar %}
+                    <img src="{{ score.user.avatar.url }}" width="32" height="32" class="rounded-circle">
+                  {% else %}
+                    <span class="rounded-circle bg-secondary bg-opacity-25 d-inline-flex align-items-center justify-content-center" style="width:32px;height:32px;">👤</span>
+                  {% endif %}
+                  <span>{{ score.user.full_name }}</span>
+                  {% if score.user == user %}<span class="badge bg-primary ms-1">Yo</span>{% endif %}
+                </div>
+              </td>
+              <td class="text-center text-success fw-semibold">{{ score.correct_predictions }}</td>
+              <td class="text-center text-danger">{{ score.incorrect_predictions }}</td>
+              <td class="text-center text-secondary">{{ score.null_predictions }}</td>
+              <td class="text-center text-warning fw-semibold">{{ score.playoff_correct }}</td>
+              <td class="text-center fw-bold fs-5 text-primary">{{ score.total_points }}</td>
+            </tr>
+          {% empty %}
+            <tr>
+              <td colspan="7" class="text-center text-muted py-5">
+                Aún no hay puntuaciones. Los puntos aparecerán después del primer partido.
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<p class="text-muted small mt-2">
+  Criterios de desempate: 1) Puntos totales · 2) Aciertos en eliminatorias · 3) Total de aciertos
+</p>
+{% endblock %}

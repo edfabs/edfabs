@@ -31,5 +31,7 @@ urlpatterns = [
     path("members/", include("members.urls")),
     path("emailing/", include("emailing.urls")),
     path("lacabanaRestaurante/", include("lacabanaRestaurante.urls")),
+    # Quiniela Mundial 2026
+    path("mundial/", include("mundial.urls", namespace="mundial")),
     # ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
