@@ -29,6 +29,10 @@ DEBUG = bool(os.environ.get("DJANGO_DEBUG", True))
 
 ALLOWED_HOSTS = ["*"]
 
+# Controla si el registro publico de usuarios esta habilitado.
+# Cambiar a True para permitir nuevos registros.
+REGISTRATION_OPEN = False
+
 
 # Application definition
 

@@ -9,6 +9,7 @@ from django.contrib.auth.forms import PasswordResetForm
 from django.core.files.base import ContentFile
 from django.core.mail import send_mail
 from django.core.signing import BadSignature, SignatureExpired, TimestampSigner
+from django.http import Http404
 from django.shortcuts import redirect, render
 from django.utils.timezone import now
 
@@ -70,6 +71,9 @@ def _send_verification_email(request, user):
 
 
 def register_view(request):
+    if not getattr(settings, 'REGISTRATION_OPEN', False):
+        raise Http404
+
     if request.user.is_authenticated:
         return redirect('mundial:dashboard')
 
