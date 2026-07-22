@@ -1,7 +1,19 @@
-from django.shortcuts import render
+from django.contrib import messages
+from django.shortcuts import redirect, render
 
 from ..decorators import verified_required
 from ..models import UserScore, Prediction, Match, PointConfig
+
+
+@verified_required
+def leaderboard_route_blocked_view(request):
+    """Bloquea el acceso a /mundial/tabla/ sin eliminar leaderboard_view.
+
+    La ruta 'tabla/' en urls.py apunta aquí en vez de a leaderboard_view.
+    Para reactivar la tabla, volver a apuntar esa ruta a leaderboard_view.
+    """
+    messages.info(request, 'La tabla de posiciones no está disponible por el momento.')
+    return redirect('mundial:dashboard')
 
 
 @verified_required

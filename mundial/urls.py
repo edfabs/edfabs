@@ -54,7 +54,7 @@ urlpatterns = [
     path('mis-predicciones/', match_views.my_predictions_view, name='my_predictions'),
 
     # ── Tabla de posiciones ────────────────────────────────────────────────
-    path('tabla/', lb_views.leaderboard_view, name='leaderboard'),
+    path('tabla/', lb_views.leaderboard_route_blocked_view, name='leaderboard'),
     path('historial/', lb_views.score_history_view, name='score_history'),
 
     # ── Panel Admin (/mundial/admin-quiniela/) ─────────────────────────────
