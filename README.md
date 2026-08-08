@@ -2,7 +2,7 @@
 
 ## ⚽ Quiniela Mundial
 
-Aplicación web de quiniela para el Mundial FIFA 2026, construida con Django 3.0.3.
+Aplicación web de quiniela para el Mundial 2026, construida con Django 3.0.3.
 
 ---
 
