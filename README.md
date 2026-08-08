@@ -50,6 +50,6 @@ Desarrollo soluciones tecnológicas que integran **infraestructura de red, comun
 <div align="center">
 
 [![Sitio web](https://img.shields.io/badge/🌐_Sitio_web-www.edfabs.com-black?style=flat-square)](https://www.edfabs.com)
-[![Contáctame](https://img.shields.io/badge/✉️_Contáctame-www.edfabs.com/contacto-black?style=flat-square)](https://www.edfabs.com/contacto)
+[![Contáctame](https://img.shields.io/badge/✉️_Contáctame-www.edfabs.com/contacto-black?style=flat-square)](https://www.edfabs.com/contact)
 
 </div>
