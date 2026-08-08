@@ -1,6 +1,6 @@
 # Fabian Suchett — Projects
 
-## ⚽ Quiniela Mundial FIFA 2026
+## ⚽ Quiniela Mundial
 
 Aplicación web de quiniela para el Mundial FIFA 2026, construida con Django 3.0.3.
 
@@ -222,7 +222,7 @@ python manage.py migrate
 
 ### Formato del Mundial 2026
 
-El Mundial FIFA 2026 tendrá **48 equipos**:
+El torneo 2026 
 - 12 grupos de 4 → 72 partidos de fase de grupos
 - Ronda de 32 (16 partidos) + Ronda de 16 (8) + Cuartos (4) + Semis (2) + 3er lugar (1) + Final (1) = 32 partidos KO
 - **Total: 104 partidos**
