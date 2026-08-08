@@ -5,7 +5,7 @@
 ### Ingeniero en Comunicaciones y Electrónica
 
 [![Website](https://img.shields.io/badge/Website-www.edfabs.com-0A66C2?style=for-the-badge&logo=googlechrome&logoColor=white)](https://www.edfabs.com)
-[![Contacto](https://img.shields.io/badge/Contacto-Disponible-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://www.edfabs.com/contacto)
+[![Contacto](https://img.shields.io/badge/Contacto-Disponible-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://www.edfabs.com/contact)
 
 </div>
 
