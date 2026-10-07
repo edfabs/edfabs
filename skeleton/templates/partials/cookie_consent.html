@@ -1,0 +1,323 @@
+{% load static %}
+<!-- Consentimiento de cookies (banner + panel). Lógica en static/js/cookie-consent.js -->
+<style>
+	.ck-root {
+		--ck-primary: #136dec;
+		--ck-primary-hover: #2563eb;
+		--ck-bg: #101822;
+		--ck-surface: #1c2027;
+		--ck-border: #3b4554;
+		--ck-text: #ffffff;
+		--ck-muted: #9da8b9;
+		--ck-radius: 0.5rem;
+		--ck-radius-lg: 0.75rem;
+		--ck-z-banner: 60; /* header usa z-50 */
+		--ck-z-modal: 70;
+		font-family: "Noto Sans", sans-serif;
+		color: var(--ck-text);
+	}
+	.ck-root [hidden] { display: none !important; }
+
+	/* ── Banner (primera capa) ── */
+	.ck-banner {
+		position: fixed;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: var(--ck-z-banner);
+		background: var(--ck-surface);
+		border-top: 1px solid var(--ck-border);
+		box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.35);
+		animation: ck-slide-up 0.3s ease-out;
+	}
+	.ck-banner__inner {
+		display: flex;
+		align-items: center;
+		gap: 1.5rem;
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 1rem 2.5rem;
+	}
+	.ck-banner__text {
+		flex: 1;
+		margin: 0;
+		font-size: 0.875rem;
+		line-height: 1.5;
+		color: var(--ck-muted);
+	}
+	.ck-link {
+		color: var(--ck-text);
+		text-decoration: underline;
+		text-underline-offset: 2px;
+	}
+	.ck-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+	}
+
+	/* Todos los botones con el mismo peso visual */
+	.ck-btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 2.5rem;
+		padding: 0 1.25rem;
+		border: 1px solid var(--ck-primary);
+		border-radius: var(--ck-radius);
+		background: var(--ck-primary);
+		color: #fff;
+		font-family: inherit;
+		font-size: 0.875rem;
+		font-weight: 700;
+		line-height: 1;
+		white-space: nowrap;
+		cursor: pointer;
+		transition: background-color 0.15s ease;
+	}
+
+	/* ── Panel (segunda capa) ── */
+	.ck-overlay {
+		position: fixed;
+		inset: 0;
+		z-index: var(--ck-z-modal);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 1rem;
+		background: rgba(0, 0, 0, 0.65);
+		animation: ck-fade-in 0.2s ease-out;
+	}
+	.ck-dialog {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		max-width: 560px;
+		max-height: calc(100vh - 2rem);
+		background: var(--ck-surface);
+		border: 1px solid var(--ck-border);
+		border-radius: var(--ck-radius-lg);
+		box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+	}
+	.ck-dialog:focus { outline: none; }
+	.ck-dialog__body {
+		overflow-y: auto;
+		padding: 1.5rem;
+	}
+	.ck-dialog__title {
+		margin: 0 2.5rem 0.75rem 0;
+		font-family: "Space Grotesk", sans-serif;
+		font-size: 1.25rem;
+		font-weight: 700;
+		line-height: 1.3;
+	}
+	.ck-dialog__intro {
+		margin: 0 0 1.25rem;
+		font-size: 0.875rem;
+		line-height: 1.6;
+		color: var(--ck-muted);
+	}
+	.ck-close {
+		position: absolute;
+		top: 0.75rem;
+		right: 0.75rem;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 2.25rem;
+		height: 2.25rem;
+		border: 0;
+		border-radius: var(--ck-radius);
+		background: transparent;
+		color: var(--ck-muted);
+		font-size: 1.5rem;
+		line-height: 1;
+		cursor: pointer;
+	}
+	.ck-category {
+		padding: 1rem 0;
+		border-top: 1px solid var(--ck-border);
+	}
+	.ck-category__head {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		margin-bottom: 0.5rem;
+	}
+	.ck-category__title {
+		margin: 0;
+		font-family: "Space Grotesk", sans-serif;
+		font-size: 1rem;
+		font-weight: 700;
+	}
+	.ck-category__desc {
+		margin: 0;
+		font-size: 0.875rem;
+		line-height: 1.6;
+		color: var(--ck-muted);
+	}
+	.ck-dialog__footer {
+		display: flex;
+		justify-content: flex-end;
+		gap: 0.75rem;
+		padding: 1rem 1.5rem;
+		border-top: 1px solid var(--ck-border);
+	}
+
+	/* ── Interruptor ── */
+	.ck-switch {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		flex-shrink: 0;
+		padding: 0.25rem;
+		border: 0;
+		border-radius: var(--ck-radius);
+		background: transparent;
+		color: var(--ck-text);
+		font-family: inherit;
+		font-size: 0.8125rem;
+		font-weight: 700;
+		cursor: pointer;
+	}
+	.ck-switch__state {
+		min-width: 1.75rem;
+		text-align: right;
+	}
+	.ck-switch__track {
+		position: relative;
+		width: 2.75rem;
+		height: 1.5rem;
+		border: 1px solid var(--ck-border);
+		border-radius: 9999px;
+		background: var(--ck-bg);
+		transition: background-color 0.15s ease;
+	}
+	.ck-switch__knob {
+		position: absolute;
+		top: 2px;
+		left: 2px;
+		width: 1.125rem;
+		height: 1.125rem;
+		border-radius: 9999px;
+		background: var(--ck-muted);
+		transition: transform 0.15s ease, background-color 0.15s ease;
+	}
+	.ck-switch[aria-checked="true"] .ck-switch__track {
+		background: var(--ck-primary);
+		border-color: var(--ck-primary);
+	}
+	.ck-switch[aria-checked="true"] .ck-switch__knob {
+		transform: translateX(1.25rem);
+		background: #fff;
+	}
+	.ck-switch:disabled {
+		cursor: not-allowed;
+		opacity: 0.75;
+	}
+	.ck-switch--fixed .ck-switch__state { min-width: 0; }
+
+	/* ── Foco visible ── */
+	.ck-btn:focus-visible,
+	.ck-link:focus-visible,
+	.ck-close:focus-visible,
+	.ck-switch:focus-visible {
+		outline: 2px solid var(--ck-primary);
+		outline-offset: 2px;
+	}
+	.ck-btn:focus-visible { outline-color: #fff; }
+
+	@media (hover: hover) {
+		.ck-btn:hover { background: var(--ck-primary-hover); border-color: var(--ck-primary-hover); }
+		.ck-close:hover { color: var(--ck-text); background: var(--ck-bg); }
+		.ck-link:hover { color: var(--ck-primary); }
+	}
+
+	@keyframes ck-slide-up { from { transform: translateY(100%); } to { transform: translateY(0); } }
+	@keyframes ck-fade-in { from { opacity: 0; } to { opacity: 1; } }
+
+	@media (prefers-reduced-motion: reduce) {
+		.ck-banner,
+		.ck-overlay { animation: none; }
+		.ck-btn,
+		.ck-switch__track,
+		.ck-switch__knob { transition: none; }
+	}
+
+	@media (max-width: 767px) {
+		.ck-banner__inner {
+			flex-direction: column;
+			align-items: stretch;
+			gap: 1rem;
+			padding: 1rem;
+		}
+		.ck-actions { flex-direction: column; }
+		.ck-actions .ck-btn { width: 100%; }
+	}
+	@media (max-width: 639px) {
+		.ck-overlay { padding: 0.5rem; }
+		.ck-dialog { max-height: calc(100vh - 1rem); }
+		.ck-dialog__body { padding: 1.25rem 1rem; }
+		.ck-dialog__footer {
+			flex-direction: column-reverse;
+			padding: 1rem;
+		}
+		.ck-dialog__footer .ck-btn { width: 100%; }
+	}
+</style>
+
+<div class="ck-root" id="ck-root">
+	<section class="ck-banner" id="ck-banner" aria-label="Aviso de cookies" hidden>
+		<div class="ck-banner__inner">
+			<p class="ck-banner__text">
+				Uso cookies para que el sitio funcione y, con tu permiso, para analizar su uso. Puedes aceptarlas, rechazarlas o configurarlas.
+				<a class="ck-link" href="{% url 'skeleton:privacidad' %}#cookies">Política de Privacidad</a>
+			</p>
+			<div class="ck-actions">
+				<button type="button" class="ck-btn" data-ck-action="accept-all">Aceptar todas</button>
+				<button type="button" class="ck-btn" data-ck-action="reject">Rechazar no esenciales</button>
+				<button type="button" class="ck-btn" data-ck-action="customize">Personalizar</button>
+			</div>
+		</div>
+	</section>
+
+	<div class="ck-overlay" id="ck-modal" hidden>
+		<div class="ck-dialog" role="dialog" aria-modal="true" aria-labelledby="ck-dialog-title" tabindex="-1">
+			<button type="button" class="ck-close" data-ck-action="close" aria-label="Cerrar">&times;</button>
+			<div class="ck-dialog__body">
+				<h2 class="ck-dialog__title" id="ck-dialog-title">Personaliza tus preferencias de cookies</h2>
+				<p class="ck-dialog__intro">Respeto tu derecho a la privacidad. Puedes elegir no permitir algunos tipos de cookies. Tus preferencias se aplicarán en todo el sitio.</p>
+
+				<div class="ck-category">
+					<div class="ck-category__head">
+						<h3 class="ck-category__title" id="ck-cat-necessary">Necesarias</h3>
+						<button type="button" class="ck-switch ck-switch--fixed" role="switch" aria-checked="true" aria-labelledby="ck-cat-necessary ck-always" disabled>
+							<span class="ck-switch__state" id="ck-always">Siempre activas</span>
+							<span class="ck-switch__track" aria-hidden="true"><span class="ck-switch__knob"></span></span>
+						</button>
+					</div>
+					<p class="ck-category__desc">Estas cookies son necesarias para que el sitio funcione correctamente y no pueden desactivarse. Ayudan a iniciar sesión, proteger los formularios y guardar tus preferencias de privacidad.</p>
+				</div>
+
+				<div class="ck-category">
+					<div class="ck-category__head">
+						<h3 class="ck-category__title" id="ck-cat-analytics">Analítica</h3>
+						<button type="button" class="ck-switch" role="switch" aria-checked="false" aria-labelledby="ck-cat-analytics" data-ck-switch="analytics">
+							<span class="ck-switch__state" aria-hidden="true">Off</span>
+							<span class="ck-switch__track" aria-hidden="true"><span class="ck-switch__knob"></span></span>
+						</button>
+					</div>
+					<p class="ck-category__desc">Estas cookies me ayudan a mejorar el sitio haciendo un seguimiento de las páginas más populares y de cómo se mueven los visitantes por el sitio.</p>
+				</div>
+			</div>
+			<div class="ck-dialog__footer">
+				<button type="button" class="ck-btn" data-ck-action="save">Guardar preferencias</button>
+				<button type="button" class="ck-btn" data-ck-action="accept-all">Aceptar todas</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="{% static 'js/cookie-consent.js' %}" defer></script>

@@ -233,19 +233,22 @@
 <div class="flex flex-wrap items-center justify-center gap-6 text-sm text-text-secondary">
 <a class="hover:text-white transition-colors" href="/privacidad">Política de Privacidad</a>
 <a class="hover:text-white transition-colors" href="/terminos">Términos de Uso</a>
+<button type="button" class="hover:text-white transition-colors" data-ck-open>Preferencias de cookies</button>
 </div>
 <p class="text-xs text-text-secondary/60">© 2026 Ing. Fabian Suchett. Todos los derechos reservados.</p>
 </footer>
 </div>
 </div>
 </div>
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-170952228-1"></script>
-	<script>
+{% include "partials/cookie_consent.html" %}
+<!-- Google Analytics: bloqueado hasta que el usuario acepte la categoría "analytics" -->
+<script type="text/plain" data-ck-category="analytics" async src="https://www.googletagmanager.com/gtag/js?id=G-SEMNLVY53E"></script>
+	<script type="text/plain" data-ck-category="analytics">
 	  window.dataLayer = window.dataLayer || [];
 	  function gtag(){dataLayer.push(arguments);}
 	  gtag('js', new Date());
 
-	  gtag('config', 'UA-170952228-1');
+	  gtag('config', 'G-SEMNLVY53E');
 	</script>
 </body></html>
 	<!-- <footer>
